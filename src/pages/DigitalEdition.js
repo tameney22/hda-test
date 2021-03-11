@@ -5,20 +5,32 @@ import { useState, useEffect } from 'react';
 import { getChildrenDeep } from 'react-nanny'
 import { useParams } from 'react-router';
 
+let hide = true;
+
 const Line = (props) => {
     // let lineNum = props.teiDomElement.getAttribute('n')
     // console.log("CALLED:", lineNum)
-    let children = props.line.children
+    // let hide = props.hide
+    let mile = props.stone
+    let children = props.line.children // Children = anything inside <tei-l> possibly a <tei-milestone>
     let milestone = Array.from(children).find(child => child.nodeName === "TEI-MILESTONE")
-    // if (milestone)
+    if (milestone) {
+        console.log("REACHED")
+        if (milestone.getAttribute('n') === mile) {
+            hide = false
+        } else {
+            hide = true
+        }
+    }
+
     return (
         <>
-            {milestone ?
+            {!hide ?
                 <>
-                    <h2>{milestone.getAttribute('n')}</h2>
+                    {/* <h2>{milestone.getAttribute('n')}</h2> */}
                     <p>{props.text}</p>
                 </>
-                : <p>{props.text}</p>}
+                : <></>}
         </>
     )
 }
@@ -30,13 +42,26 @@ const LaisseTextOld = (props) => {
 }
 
 const LaisseText = (props) => {
-    let children = props.laisse.children
-    let lines = Array.from(children).map((line, i) => {
+    // let hide = true
+    let milestone = props.stone
+    let children = props.laisse.children // Children = <tei-l>
+    // let lines = Array.from(children).map((line, i) => {
+
+    let lines = []
+    for (let i = 0; i < children.length; i++) {
+        let line = children[i]
         if (line.nodeName === "TEI-MILESTONE") {
-            return <h2 key={i}>{line.getAttribute('n')}</h2>
+            if (line.getAttribute('n') === milestone) {
+                hide = false
+            } else {
+                hide = true
+            }
+            lines.push(<h2 key={i}>{line.getAttribute('n')}</h2>)
+        } else {
+            lines.push(<Line key={i} text={line.textContent} line={line} stone={milestone} />)
         }
-        return <Line key={i} text={line.textContent} line={line} />
-    });
+    }//);
+
     return (
         <>
             <p>{children.length} Lines</p>
@@ -95,10 +120,11 @@ const BodyOld = (props) => {
 }
 
 const Body = (props) => {
-    let children = props.teiDomElement.children //.filter(elem => elem.nodeName === "tei-milestone").length
+    let milestone = props.stone
+    let children = props.teiDomElement.children // Children = <tei-lg>
     // console.log(children)
     let content = Array.from(children).map((lg, i) => {
-        return <LaisseText key={i} text={lg.textContent} laisse={lg} />
+        return <LaisseText key={i} text={lg.textContent} laisse={lg} stone={milestone} />
     });
     // let milestones = children.querySelectorAll('tei-milestone')
     // console.log(milestones)
@@ -120,9 +146,10 @@ const Milestone = (props) => {
 }
 
 const DigitalEdition = () => {
-    const { teiName } = useParams()
+    const { teiName, stone } = useParams()
     console.log(teiName)
     const [tei, setTei] = useState({ data: null, ready: false })
+    const [hide, setHide] = useState(true)
 
     useEffect(() => {
         axios.get(`/teis/${teiName}.xml`, {
@@ -141,7 +168,9 @@ const DigitalEdition = () => {
                     {/* <TEIRoute el="tei-title" component={Title} /> */}
                     {/* <TEIRoute el='tei-l' component={Line} /> */}
                     {/* <TEIRoute el='tei-lg' component={LaisseTest} /> */}
-                    <TEIRoute el='tei-body' component={Body} />
+                    <TEIRoute el='tei-body' >
+                        <Body stone={stone} hide={setHide} />
+                    </TEIRoute>
                     {/* <TEIRoute el='tei-milestone' component={Milestone} /> */}
                 </TEIRender>
                 : <h2>Loading. . .</h2>}
