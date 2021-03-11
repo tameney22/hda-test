@@ -1,8 +1,9 @@
 import { TEIRender, TEIRoute } from 'react-teirouter'
-import BXML from '../teis/b.xml'
+// import BXML from '../teis/b.xml'
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getChildrenDeep } from 'react-nanny'
+import { useParams } from 'react-router';
 
 const Line = (props) => {
     // let lineNum = props.teiDomElement.getAttribute('n')
@@ -104,7 +105,7 @@ const Body = (props) => {
     return (
         <>
             <h3>{children.length} elements found</h3>
-            <div>{content.slice(0, 3)}</div>
+            <div>{content.slice(0, 5)}</div>
         </>
     )
 }
@@ -119,20 +120,24 @@ const Milestone = (props) => {
 }
 
 const DigitalEdition = () => {
+    const { teiName } = useParams()
+    console.log(teiName)
     const [tei, setTei] = useState({ data: null, ready: false })
 
-    axios.get(BXML, {
-        "Content-Type": "application/xml; charset=utf-8"
-    }).then((response) => {
-        setTei({ data: response.data, ready: true })
-        // console.log(tei)
-    })
+    useEffect(() => {
+        axios.get(`/teis/${teiName}.xml`, {
+            "Content-Type": "application/xml; charset=utf-8"
+        }).then((response) => {
+            setTei({ data: response.data, ready: true })
+            // console.log(tei)
+        })
+    }, [teiName])
 
     return (
         <div>
-            <h1>B.XML</h1>
+            <h1>{teiName}.XML</h1>
             {tei.ready ?
-                <TEIRender teiData={tei.data} path={tei.data}>
+                <TEIRender teiData={tei.data} path={`/teis/${teiName}.xml`}>
                     {/* <TEIRoute el="tei-title" component={Title} /> */}
                     {/* <TEIRoute el='tei-l' component={Line} /> */}
                     {/* <TEIRoute el='tei-lg' component={LaisseTest} /> */}

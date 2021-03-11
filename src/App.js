@@ -18,7 +18,7 @@ function App() {
       <div>
         <Switch>
           <Route path="/" component={HomePage} exact />
-          <Route path="/editions/b" component={DigitalEdition} />
+          <Route path="/editions/:teiName" component={DigitalEdition} />
           <Route path="/test2" component={TestPage} />
           <Route path="/about" component={AboutPage} />
         </Switch>
