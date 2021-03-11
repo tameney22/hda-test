@@ -7,8 +7,18 @@ import { getChildrenDeep } from 'react-nanny'
 const Line = (props) => {
     // let lineNum = props.teiDomElement.getAttribute('n')
     // console.log("CALLED:", lineNum)
+    let children = props.line.children
+    let milestone = Array.from(children).find(child => child.nodeName === "TEI-MILESTONE")
+    // if (milestone)
     return (
-        <p>{props.text}</p>
+        <>
+            {milestone ?
+                <>
+                    <h2>{milestone.getAttribute('n')}</h2>
+                    <p>{props.text}</p>
+                </>
+                : <p>{props.text}</p>}
+        </>
     )
 }
 
@@ -21,6 +31,9 @@ const LaisseTextOld = (props) => {
 const LaisseText = (props) => {
     let children = props.laisse.children
     let lines = Array.from(children).map((line, i) => {
+        if (line.nodeName === "TEI-MILESTONE") {
+            return <h2 key={i}>{line.getAttribute('n')}</h2>
+        }
         return <Line key={i} text={line.textContent} line={line} />
     });
     return (
@@ -91,7 +104,7 @@ const Body = (props) => {
     return (
         <>
             <h3>{children.length} elements found</h3>
-            <div>{content[0]}</div>
+            <div>{content.slice(0, 3)}</div>
         </>
     )
 }
