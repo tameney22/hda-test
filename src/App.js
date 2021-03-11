@@ -3,7 +3,8 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage'
@@ -18,7 +19,8 @@ function App() {
       <div>
         <Switch>
           <Route path="/" component={HomePage} exact />
-          <Route path="/editions/:teiName" component={DigitalEdition} />
+          {/* <Redirect from="/editions/:teiName" to="/editions/:teiName/1R" /> */}
+          <Route path="/editions/:teiName/:stone" component={DigitalEdition} />
           <Route path="/test2" component={TestPage} />
           <Route path="/about" component={AboutPage} />
         </Switch>
