@@ -2,7 +2,6 @@ import { TEIRender, TEIRoute } from 'react-teirouter'
 // import BXML from '../teis/b.xml'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { getChildrenDeep } from 'react-nanny'
 import { useParams } from 'react-router';
 
 let hide = true;
