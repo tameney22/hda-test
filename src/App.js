@@ -20,6 +20,7 @@ function App() {
         <Switch>
           <Route path="/" component={HomePage} exact />
           {/* <Redirect from="/editions/:teiName" to="/editions/:teiName/1R" /> */}
+          <Route exact path="/editions/:teiName" render={props => (<Redirect to={`/editions/${props.match.params.teiName}/1R`} />)} />
           <Route path="/editions/:teiName/:stone" component={DigitalEdition} />
           <Route path="/test2" component={TestPage} />
           <Route path="/about" component={AboutPage} />
