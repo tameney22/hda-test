@@ -3,6 +3,10 @@ import { TEIRender, TEIRoute } from 'react-teirouter'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import { Viewer } from 'react-iiif-viewer'
 
 let hide = true;
 
@@ -14,7 +18,7 @@ const Line = (props) => {
     let children = props.line.children // Children = anything inside <tei-l> possibly a <tei-milestone>
     let milestone = Array.from(children).find(child => child.nodeName === "TEI-MILESTONE")
     if (milestone) {
-        console.log("REACHED:", milestone.getAttribute('n'))
+        // console.log("REACHED:", milestone.getAttribute('n'))
         if (milestone.getAttribute('n') === mile) {
             hide = false
         } else {
@@ -81,10 +85,16 @@ const Body = (props) => {
     )
 }
 
+const getTif = (teiName, milestone) => {
+    return teiName + "0".repeat(4 - milestone.length) + milestone.toLowerCase()
+}
+
+
 const DigitalEdition = () => {
     const { teiName, stone } = useParams()
-    console.log(teiName)
+    // console.log(teiName)
     const [tei, setTei] = useState({ data: null, ready: false })
+    // const [manuName, setManuName] = useState("")
 
     useEffect(() => {
         axios.get(`/teis/${teiName}.xml`, {
@@ -95,21 +105,43 @@ const DigitalEdition = () => {
         })
     }, [teiName])
 
+    // const Title = (props) => {
+    //     let title = props.teiDomElement.children[1]
+    //     let type = title.getAttribute('type')
+    //     let text = title.textContent
+    //     // let dso = props.teiDomElement.getAttribute('data-origname')
+    //     console.log("Type:", type, text)
+    //     setManuName(text)
+    //     return (<h2>{text}</h2>)
+    // }
+
+
     return (
-        <div>
-            <h1>{teiName}.XML</h1>
-            {tei.ready ?
-                <TEIRender teiData={tei.data} path={`/teis/${teiName}.xml`}>
-                    {/* <TEIRoute el="tei-title" component={Title} /> */}
-                    {/* <TEIRoute el='tei-l' component={Line} /> */}
-                    {/* <TEIRoute el='tei-lg' component={LaisseTest} /> */}
-                    <TEIRoute el='tei-body' >
-                        <Body stone={stone} />
-                    </TEIRoute>
-                    {/* <TEIRoute el='tei-milestone' component={Milestone} /> */}
-                </TEIRender>
-                : <h2>Loading. . .</h2>}
-        </div>
+        <Container>
+            <Row>
+                <Col>
+                    {/* <h1>{manuName}</h1> */}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Viewer width="100%" height="100vh" iiifUrl={`https://iiif.wlu.edu/iiif/huon/${getTif(teiName, stone)}.tif/info.json`} />
+                </Col>
+                <Col>
+                    <h1>{teiName.toUpperCase()}.XML</h1>
+                    {tei.ready ?
+                        <TEIRender teiData={tei.data} path={`/teis/${teiName}.xml`}>
+                            {/* <TEIRoute el="tei-titlestmt" component={Title} /> */}
+                            <TEIRoute el='tei-body' >
+                                <Body stone={stone} />
+                            </TEIRoute>
+                        </TEIRender>
+                        : <h2>Loading. . .</h2>}
+                </Col>
+            </Row>
+        </Container >
+
+
     );
 
 }
