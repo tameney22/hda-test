@@ -6,93 +6,16 @@ import { useParams } from 'react-router';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Spinner from 'react-bootstrap/Spinner'
 import { Viewer } from 'react-iiif-viewer'
-
-let hide = true;
-
-const Line = (props) => {
-    // let lineNum = props.teiDomElement.getAttribute('n')
-    // console.log("CALLED:", lineNum)
-    // let hide = props.hide
-    let mile = props.stone
-    let children = props.line.children // Children = anything inside <tei-l> possibly a <tei-milestone>
-    let milestone = Array.from(children).find(child => child.nodeName === "TEI-MILESTONE")
-    if (milestone) {
-        // console.log("REACHED:", milestone.getAttribute('n'))
-        if (milestone.getAttribute('n') === mile) {
-            hide = false
-        } else {
-            hide = true
-        }
+const DigitalEdition = () => {
+    const getTif = (teiName, milestone) => {
+        return teiName + "0".repeat(4 - milestone.length) + milestone.toLowerCase()
     }
 
-    return (
-        <>
-            {!hide ?
-                <>
-                    {/* <h2>{milestone.getAttribute('n')}</h2> */}
-                    <p>{props.text}</p>
-                </>
-                : <></>}
-        </>
-    )
-}
-
-const LaisseText = (props) => {
-    // let hide = true
-    let milestone = props.stone
-    let children = props.laisse.children // Children = <tei-l>
-    // let lines = Array.from(children).map((line, i) => {
-
-    let lines = []
-    for (let i = 0; i < children.length; i++) {
-        let line = children[i]
-        if (line.nodeName === "TEI-MILESTONE") {
-            if (line.getAttribute('n') === milestone) {
-                hide = false
-            } else {
-                hide = true
-            }
-            // lines.push(<h2 key={i}>{line.getAttribute('n')}</h2>)
-        } else {
-            lines.push(<Line key={i} text={line.textContent} line={line} stone={milestone} />)
-        }
-    }//);
-
-    return (
-        <>
-            {/* <p>{children.length} Lines</p> */}
-            {lines}
-        </>
-    )
-}
-
-const Body = (props) => {
-    let milestone = props.stone
-    let children = props.teiDomElement.children // Children = <tei-lg>
-    // console.log(children)
-    let content = Array.from(children).map((lg, i) => {
-        return <LaisseText key={i} text={lg.textContent} laisse={lg} stone={milestone} />
-    });
-    // let milestones = children.querySelectorAll('tei-milestone')
-    // console.log(milestones)
-    return (
-        <>
-            {/* <h3>{children.length} elements found</h3> */}
-            <h2>Milestone: {milestone}</h2>
-            <div>{content}</div>
-        </>
-    )
-}
-
-const getTif = (teiName, milestone) => {
-    return teiName + "0".repeat(4 - milestone.length) + milestone.toLowerCase()
-}
-
-
-const DigitalEdition = () => {
     const { teiName, stone } = useParams()
-    // console.log(teiName)
+    let hide = stone === "1R" ? false : true; // condition to not skip rendering first few lines in t.xml
+
     const [tei, setTei] = useState({ data: null, ready: false })
     // const [manuName, setManuName] = useState("")
 
@@ -115,6 +38,37 @@ const DigitalEdition = () => {
     //     return (<h2>{text}</h2>)
     // }
 
+    const Line = (props) => {
+        let children = props.teiDomElement.children
+        let milestone = Array.from(children).find(child => child.nodeName === "TEI-MILESTONE")
+        if (milestone) {
+            // console.log("REACHED:", milestone.getAttribute('n'))
+            if (milestone.getAttribute('n') === stone) {
+                hide = false
+            } else {
+                hide = true
+            }
+        }
+
+        return (
+            <>
+                {!hide ?
+                    <p>{props.teiDomElement.textContent}</p>
+                    : <></>}
+            </>
+        )
+    }
+
+    const Laisse = (props) => {
+        return (
+            <>
+                {!hide ?
+                    <h3>{props.teiDomElement.textContent}</h3>
+                    : <></>}
+            </>
+        )
+    }
+
 
     return (
         <Container>
@@ -132,16 +86,17 @@ const DigitalEdition = () => {
                     {tei.ready ?
                         <TEIRender teiData={tei.data} path={`/teis/${teiName}.xml`}>
                             {/* <TEIRoute el="tei-titlestmt" component={Title} /> */}
-                            <TEIRoute el='tei-body' >
+                            {/* <TEIRoute el='tei-body' >
                                 <Body stone={stone} />
-                            </TEIRoute>
+                            </TEIRoute> */}
+
+                            <TEIRoute el='tei-l' component={Line} />
+                            <TEIRoute el='tei-head' component={Laisse} />
                         </TEIRender>
-                        : <h2>Loading. . .</h2>}
+                        : <Spinner animation="border" />}
                 </Col>
             </Row>
-        </Container >
-
-
+        </Container>
     );
 
 }
