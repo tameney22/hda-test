@@ -79,6 +79,37 @@ p.intro {
   padding-top: 25%;
 }
 
+/* Footer Styles */
+#logo_wludh {
+  width: 60%;
+}
+
+#logo_loyola {
+  width: 60%;
+}
+
+#logo_unf {
+  margin-top: -1em;
+  width: 60%;
+}
+
+#logo_neh {
+  width: 60%;
+}
+
+#logo_marucelliana {
+  margin-right: 0.5em;
+  width: 25%;
+}
+
+#logo_archiginnasio {
+  width: 20%;
+}
+
+#logo_vescovile {
+  width: 85%;
+}
+
 /* Styles for mobile */
 @media only screen and (max-width: 951px) {
   /* Navbar Styles */
@@ -123,3 +154,5 @@ p.intro {
     width: 100%;
   }
 }
+
+

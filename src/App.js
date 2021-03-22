@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 // import logo from './logo.svg';
 import './App.css';
 import {
