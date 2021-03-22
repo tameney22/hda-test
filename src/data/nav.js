@@ -1,9 +1,9 @@
 export const nav = [
     {
-        title: "About",
+        title: "Abouttt",
         dropdown: [
             {
-                page: "Abouttt",
+                page: "About",
                 url: "/about"
             },
             {
