@@ -116,7 +116,7 @@ p.intro {
   .footer{
     margin-top: 1rem;
     padding: 1rem;
-    background-color: blue;
+    color: blue;
     position: fixed;
     bottom: 0;
     left: 0;
