@@ -9,7 +9,7 @@ const Navigation = () => {
         <Navbar collapseOnSelect expand="lg" bg="light" >
             <Navbar.Brand href="/" >
                 <h2 id="site-title">Huon d'Auvergne Digital Archive</h2>
-                <p id="nav-subtitle">TESTA digital edition and translation of Huon d'Auvergne, a pre-modern, Franco-Italian Epic</p>
+                <p id="nav-subtitle">A digital edition and translation of Huon d'Auvergne, a pre-modern, Franco-Italian Epic</p>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
