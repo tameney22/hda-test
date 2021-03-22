@@ -3,10 +3,6 @@ export const nav = [
         title: "About",
         dropdown: [
             {
-                page: "About",
-                url: "/about"
-            },
-            {
                 page: "Collaborators",
                 url: "/about/collaborators"
             },
