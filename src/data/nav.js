@@ -3,7 +3,7 @@ export const nav = [
         title: "About",
         dropdown: [
             {
-                page: "About",
+                page: "Abouttt",
                 url: "/about"
             },
             {
