@@ -1,6 +1,6 @@
 export const nav = [
     {
-        title: "Abouttt",
+        title: "About",
         dropdown: [
             {
                 page: "About",
