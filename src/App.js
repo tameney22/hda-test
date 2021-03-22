@@ -12,6 +12,7 @@ import DigitalEdition from './pages/DigitalEdition';
 import Navigation from './components/Navigation'
 import Footer from './components/footer' //added footer from components
 import TestPage from './pages/TestPage';
+import Collaborators from './pages/Collaborators';
 
 function App() {
   return (
