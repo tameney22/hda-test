@@ -110,6 +110,18 @@ p.intro {
   width: 85%;
 }
 
+/* Static Page Styles */
+
+/* Collaborators Styles */
+.collab_title{
+  text-align:left;
+}
+
+.collab {
+  text-align:left;
+  margin-left: 1em;
+}
+
 /* Styles for mobile */
 @media only screen and (max-width: 951px) {
   /* Navbar Styles */
