@@ -7,8 +7,24 @@ export const nav = [
                 url: "/about"
             },
             {
+                page: "Collaborators",
+                url: "/about/collaborators"
+            },
+            {
                 page: "Bibliography",
                 url: "/about/bibliography"
+            },
+            {
+                page: "Cite Our Work",
+                url: "/about/citation"
+            },
+            {
+                page: "Source Code",
+                url: "https://github.com/SteveWLU/hda"
+            },
+            {
+                page: "Technical Notes",
+                url: "/about/technical"
             },
         ]
     },
@@ -18,6 +34,10 @@ export const nav = [
             {
                 page: "General Criteria",
                 url: "/test-praxis"
+            },
+            {
+                page: "Padua Criteria",
+                url: "/about/padua-praxis"
             },
         ]
     },
