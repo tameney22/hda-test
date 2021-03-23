@@ -32,11 +32,11 @@ const HomePage = () => {
                                 
                         <h2 class="intro">Digital Editions</h2>
                         <div class="intro">
-                            <a href="/editions/b-intro">Berlin (B)   |  </a>
-                            <a href="/editions/t-intro">Turin (T)  |  </a>
-                            <a href="/editions/p-intro">Padua (P)  |  </a>
-                            <a href="/editions/br-intro">Barbieri Fragment (Br)  |  </a>
-                            <a href="/editions/b-intro">Berlin Translation</a>
+                            <a href="/editions/b">Berlin (B)   |  </a>
+                            <a href="/editions/t">Turin (T)  |  </a>
+                            <a href="/editions/p">Padua (P)  |  </a>
+                            <a href="/editions/br">Barbieri Fragment (Br)  |  </a>
+                            <a href="/editions/bt">Berlin Translation</a>
                         </div>
                     </p>
                 </Col>
