@@ -44,6 +44,10 @@ p.intro:before {
   font-weight: bold;
 }
 
+.container {
+  max-width: 85%;
+}
+
 img#initial {
   max-width: 65%;
   max-height: 85%;
