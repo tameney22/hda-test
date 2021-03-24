@@ -14,6 +14,7 @@ import Footer from './components/footer' //added footer from components
 import TestPage from './pages/TestPage';
 import Collaborators from './pages/Collaborators';
 import Technical from './pages/Technical';
+import Bibliography from './pages/Bibliography';
 import error404 from './pages/error404';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             {/* <Route path="/test2" component={TestPage} /> */}
             <Route path="/about/collaborators" component={Collaborators} />
             <Route path="/about/technical" component={Technical} />
+            <Route path="/about/Bibliography" component={Bibliography} />
 
             //Add above this so that any unimplemented pages show 404 page
             <Route path="*" component={error404} />

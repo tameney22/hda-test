@@ -6,7 +6,7 @@ import { nav } from '../data/nav'
 
 const Navigation = () => {
     return (
-        <Navbar collapseOnSelect expand="lg" bg="light" >
+        <Navbar collapseOnSelect expand="lg" bg="light">
             <Navbar.Brand href="/" >
                 <h2 id="site-title">Huon d'Auvergne Digital Archive</h2>
                 <p id="nav-subtitle">A digital edition and translation of Huon d'Auvergne, a pre-modern, Franco-Italian Epic</p>
