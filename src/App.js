@@ -11,10 +11,10 @@ import HomePage from './pages/HomePage';
 import DigitalEdition from './pages/DigitalEdition';
 import Navigation from './components/Navigation'
 import Footer from './components/footer' //added footer from components
-import TestPage from './pages/TestPage';
 import Collaborators from './pages/Collaborators';
 import Technical from './pages/Technical';
 import error404 from './pages/error404';
+import Search from './pages/Search/Search';
 
 function App() {
   return (
@@ -24,10 +24,9 @@ function App() {
         <div>
           <Switch>
             <Route path="/" component={HomePage} exact />
-            {/* <Redirect from="/editions/:teiName" to="/editions/:teiName/1R" /> */}
             <Route exact path="/editions/:teiName" render={props => (<Redirect to={`/editions/${props.match.params.teiName}/1R`} />)} />
             <Route path="/editions/:teiName/:stone" component={DigitalEdition} />
-            {/* <Route path="/test2" component={TestPage} /> */}
+            <Route path="/search" component={Search} />
             <Route path="/about/collaborators" component={Collaborators} />
             <Route path="/about/technical" component={Technical} />
 
@@ -35,7 +34,7 @@ function App() {
             <Route path="*" component={error404} />
           </Switch>
         </div>
-        <Footer /> 
+        <Footer />
       </div>
     </Router>);
 }

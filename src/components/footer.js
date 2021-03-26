@@ -34,10 +34,10 @@ function Footer() {
                     <Image id="logo_vescovile" src="/images/logo_vescovile.jpg" />
                 </Col>
             </Row>
-            <p class="legal">&copy; <a href="https://www.wlu.edu/romance-languages-department/faculty-and-staff/profile?ID=x9689"
-            title="Stephen P. McCormick">Stephen P. McCormick</a> and <a href="https://digitalhumanities.wlu.edu/" title="lynda">
-            Washington & Lee Digital Humanities</a> | Site built using <a href="https://reactjs.org" title="ReactJS">
-            ReactJS</a> and the <a href="https://www.tei-c.org/" title="Text Encoding Initiative">Text Encoding Initiative.</a></p>
+            <p className="legal">&copy; <a href="https://www.wlu.edu/romance-languages-department/faculty-and-staff/profile?ID=x9689"
+                title="Stephen P. McCormick">Stephen P. McCormick</a> and <a href="https://digitalhumanities.wlu.edu/" title="lynda">
+                    Washington & Lee Digital Humanities</a> | Site built using <a href="https://reactjs.org" title="ReactJS">
+                    ReactJS</a> and the <a href="https://www.tei-c.org/" title="Text Encoding Initiative">Text Encoding Initiative.</a></p>
         </Container>
     );
 }
