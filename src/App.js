@@ -8,7 +8,7 @@ import {
   Redirect
 } from "react-router-dom";
 import HomePage from './pages/HomePage';
-import DigitalEdition from './pages/DigitalEdition';
+import DigitalEdition from './pages/DigitalEdition/DigitalEdition';
 import Navigation from './components/Navigation'
 import Footer from './components/footer' //added footer from components
 import Collaborators from './pages/Collaborators';

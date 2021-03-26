@@ -1,13 +1,22 @@
 import { TEIRender, TEIRoute } from 'react-teirouter'
-// import BXML from '../teis/b.xml'
+import { useLocation } from 'react-router-dom'
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createRef } from 'react';
 import { useParams } from 'react-router';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
+import Button from 'react-bootstrap/Button'
 import { Viewer } from 'react-iiif-viewer'
+import './DigitalEdition.css'
+
+
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
+
+
 const DigitalEdition = () => {
     const getTif = (teiName, milestone) => {
         return teiName + "0".repeat(4 - milestone.length) + milestone.toLowerCase()
@@ -38,7 +47,21 @@ const DigitalEdition = () => {
     //     return (<h2>{text}</h2>)
     // }
 
+    const refs = new Map()
+    let query = useQuery()
+    let lineNum = query.get('lineNum')
+
+    const scrollToLine = () => refs.get(lineNum).current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+
     const Line = (props) => {
+        // Scrolling when lineNum query param exists
+        const ref = createRef()
+        let lineNumber = props.teiDomElement.getAttribute('n')
+        refs.set(lineNumber, ref)
+
         let children = props.teiDomElement.children
         let milestone = Array.from(children).find(child => child.nodeName === "TEI-MILESTONE")
         if (milestone) {
@@ -53,11 +76,16 @@ const DigitalEdition = () => {
         return (
             <>
                 {!hide ?
-                    <p>{props.teiDomElement.textContent}</p>
+                    <p id={lineNum && lineNum === lineNumber ? 'highlight' : null} ref={ref}>{props.teiDomElement.textContent}
+                        {props.teiDomElement.getAttribute('n') % 5 === 0 ?
+                            <span className="number" style={{ float: 'right' }}>{props.teiDomElement.getAttribute('n')}</span>
+                            : <></>}</p>
                     : <></>}
             </>
         )
     }
+
+
 
     const Laisse = (props) => {
         return (
@@ -74,14 +102,14 @@ const DigitalEdition = () => {
         <Container>
             <Row>
                 <Col>
-                    {/* <h1>{manuName}</h1> */}
+                    {lineNum ? <Button variant='link' style={{ backgroundColor: "#5f0000", color: "white", margin: '15px' }} onClick={scrollToLine}>Scroll to line {lineNum}</Button> : <></>}
                 </Col>
             </Row>
             <Row>
                 <Col>
                     <Viewer width="100%" height="100vh" iiifUrl={`https://iiif.wlu.edu/iiif/huon/${getTif(teiName, stone)}.tif/info.json`} />
                 </Col>
-                <Col>
+                <Col id="TEI" className="custom-scroll">
                     <h1>{teiName.toUpperCase()}.XML</h1>
                     {tei.ready ?
                         <TEIRender teiData={tei.data} path={`/teis/${teiName}.xml`}>
@@ -96,7 +124,7 @@ const DigitalEdition = () => {
                         : <Spinner animation="border" />}
                 </Col>
             </Row>
-        </Container>
+        </Container >
     );
 
 }

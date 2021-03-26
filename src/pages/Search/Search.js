@@ -11,7 +11,6 @@ import Card from 'react-bootstrap/Card'
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
 import './Search.css'
 
 require('lunr-languages/lunr.stemmer.support')(lunr);
@@ -27,7 +26,7 @@ const Result = ({ shortName, lineText, lineNum, page, manuTitle }) => {
                     {lineText}
                 </Card.Text>
                 {/* <Card.Subtitle className="mb-2 text-muted">{manuTitle}</Card.Subtitle> */}
-                <Card.Link href={`/editions/${shortName}/${page.toUpperCase()}`}>Line Number: {lineNum}</Card.Link>
+                <Card.Link href={`/editions/${shortName}/${page.toUpperCase()}?lineNum=${lineNum}`}>Line Number: {lineNum}</Card.Link>
             </Card.Body>
         </Card>
     )
@@ -75,7 +74,7 @@ const Search = () => {
 
     const ResultsList = ({ name, manuName }) => {
         return (
-            <Col className="match-list" sm='12' md='6' lg='3'>
+            <Col className="custom-scroll" sm='12' md='6' lg='3'>
                 <h4 className="manuName">{manuName}</h4>
                 {results.filter((result) => {
                     let colonIndex = result.ref.indexOf(":") + 1;
