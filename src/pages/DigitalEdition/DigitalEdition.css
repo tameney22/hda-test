@@ -1,0 +1,24 @@
+#TEI {
+  height: 85vh;
+}
+/* Highlighting search result */
+@keyframes blink {
+  0% {
+    background-color: yellow;
+  }
+  50% {
+    background-color: white;
+  }
+  100% {
+    background-color: yellow;
+  }
+}
+
+#highlight {
+  background-color: yellow;
+  animation-name: blink;
+  animation-duration: 2s;
+  animation-iteration-count: 3;
+  padding: 3px;
+  border-radius: 7px;
+}

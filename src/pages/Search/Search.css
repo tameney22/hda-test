@@ -1,0 +1,16 @@
+.card {
+  margin: 10px 0;
+}
+
+.manuName {
+  height: 40px;
+}
+
+.custom-scroll {
+  height: 73vh;
+  overflow-y: auto;
+}
+
+#search-btn {
+  background-color: #5f0000;
+}
