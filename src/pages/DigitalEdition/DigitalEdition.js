@@ -10,12 +10,16 @@ import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
 import { Viewer } from 'react-iiif-viewer'
 import './DigitalEdition.css'
-
+import {TokenAnnotator, TextAnnotator} from 'react-text-annotate'
+import Card from 'react-bootstrap/Card'
+import { State, Toggle } from 'react-powerplug'
+import annotator from 'annotator'
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
+var TEXT = [];
 
 const DigitalEdition = () => {
     const getTif = (teiName, milestone) => {
@@ -73,10 +77,16 @@ const DigitalEdition = () => {
             }
         }
 
+        if(!hide)
+        {
+            TEXT.push(props.teiDomElement.textContent);
+        }
+
         return (
             <>
                 {!hide ?
-                    <p id={lineNum && lineNum === lineNumber ? 'highlight' : null} ref={ref}>{props.teiDomElement.textContent}
+                    <p id={lineNum && lineNum === lineNumber ? 'highlight' : null} ref={ref}>
+                        {props.teiDomElement.textContent}
                         {props.teiDomElement.getAttribute('n') % 5 === 0 ?
                             <span className="number" style={{ float: 'right' }}>{props.teiDomElement.getAttribute('n')}</span>
                             : <></>}</p>
@@ -88,6 +98,12 @@ const DigitalEdition = () => {
 
 
     const Laisse = (props) => {
+
+        if(!hide)
+        {
+            TEXT.push(props.teiDomElement.textContent);
+        }
+
         return (
             <>
                 {!hide ?
@@ -97,6 +113,10 @@ const DigitalEdition = () => {
         )
     }
 
+    var app = new annotator.App();
+    app.include(annotator.ui.main);
+    app.include(annotator.storage.http);
+    app.start();
 
     return (
         <Container>
@@ -109,15 +129,16 @@ const DigitalEdition = () => {
                 <Col>
                     <Viewer width="100%" height="100vh" iiifUrl={`https://iiif.wlu.edu/iiif/huon/${getTif(teiName, stone)}.tif/info.json`} />
                 </Col>
+
                 <Col id="TEI" className="custom-scroll">
                     <h1>{teiName.toUpperCase()}.XML</h1>
+
                     {tei.ready ?
                         <TEIRender teiData={tei.data} path={`/teis/${teiName}.xml`}>
                             {/* <TEIRoute el="tei-titlestmt" component={Title} /> */}
                             {/* <TEIRoute el='tei-body' >
                                 <Body stone={stone} />
                             </TEIRoute> */}
-
                             <TEIRoute el='tei-l' component={Line} />
                             <TEIRoute el='tei-head' component={Laisse} />
                         </TEIRender>
@@ -130,3 +151,7 @@ const DigitalEdition = () => {
 }
 
 export default DigitalEdition;
+
+
+
+

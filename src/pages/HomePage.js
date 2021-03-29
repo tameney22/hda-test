@@ -12,6 +12,7 @@ const HomePage = () => {
                     <Image id="initial" src="/images/initial-home-page.png" />
                 </Col>
                 <Col lg={6}>
+
                     <p className="intro">and disciplines,
                         the Huon d'Auvergne Digital Archive is a collaborative scholarly project
                         that presents for the first time to a modern reading audience the
