@@ -11,7 +11,6 @@ import HomePage from './pages/HomePage';
 import DigitalEdition from './pages/DigitalEdition';
 import Navigation from './components/Navigation'
 import Footer from './components/footer' //added footer from components
-import TestPage from './pages/TestPage';
 import Collaborators from './pages/Collaborators';
 import Technical from './pages/Technical';
 import Bibliography from './pages/Bibliography';
