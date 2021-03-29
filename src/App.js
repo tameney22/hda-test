@@ -11,9 +11,9 @@ import HomePage from './pages/HomePage';
 import DigitalEdition from './pages/DigitalEdition/DigitalEdition';
 import Navigation from './components/Navigation'
 import Footer from './components/footer' //added footer from components
-import Collaborators from './pages/Collaborators';
-import Technical from './pages/Technical';
-import Bibliography from './pages/Bibliography';
+import Collaborators from './pages/About/Collaborators';
+import Technical from './pages/About/Technical';
+import Bibliography from './pages/About/Bibliography';
 import error404 from './pages/error404';
 import Search from './pages/Search/Search';
 
