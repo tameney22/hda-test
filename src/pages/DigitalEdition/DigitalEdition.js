@@ -133,6 +133,7 @@ const DigitalEdition = () => {
                 <Col id="TEI" className="custom-scroll">
                     <h1>{teiName.toUpperCase()}.XML</h1>
 
+
                     {tei.ready ?
                         <TEIRender teiData={tei.data} path={`/teis/${teiName}.xml`}>
                             {/* <TEIRoute el="tei-titlestmt" component={Title} /> */}
