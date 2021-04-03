@@ -20,7 +20,7 @@ const Bibliography = () => {
                             <li><a href="#">1. Manuscripts and Early Print Editions</a></li>
                             <li><a href="#">2. Reference Works</a></li>
                             <li><a href="#">3. Secondary Material</a></li>
-                        </ul>
+                         </ul>
                     </Navbar>
                 </Col>
                 <Col>
