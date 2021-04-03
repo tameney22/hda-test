@@ -26,7 +26,7 @@ const tocb = () => {
                 <Col>
                         <h2>Table of Contents</h2>
                         <hr id="ms-intro-toc" />
-                        <ol>
+                        <ul>
                             
                             <li><NavLink to="/criteria">Edition Criteria</NavLink></li>
                             
@@ -39,7 +39,7 @@ const tocb = () => {
                             <li>Concordance</li>
                             <li>Codicology</li>
                             <li>Glossary</li>
-                        </ol>
+                        </ul>
                 </Col>
             </Row>
         </Container>
