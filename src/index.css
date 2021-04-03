@@ -115,6 +115,14 @@ p.intro {
 }
 
 /* Static Page Styles */
+#toc {
+  list-style-type: none;
+  font-size: 1.5em;
+}
+
+#toc-title {
+  margin-left: 1em;
+}
 
 /* Collaborators Styles */
 .collab_title {
