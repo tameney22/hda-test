@@ -1,12 +1,24 @@
-import React from "react";
+import { TEIRender, TEIRoute } from 'react-teirouter'
+import { useLocation } from 'react-router-dom'
+import axios from 'axios';
+import { useState, useEffect, createRef } from 'react';
+import { useParams } from 'react-router';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Spinner from 'react-bootstrap/Spinner'
+import Button from 'react-bootstrap/Button'
 import { Viewer } from 'react-iiif-viewer'
-import { NavLink } from "react-router-dom";
-import axios from 'axios';
+import annotator from 'annotator'
+import Navbar from "react-bootstrap/Navbar";
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { nav } from '../data/nav'
 
 const tocb = () => {
+
+    
+
     return(
         <Container>
             <Row>

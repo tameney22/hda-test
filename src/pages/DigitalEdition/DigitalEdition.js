@@ -19,8 +19,6 @@ function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
-var TEXT = [];
-
 const DigitalEdition = () => {
     const getTif = (teiName, milestone) => {
         return teiName + "0".repeat(4 - milestone.length) + milestone.toLowerCase()
@@ -77,11 +75,6 @@ const DigitalEdition = () => {
             }
         }
 
-        if(!hide)
-        {
-            TEXT.push(props.teiDomElement.textContent);
-        }
-
         return (
             <>
                 {!hide ?
@@ -98,11 +91,6 @@ const DigitalEdition = () => {
 
 
     const Laisse = (props) => {
-
-        if(!hide)
-        {
-            TEXT.push(props.teiDomElement.textContent);
-        }
 
         return (
             <>
