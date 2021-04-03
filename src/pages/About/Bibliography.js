@@ -16,11 +16,11 @@ const Bibliography = () => {
                 <Col>
                     <Navbar bg="light" sticky={true}>
                         <h2>Table of Contents</h2>
-                        <ul>
+                        <Row><ul>
                             <Row><a href="#">1. Manuscripts and Early Print Editions</a></Row>
                             <Row><a href="#">2. Reference Works</a></Row>
                             <Row><a href="#">3. Secondary Material</a></Row>
-                        </ul>
+                        </ul></Row>
                     </Navbar>
                 </Col>
                 <Col>
