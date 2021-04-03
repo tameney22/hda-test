@@ -16,14 +16,15 @@ const Bibliography = () => {
                 <Col>
                     <Navbar bg="light" sticky={true}>
                         <h2 data-toc-skip>Table of Contents</h2>
-                        <a href="#">1. Manuscripts and Early Print Editions</a>
-                        <a href="#">2. Reference Works</a>
-                        <a href="#">3. Secondary Material</a>
+                        <ul>
+                            <li><a href="#">1. Manuscripts and Early Print Editions</a></li>
+                            <li><a href="#">2. Reference Works</a></li>
+                            <li><a href="#">3. Secondary Material</a></li>
+                        </ul>
                     </Navbar>
                 </Col>
-      
                 <Col>
-<h2>1. Manuscripts and Early Print Editions</h2>
+                    <h2>1. Manuscripts and Early Print Editions</h2>
 
 <p>Conventions used are those of the <i>MLA Handbook for Writers of Research Papers</i>, 7th ed. (New York, NY: 2009), with the addition of “p.” or “pp.” for page numbers, where applicable, to assist in clarity.</p>
 
@@ -1078,10 +1079,12 @@ const Bibliography = () => {
 <li>Zuwiyya, David, ed. <i>A Companion to Alexander Literature in the Middle Ages</i>. Boston: Brill, 2011.</li>
 
 </ul>
-</Col>
+                
+                
+                </Col>
+      
             </Row>
-        </Container>
-    )
+            </Container>)
 }
 
 export default Bibliography
