@@ -10,17 +10,17 @@ const Bibliography = () => {
     return(
         <Container>
             <Row>
-                <Col><h1 data-toc-skip>Huon d'Auvergne Bibliography</h1></Col>
+                <Col><h1>Huon d'Auvergne Bibliography</h1></Col>
             </Row>
             <Row>
                 <Col>
                     <Navbar bg="light" sticky={true}>
-                        <h2 data-toc-skip>Table of Contents</h2>
-                        <ul>
-                            <li><a href="#">1. Manuscripts and Early Print Editions</a></li>
-                            <li><a href="#">2. Reference Works</a></li>
-                            <li><a href="#">3. Secondary Material</a></li>
-                        </ul>
+                        <Row><h2>Table of Contents</h2></Row>
+                        <Row><ul>
+                            <a href="#">1. Manuscripts and Early Print Editions</a>
+                            <a href="#">2. Reference Works</a>
+                            <a href="#">3. Secondary Material</a>
+                        </ul></Row>
                     </Navbar>
                 </Col>
                 <Col>
