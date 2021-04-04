@@ -14,6 +14,8 @@ const EditionIntro = () => {
             <Row>
                 <Col>
                     <h1>{teiIntro.content.title}</h1>
+                    <h2>Introduction to Edition</h2>
+                    <p>{teiIntro.content.msDesc}</p>
                 </Col>
             </Row>
             <Row>
@@ -22,7 +24,7 @@ const EditionIntro = () => {
                 </Col>
                 <Col>
                     <h2>Table of Contents</h2>
-                    <ul id="toc">
+                    <ul class="list-inline" id="toc">
                         {teiIntro.content.toc.map((item) => {
                             return (
                                 <li><a href={item.url}>{item.name}</a></li>
