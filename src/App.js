@@ -16,6 +16,7 @@ import Technical from './pages/About/Technical';
 import Bibliography from './pages/About/Bibliography';
 import error404 from './pages/error404';
 import Search from './pages/Search/Search';
+import EditionIntro from './pages/EditionIntro/EditionIntro'
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
             <Route path="/about/collaborators" component={Collaborators} />
             <Route path="/about/technical" component={Technical} />
             <Route path="/about/Bibliography" component={Bibliography} />
+            <Route path="/edition-intro/:teiName" component={EditionIntro} />
+
 
             //Add above this so that any unimplemented pages show 404 page
             <Route path="*" component={error404} />

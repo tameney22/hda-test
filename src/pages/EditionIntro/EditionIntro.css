@@ -1,0 +1,5 @@
+#toc li {
+    list-style-type:decimal;
+    font-size: 2em;
+    padding-bottom: 1em;
+}
