@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 import Navbar from "react-bootstrap/Navbar";
+
 import Nav from 'react-bootstrap/Nav';
 
 const Bibliography = () => {
@@ -13,15 +14,16 @@ const Bibliography = () => {
                 <Col><h1>Huon d'Auvergne Bibliography</h1></Col>
             </Row>
             <Row>
-                <Col>
-                    <Navbar bg="light" sticky={true}>
-                        <Row><h2>Table of Contents</h2></Row>
-                        <ul>
-                            <li><a href="#">1. Manuscripts and Early Print Editions</a></li>
-                            <li><a href="#">2. Reference Works</a></li>
-                            <li><a href="#">3. Secondary Material</a></li>
-                         </ul>
-                    </Navbar>
+                <Col class = "row fill" md={{span:2, offset: 0}} sticky="true" position="absolute" top="100px" bottom="0" bg="light" >
+                        <Navbar bg="light" sticky="top" position="absolute">
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                           <Nav className="flex-column">
+                                <b>Table of Contents</b>
+                                <Nav.Link href="#">1. Manuscripts and Early Print Editions</Nav.Link>
+                                <Nav.Link href="#">2. Reference Works</Nav.Link>
+                                <Nav.Link href="#">3. Secondary Material</Nav.Link>
+                            </Nav>
+                        </Navbar>
                 </Col>
                 <Col>
                     <h2>1. Manuscripts and Early Print Editions</h2>
@@ -1084,7 +1086,8 @@ const Bibliography = () => {
                 </Col>
       
             </Row>
-            </Container>)
+            </Container>
+            )
 }
 
 export default Bibliography
