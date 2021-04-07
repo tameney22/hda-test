@@ -9,27 +9,49 @@ import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
 import { Viewer } from 'react-iiif-viewer'
+import {TokenAnnotator, TextAnnotator} from 'react-text-annotate'
+import Card from 'react-bootstrap/Card'
+import { State, Toggle } from 'react-powerplug'
 import annotator from 'annotator'
-import Navbar from "react-bootstrap/Navbar";
-import Nav from 'react-bootstrap/Nav';
-import NavLink from 'react-bootstrap/Nav'
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { NavLink, Link } from 'react-router-dom'
 
-const tocb = () => {
+var text, parser, xmlDoc;
 
-    
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
+
+const Tocb = () => {
+    const getTif = (teiName, milestone) => {
+        return teiName + "0".repeat(4 - milestone.length) + milestone.toLowerCase()
+    }
+
+    const { teiName, stone } = useParams()
+    let hide = stone === "1R" ? false : true; // condition to not skip rendering first few lines in t.xml
+
+    const [tei, setTei] = useState({ data: null, ready: false })
+
+    parser = new DOMParser();
+
+    useEffect(() => {
+        axios.get(`/teis/${teiName}.xml`, {
+            "Content-Type": "application/xml; charset=utf-8"
+        }).then((response) => {
+            {data: response.data, ready: true};
+            text = response.data;
+            // console.log(tei)
+        })
+    }, [teiName])
+
+    xmlDoc = parser.parseFromString(text,"text/xml");
+    document.getElementById("title").innerHTML = xmlDoc.getElementsByTagName("title");
 
     return(
         <Container>
             <Row>
-                <Col md={{ span: 6, offset: 3 }}>
-                    <h1>Berlin, Kupferstichkabinett 78 D 8 (olim Hamilton 337)</h1>
-                    <p id="demo"></p>
-                    
+                <Col md={{ span: 100, offset: 3 }}>
+
                     <h2>Introduction to Edition</h2>
-                    This is the manuscript listed in the Gonzaga inventory of 1407. The first folio bears three copies of the coat of arms of the Gonzaga family.
-                    The manuscript passed through noble families in the Italian peninsula and then to the English Hamilton family.
-                    In the 19th century, the Prussian government bought a group of the Hamilton manuscripts that included B. The manuscript was first described by Adolf Tobler in 1884.
                 </Col>
             </Row>
             <br />
@@ -60,4 +82,70 @@ const tocb = () => {
     )
 }
 
-export default tocb
+export default Tocb
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+<TEIRoute el='tei-aquisition' component={getAquisition} />
+
+
+
+
+
+
+const getTif = (teiName, milestone) => {
+    return teiName + "0".repeat(4 - milestone.length) + milestone.toLowerCase()
+}
+
+const { teiName, stone } = useParams()
+let hide = stone === "1R" ? false : true; // condition to not skip rendering first few lines in t.xml
+
+const [tei, setTei] = useState({ data: null, ready: false })
+// const [manuName, setManuName] = useState("")
+
+useEffect(() => {
+    axios.get(`/teis/${teiName}.xml`, {
+        "Content-Type": "application/xml; charset=utf-8"
+    }).then((response) => {
+        setTei({ data: response.data, ready: true })
+        // console.log(tei)
+    })
+}, [teiName])
+
+const refs = new Map()
+let query = useQuery()
+let lineNum = query.get('lineNum')
+
+const GetAquisition = (props) => {
+
+const ref = createRef()
+    let lineNumber = props.teiDomElement.getAttribute('acquisition')
+    refs.set(lineNumber, ref)
+
+    let children = props.teiDomElement.children
+
+    return(
+        <p>{children.p}</p>
+    )
+}
+
+
+
+*/

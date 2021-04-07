@@ -42,7 +42,7 @@ export const nav = [
         dropdown: [
             {
                 page: "Berlin (B)",
-                url: "/editions-toc/tocb"
+                url: "/editions-toc/b"
             },
             {
                 page: "Turin (T)",
