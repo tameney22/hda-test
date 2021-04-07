@@ -1,0 +1,344 @@
+{
+    "TEI": {
+        "$": {
+            "xmlns": "http://www.tei-c.org/ns/1.0",
+            "xml:lang": "en"
+        },
+        "teiHeader": [{
+                    "fileDesc": [{
+                        "titleStmt": [{
+                            "title": [{
+                                    "_": "Huon d'Auvergne",
+                                    "$": {
+                                        "type": "text"
+                                    }
+                                },
+                                {
+                                    "_": "Berlin Kupferstichkabinett 78 D 8 (olim Hamilton 337)",
+                                    "$": {
+                                        "type": "manuscript"
+                                    }
+                                },
+                                {
+                                    "_": "Berlin",
+                                    "$": {
+                                        "type": "short"
+                                    }
+                                }
+                            ],
+                            "sponsor": [{
+                                "address": [{
+                                    "addrLine": [
+                                        "Washington and Lee University",
+                                        "204 W. Washington St.",
+                                        "Lexington, VA 24450"
+                                    ]
+                                }]
+                            }],
+                            "funder": [
+                                "The National Endowment for the Humanities"
+                            ],
+                            "respStmt": [{
+                                    "name": [{
+                                        "_": "Leslie Zarker Morgan",
+                                        "$": {
+                                            "resp": "editor",
+                                            "xml:id": "LZM"
+                                        }
+                                    }],
+                                    "resp": [
+                                        "Edition of B"
+                                    ]
+                                },
+                                {
+                                    "name": [{
+                                        "_": "Stephen Patrick McCormick",
+                                        "$": {
+                                            "resp": "encoder",
+                                            "xml:id": "SPM"
+                                        }
+                                    }],
+                                    "resp": [
+                                        "TEI coding and development",
+                                        "Web interface development"
+                                    ]
+                                },
+                                {
+                                    "name": [{
+                                        "_": "Shira Schwam-Baird",
+                                        "$": {
+                                            "resp": "translator",
+                                            "xml:id": "SSB"
+                                        }
+                                    }],
+                                    "resp": [
+                                        "translation of B"
+                                    ]
+                                }
+                            ]
+                        }],
+                        "editionStmt": [{
+                            "edition": [{
+                                "$": {
+                                    "n": "1.0.0"
+                                },
+                                "title": [{
+                                    "_": "Version 1.0.0, enriched with text structure tags,\r\n            abbreviation expansions, basic decoration identification, and a notes and commentaries\r\n            apparatus.",
+                                    "$": {
+                                        "rend": "italic",
+                                        "type": "digital"
+                                    }
+                                }],
+                                "date": [{
+                                    "_": "31 August 2017",
+                                    "$": {
+                                        "when": "2017"
+                                    }
+                                }]
+                            }],
+                            "respStmt": [{
+                                    "name": [
+                                        "Stephen P. McCormick"
+                                    ],
+                                    "resp": [
+                                        "Created initial digital document, customized TEI tags for text structure, and began\r\n            tagging for text structure"
+                                    ]
+                                },
+                                {
+                                    "name": [
+                                        "Natsumi D. Alvarez"
+                                    ],
+                                    "resp": [
+                                        "Customized TEI tags for text structure and began tagging."
+                                    ]
+                                }
+                            ]
+                        }],
+                        "publicationStmt": [{
+                            "publisher": [
+                                "Washington and Lee University"
+                            ],
+                            "pubPlace": [
+                                "Lexington, Virginia"
+                            ],
+                            "address": [{
+                                "name": [{
+                                        "_": "Washington and Lee University",
+                                        "$": {
+                                            "type": "institution"
+                                        }
+                                    },
+                                    {
+                                        "_": "Lexington",
+                                        "$": {
+                                            "type": "city"
+                                        }
+                                    },
+                                    {
+                                        "_": "Virginia",
+                                        "$": {
+                                            "type": "state"
+                                        }
+                                    },
+                                    {
+                                        "_": "USA",
+                                        "$": {
+                                            "type": "country"
+                                        }
+                                    }
+                                ],
+                                "street": [
+                                    "204 W. Washington St."
+                                ],
+                                "postCode": [
+                                    "24450"
+                                ]
+                            }],
+                            "availability": [{
+                                "$": {
+                                    "status": "free"
+                                },
+                                "p": [
+                                    "The Huon Digital Archive project, funded by the National Endowment for the Humanities,\r\n            offers freely on a non-commercial basis the text of each edition and the accompanying\r\n            English translation . The appropriate editor or translator must be cited when\r\n            referencing the texts. The images are not available for download, and any user wishing\r\n            to use the manuscript images for personal or academic use must obtain written permission\r\n            from the appropriate holding library and pay all related fees. For more information on\r\n            reproductions and image use, visit the website of the respective library."
+                                ]
+                            }]
+                        }],
+                        "sourceDesc": [{
+                            "listWit": [{
+                                "witness": [{
+                                        "$": {
+                                            "xml:id": "B"
+                                        }
+                                    },
+                                    {
+                                        "$": {
+                                            "xml:id": "T"
+                                        }
+                                    },
+                                    {
+                                        "$": {
+                                            "xml:id": "P"
+                                        }
+                                    },
+                                    {
+                                        "$": {
+                                            "xml:id": "Br"
+                                        }
+                                    }
+                                ]
+                            }],
+                            "msDesc": [{
+                                "msIdentifier": [{
+                                    "country": [
+                                        "Germany"
+                                    ],
+                                    "settlement": [
+                                        "Berlin"
+                                    ],
+                                    "repository": [
+                                        "Kupferstichkabinett"
+                                    ],
+                                    "idno": [
+                                        "78 D 8 (olim Hamilton 337)"
+                                    ]
+                                }],
+                                "head": [{
+                                    "$": {
+                                        "type": "msHeading"
+                                    },
+                                    "title": [{
+                                        "_": "Huon d'Auvergne",
+                                        "$": {
+                                            "type": "manuscript",
+                                            "xml:lang": "FI"
+                                        }
+                                    }],
+                                    "origPlace": [{
+                                        "_": "Italy",
+                                        "$": {
+                                            "cert": "low"
+                                        }
+                                    }],
+                                    "origDate": [{
+                                        "_": "1341",
+                                        "$": {
+                                            "cert": "medium",
+                                            "evidence": "internal"
+                                        }
+                                    }]
+                                }],
+                                "history": [{
+                                    "origin": [{
+                                        "p": [{
+                                            "_": "Written in \r\n                  ",
+                                            "origPlace": [
+                                                "Northern Italy"
+                                            ],
+                                            "origDate": [
+                                                "1341"
+                                            ]
+                                        }]
+                                    }],
+                                    "provenance": [
+                                        "Gonzaga Library"
+                                    ],
+                                    "acquisition": [{
+                                        "p": [
+                                            "This is the manuscript listed in the Gonzaga inventory of 1407. The first folio\r\n                bears three copies of the coat of arms of the Gonzaga family. The manuscript passed\r\n                through noble families in the Italian peninsula and then to the English Hamilton\r\n                family. In the 19th century, the Prussian government bought a group of the Hamilton\r\n                manuscripts that included B. The manuscript was first described by Adolf Tobler in\r\n                1884."
+                                        ]
+                                    }]
+                                }],
+                                "msContents": [{
+                                    "textLang": [{
+                                        "_": "Franco-Italian",
+                                        "$": {
+                                            "xml:lang": "fi"
+                                        }
+                                    }],
+                                    "msItem": [{
+                                        "locus": [{
+                                            "_": "ff. 1r-84v",
+                                            "$": {
+                                                "from": "1r",
+                                                "to": "84v"
+                                            }
+                                        }],
+                                        "title": [{
+                                            "_": "Huon d'Auvergne",
+                                            "$": {
+                                                "type": "text",
+                                                "xml:lang": "fi"
+                                            }
+                                        }],
+                                        "incipit": [
+                                            "Al tamps de may quand furent li prael"
+                                        ],
+                                        "explicit": [
+                                            "En son saint regne o chante li kerubin"
+                                        ]
+                                    }]
+                                }],
+                                "physDesc": [{
+                                    "objectDesc": [{
+                                        "$": {
+                                            "form": "codex"
+                                        },
+                                        "supportDesc": [{
+                                            "$": {
+                                                "material": "parchment"
+                                            },
+                                            "support": [{
+                                                "p": [
+                                                    "Paper"
+                                                ]
+                                            }],
+                                            "extent": [{
+                                                "_": "84 manuscript folios, 12224 lines of verse \r\n                ",
+                                                "dimensions": [{
+                                                    "$": {
+                                                        "scope": "all",
+                                                        "type": "leaves",
+                                                        "unit": "in"
+                                                    },
+                                                    "height": [
+                                                        "38 cm"
+                                                    ],
+                                                    "width": [
+                                                        "27 cm"
+                                                    ]
+                                                }]
+                                            }]
+                                        }],
+                                        "layoutDesc": [{
+                                            "layout": [{
+                                                "$": {
+                                                    "columns": "2"
+                                                },
+                                                "p": [
+                                                    "In double columns except first folio which is in 2+1"
+                                                ]
+                                            }]
+                                        }]
+                                    }],
+                                    "handDesc": [{
+                                        "p": [
+                                            "Written in one hand"
+                                        ]
+                                    }],
+                                    "decoDesc": [{
+                                        "p": [
+                                            "Text written in laisses with colored initials alternating blue and red with some\r\n                missed alternations"
+                                        ]
+                                    }]
+                                }]
+                            }]
+                        }]
+                    }],
+                    "encodingDesc": [{
+                                "editorialDecl": [{
+                                            "correction": [{
+                                                        "$": {
+                                                            "method": "markup"
+                                                        },
+                                                        "p": [
+                                                                "I have attempted to correct the text as little as possible and only in passages in\r\n            which meaning would be difficult to decipher. All emendations are in angle brackets\r\n            and I include a footnote with the origina  
