@@ -16,7 +16,8 @@ import { State, Toggle } from 'react-powerplug';
 import annotator from 'annotator';
 import { NavLink, Link } from 'react-router-dom';
 import { XMLParser } from 'react-xml-parser';
-export default class Tocb extends React.Component {
+
+export default class Toc extends React.Component {
 
     state = {
         data: null,
@@ -59,13 +60,15 @@ export default class Tocb extends React.Component {
                             <h1>{data.TEI.teiHeader[0].fileDesc[0].titleStmt[0].title[1]._}</h1>
 
                             <h2>Introduction to Edition</h2>
+
                             <p>{data.TEI.teiHeader[0].fileDesc[0].sourceDesc[0].msDesc[0].history[0].acquisition[0].p[0]}</p>
+                            
                         </Col>
                     </Row>
                     <br />
                     <Row>
                         <Col>
-                            <Viewer width="100%" height="100vh" iiifUrl={`https://iiif.wlu.edu/iiif/huon/b001r.tif/info.json`} />
+                            <Viewer width="100%" height="100vh" iiifUrl={`https://iiif.wlu.edu/iiif/huon/${window.location.pathname.substring(14)}001r.tif/info.json`} />
                         </Col>
                         <Col>
                                 <h1 id="toc-title">Table of Contents</h1>
@@ -99,81 +102,4 @@ export default class Tocb extends React.Component {
 }
 
 
-
-
-
-
-/*
-
-<TEIRoute el='tei-aquisition' component={getAquisition} />
-
-
-
-
-
-
-const getTif = (teiName, milestone) => {
-    return teiName + "0".repeat(4 - milestone.length) + milestone.toLowerCase()
-}
-
-const { teiName, stone } = useParams()
-let hide = stone === "1R" ? false : true; // condition to not skip rendering first few lines in t.xml
-
-const [tei, setTei] = useState({ data: null, ready: false })
-// const [manuName, setManuName] = useState("")
-
-useEffect(() => {
-    axios.get(`/teis/${teiName}.xml`, {
-        "Content-Type": "application/xml; charset=utf-8"
-    }).then((response) => {
-        setTei({ data: response.data, ready: true })
-        // console.log(tei)
-    })
-}, [teiName])
-
-const refs = new Map()
-let query = useQuery()
-let lineNum = query.get('lineNum')
-
-const GetAquisition = (props) => {
-
-const ref = createRef()
-    let lineNumber = props.teiDomElement.getAttribute('acquisition')
-    refs.set(lineNumber, ref)
-
-    let children = props.teiDomElement.children
-
-    return(
-        <p>{children.p}</p>
-    )
-}
-
-
-
-*/
-
-
-/* class getXML extends React.Component {
-
-    state = {
-        teiInfo: []
-    }
-
-    componentDidMount() {
-            axios.get(`/teis/${window.location.pathname}.xml`, {
-                "Content-Type": "application/xml; charset=utf-8"
-            }).then((response) => {
-                const teiInfo = response.data;
-                this.setState({teiInfo});
-            })
-    }
-
-    render() {
-        return (
-          <ul>
-            { this.state.teiInfo.map(info => <li>{info.title}</li>)}
-            { this.state.teiInfo.map(info => <li>{info.acquisition}</li>)}
-          </ul>
-        )
-      }
-} */
+/**/

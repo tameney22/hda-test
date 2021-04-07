@@ -46,15 +46,15 @@ export const nav = [
             },
             {
                 page: "Turin (T)",
-                url: "/editions/t"
+                url: "/editions-toc/t"
             },
             {
                 page: "Padua (P)",
-                url: "/editions/p"
+                url: "/editions-toc/p"
             },
             {
                 page: "Barbieri Fragment (Br)",
-                url: "/editions/br"
+                url: "/editions-toc/br"
             },
         ]
     },

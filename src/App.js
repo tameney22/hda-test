@@ -16,7 +16,7 @@ import Technical from './pages/About/Technical';
 import Bibliography from './pages/About/Bibliography';
 import error404 from './pages/error404';
 import Search from './pages/Search/Search';
-import Tocb from './pages/editions-toc/Tocb';
+import Toc from './pages/editions-toc/Toc';
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
         <div>
           <Switch>
             <Route path="/" component={HomePage} exact />
-            <Route path="/editions-toc/:teiName" component={Tocb} />
+            <Route path="/editions-toc/:teiName" component={Toc} />
             <Route exact path="/editions/:teiName" render={props => (<Redirect to={`/editions/${props.match.params.teiName}/1R`} />)} />
             <Route path="/editions/:teiName/:stone" component={DigitalEdition} />
             <Route path="/search" component={Search} />
