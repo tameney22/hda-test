@@ -31,17 +31,14 @@ export default class Toc extends React.Component {
         axios.get(`/teis/${window.location.pathname.substring(14)}.xml`, {
             "Content-Type": "application/xml; charset=utf-8"
         }).then(response => {
-            this.setState((state) => {
+            self.setState((state) => {
                 // Important: read `state` instead of `this.state` when updating.
                 temp = response.data;
                 var data = {};  
                 var parseString = require('xml2js').parseString;
                 parseString(temp, function (err, result) {data = result;})
-
-                this.setState((state) => {
-                    // Important: read `state` instead of `this.state` when updating.
-                    return {data: data, ready: true}
-                });
+                
+                return {data: data, ready: true}
               });
         })
     }
@@ -78,7 +75,7 @@ export default class Toc extends React.Component {
                                     <li><NavLink to="/notyetadded">Edition Criteria</NavLink></li>
                                     
                                     
-                                    <li><NavLink to="../editions/b">Digital Edition</NavLink></li>
+                                    <li><NavLink to={'../editions/' + window.location.pathname.substring(14)}>Digital Edition</NavLink></li>
                                     <li><NavLink to="/notyetadded">Berlin Translation</NavLink></li>
                                     
                                     <li><NavLink to="/notyetadded">Digital Facsimile</NavLink></li>
@@ -102,4 +99,6 @@ export default class Toc extends React.Component {
 }
 
 
-/**/
+/*
+<h1>{data.TEI.teiHeader[0].fileDesc[0].titleStmt[0].title[1]._}</h1>
+*/

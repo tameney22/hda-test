@@ -74,7 +74,7 @@
                     <witness xml:id="P"/>
                     <witness xml:id="Br"/>
                 </listWit>
-                <msDesc xml:lang="en">
+                <msDesc>
                     <!-- xml:id ??? See Cummings 52 -->
                     <msIdentifier>
                         <country>Italy</country>
@@ -121,7 +121,7 @@
                                 transcribed from the manuscript. Additionally, the “MS Image” button
                                 will allow for a side-by-side comparison of manuscript T and the
                                 transcription.</p>
-                        </acquistion>
+                        </acquisition>
                     </history>
                     <msContents>
                         <textLang mainLang="fi">Franco-Italian</textLang>
