@@ -1,21 +1,11 @@
-import { TEIRender, TEIRoute } from 'react-teirouter';
-import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import React from 'react';
-import { useState, useEffect, createRef } from 'react';
-import { useParams } from 'react-router';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
-import Button from 'react-bootstrap/Button';
 import { Viewer } from 'react-iiif-viewer';
-import {TokenAnnotator, TextAnnotator} from 'react-text-annotate';
-import Card from 'react-bootstrap/Card';
-import { State, Toggle } from 'react-powerplug';
-import annotator from 'annotator';
-import { NavLink, Link } from 'react-router-dom';
-import { XMLParser } from 'react-xml-parser';
+import { NavLink } from 'react-router-dom';
 
 export default class Toc extends React.Component {
 

@@ -19,7 +19,7 @@ import { XMLParser } from 'react-xml-parser';
 import Mirador from 'mirador/dist/es/src/index';
 import MiradorDownloadPlugin from '../../plugins/MiradorDownloadPlugin.js';
 import MiradorDownloadDialog from '../../plugins/MiradorDownloadDialog.js';
-import { MiradorViewer } from './MiradorViewer.js';
+import MiradorViewer from './MiradorViewer.js';
 
 class GetLink extends React.Component {
     render() {
@@ -91,6 +91,9 @@ export default class Facsimiles extends React.Component {
                     <br />
                     <Row>
                         <Col>
+                            <div>
+                            <MiradorViewer />
+                            </div>
                         </Col>
                     </Row>
                 </Container>
@@ -104,8 +107,3 @@ export default class Facsimiles extends React.Component {
         }
     }
 }
-
-
-/*
-<h1>{data.TEI.teiHeader[0].fileDesc[0].titleStmt[0].title[1]._}</h1>
-*/

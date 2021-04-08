@@ -6,7 +6,8 @@ export {
   MiradorDownloadDialogPlugin,
 };
 
+/*
 export default [
   miradorDownloadPlugin,
   MiradorDownloadDialogPlugin,
-];
+];*/
