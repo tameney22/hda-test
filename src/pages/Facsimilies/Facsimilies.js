@@ -17,7 +17,30 @@ import annotator from 'annotator';
 import { NavLink, Link } from 'react-router-dom';
 import { XMLParser } from 'react-xml-parser';
 
-export default class Toc extends React.Component {
+class GetLink extends React.Component {
+    render() {
+      var nameOfText = window.location.pathname.substring(13);
+
+      switch(nameOfText)
+      {
+        case "b":
+            return <a href="https://www.smb.museum/museen-und-einrichtungen/kupferstichkabinett/ueber-uns/service.html">Berlin Kupferstichkabinett</a>;
+        case "bt":
+            return <a href="https://www.smb.museum/museen-und-einrichtungen/kupferstichkabinett/ueber-uns/service.html">Berlin Kupferstichkabinett</a>;
+        case "t":
+            return <a href="http://www.bnto.librari.beniculturali.it/index.php?it/218/modulistica">Biblioteca Nazionale Universitaria di Torino</a>;
+        case "p":
+            return <a href="http://www.bibliotecaseminariopda.it/richiesta-riproduzioni/">Biblioteca del Seminario Vescovile di Padova</a>;
+        case "br":
+            return <a href="http://www.archiginnasio.it/forms/modulo4.pdf">Biblioteca Comunale dell'Archiginnasio</a>;
+        default:
+            return "error";
+          
+      }
+    }
+  }
+
+export default class Facsimiles extends React.Component {
 
     state = {   //Sets default state to "Hey I don't have the xml data loaded in yet"
         data: null,
@@ -29,7 +52,7 @@ export default class Toc extends React.Component {
         var temp;
 
         //The substring gets the letter at the end of the pathname i.e. /editions-toc/b goes to just b since /editions-toc/ is 14 characters
-        axios.get(`/teis/${window.location.pathname.substring(14)}.xml`, {  //Axios pulls in xml data
+        axios.get(`/teis/${window.location.pathname.substring(13)}.xml`, {  //Axios pulls in xml data
             "Content-Type": "application/xml; charset=utf-8"
         }).then(response => {
             self.setState((state) => {
@@ -46,8 +69,9 @@ export default class Toc extends React.Component {
     }
 
     render() //This is what gets re-redered
-    {     
+    {    
         const { data, ready } = this.state; //Allows access to the xml infomation from above to render() 
+        let name = window.location.pathname.substring(13);
 
         if(ready === true) //Displays page once everything is converted
         {
@@ -57,9 +81,7 @@ export default class Toc extends React.Component {
                         <Col>
                             <h1>{data.TEI.teiHeader[0].fileDesc[0].titleStmt[0].title[1]._}</h1>
 
-                            <h2>Introduction to Edition</h2>
-
-                            <p>{data.TEI.teiHeader[0].fileDesc[0].sourceDesc[0].msDesc[0].history[0].acquisition[0].p[0]}</p>
+                            <p>Images within the Huon Digital Archive may not be printed, reproduced or downloaded. To order reproductions of this manuscript, please review the policies of the <GetLink /></p>
                             
                         </Col>
                     </Row>
@@ -67,24 +89,6 @@ export default class Toc extends React.Component {
                     <Row>
                         <Col>
                             <Viewer width="100%" height="100vh" iiifUrl={`https://iiif.wlu.edu/iiif/huon/${window.location.pathname.substring(14)}001r.tif/info.json`} />
-                        </Col>
-                        <Col>
-                                <h1 id="toc-title">Table of Contents</h1>
-                                <hr id="ms-intro-toc" />
-                                <ul id="toc">
-                                    
-                                    <li><NavLink to="/notyetadded">Edition Criteria</NavLink></li>
-                                    
-                                    
-                                    <li><NavLink to={'../editions/' + window.location.pathname.substring(14)}>Digital Edition</NavLink></li>
-                                    <li><NavLink to="/notyetadded">Berlin Translation</NavLink></li>
-                                    
-                                    <li><NavLink to={"../Facsimilies/" + window.location.pathname.substring(14)}>Digital Facsimile</NavLink></li>
-                                    
-                                    <li><NavLink to="/notyetadded">Concordance</NavLink></li>
-                                    <li><NavLink to="/notyetadded">Codicology</NavLink></li>
-                                    <li><NavLink to="/notyetadded">Glossary</NavLink></li>
-                                </ul>
                         </Col>
                     </Row>
                 </Container>
