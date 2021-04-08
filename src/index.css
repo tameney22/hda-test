@@ -124,6 +124,15 @@ p.intro {
   margin-left: 1em;
 }
 
+.bib {
+  list-style-type: none;
+  text-align: left;
+}
+
+.bibentry{
+  font-size: 1.2em;
+}
+
 /* Collaborators Styles */
 .collab_title {
   text-align: left;

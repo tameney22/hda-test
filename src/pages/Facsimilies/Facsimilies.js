@@ -91,9 +91,7 @@ export default class Facsimiles extends React.Component {
                     <br />
                     <Row>
                         <Col>
-                            <div>
-                            <MiradorViewer />
-                            </div>
+                            <div id="root"><MiradorViewer /></div>
                         </Col>
                     </Row>
                 </Container>
