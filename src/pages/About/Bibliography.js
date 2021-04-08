@@ -4,12 +4,20 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 import Navbar from "react-bootstrap/Navbar";
-
 import Nav from 'react-bootstrap/Nav';
 
 const Bibliography = () => {
     return(
         <Container>
+            <Row>
+                <Col class = "fill" md={{span:2, offset: 0}} sticky="true" position="absolute" top="100px" bottom="0" bg="light" >
+                        <Navbar bg="light" sticky="top" height="100%">
+                        
+                            <Nav className="flex-column">
+                                <b>Table of Contents</b>
+                                <Nav.Link href="#1-manuscripts-and-early-print-editions">1. Manuscripts and Early Print Editions</Nav.Link>
+                                <Nav.Link href="#2-reference-works">2. Reference Works</Nav.Link>
+                                <Nav.Link href="#3-secondary-material">3. Secondary Material</Nav.Link>
             <br />
             <Row>
                 <Col class = "row fill" md={{span:2, offset: 0}} sticky="true" position="absolute" top="100px" bottom="0" bg="light" >
@@ -24,11 +32,20 @@ const Bibliography = () => {
                         </Navbar>
                 </Col>
                 <Col>
+                <h1 align="left">Huon d'Auvergne Bibliography</h1>
+                    <h2 align= "left">
+                        <a name="#1-manuscripts-and-early-print-editions">1. Manuscripts and Early Print Editions</a>
+                    </h2>
                     <h1 class="bib">Huon d'Auvergne Bibliography</h1>
                     <h2 class="bib" id="section1">1. Manuscripts and Early Print Editions</h2>
 
                     <p class="bib">Conventions used are those of the <i>MLA Handbook for Writers of Research Papers</i>, 7th ed. (New York, NY: 2009), with the addition of “p.” or “pp.” for page numbers, where applicable, to assist in clarity.</p>
 
+<ul class="bib" name="1-manuscripts-and-early-print-editions">
+
+    <i>Huon d’Auvergne</i>. 1341. MS 78 D 8 (olim MS Hamilton 337). Kupferstichkabinett, Berlin.
+
+    <li><i>Huon d’Auvergne</i>. n.d. MS 32. Biblioteca del seminario, Padua.</li>
                     <ul class="bib">
 
                         <li class="bibentry"><i>Huon d’Auvergne</i>. 1341. MS 78 D 8 (olim MS Hamilton 337). Kupferstichkabinett, Berlin.</li><br />
@@ -75,6 +92,7 @@ const Bibliography = () => {
 
                     <p class="bib">These volumes are available online, including scanned versions of originally printed volumes). In BOLD are standard abbreviations used in the field for reference, though entries are listed by <a href="https://style.mla.org/">Modern Language Association 7th - 8th edition</a> style with altered spacing for web reading).</p>
 
+<ul class="bib" name="2-reference-works">
                     <ul class="bib">
 
                         <li class="bibentry"><a href="https://www.abdn.ac.uk/bestiary/ms24"><i>Aberdeen Bestiary</i></a>. Special Collections, Library, Special Collections and Museums, University of Aberdeen. Consulted 28 Jan 2021.</li><br />
@@ -141,6 +159,7 @@ const Bibliography = () => {
 
                         <p class="bib">These sites have multiple links to various resources</p>
 
+<ul class="bib" name="#3-secondary-material">
                         <ul class="bib">
 
                         <li class="bibentry"><a href="https://www.lexilogos.com/francais_ancien.htm">Lexilogos Old French</a></li><br />
@@ -1084,9 +1103,8 @@ const Bibliography = () => {
                 
                 </Col>
       
-            </Row>
-            </Container>
-            )
+        </Row>
+        </Container>)
 }
 
 export default Bibliography
