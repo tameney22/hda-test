@@ -198,3 +198,9 @@ p.intro {
     width: 100%;
   }
 }
+
+/*bib styling*/
+.bib {
+  list-style: none;
+  text-align: left;
+}
