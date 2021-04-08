@@ -42,19 +42,19 @@ export const nav = [
         dropdown: [
             {
                 page: "Berlin (B)",
-                url: "/editions-toc/tocb"
+                url: "/editions-toc/b"
             },
             {
                 page: "Turin (T)",
-                url: "/editions/t"
+                url: "/editions-toc/t"
             },
             {
                 page: "Padua (P)",
-                url: "/editions/p"
+                url: "/editions-toc/p"
             },
             {
                 page: "Barbieri Fragment (Br)",
-                url: "/editions/br"
+                url: "/editions-toc/br"
             },
         ]
     },
@@ -63,7 +63,7 @@ export const nav = [
         dropdown: [
             {
                 page: "Berlin (B)",
-                url: "/editions/bt"
+                url: "/editions-toc/bt"
 
             },
         ]
