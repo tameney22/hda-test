@@ -18,6 +18,7 @@ import error404 from './pages/error404';
 import Search from './pages/Search/Search';
 import Toc from './pages/editions-toc/Toc';
 import Facsimilies from './pages/Facsimilies/Facsimilies.js';
+import MiradorViewer from './pages/Facsimilies/MiradorViewer.js';
 
 function App() {
   return (

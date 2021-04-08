@@ -16,6 +16,10 @@ import { State, Toggle } from 'react-powerplug';
 import annotator from 'annotator';
 import { NavLink, Link } from 'react-router-dom';
 import { XMLParser } from 'react-xml-parser';
+import Mirador from 'mirador/dist/es/src/index';
+import MiradorDownloadPlugin from '../../plugins/MiradorDownloadPlugin.js';
+import MiradorDownloadDialog from '../../plugins/MiradorDownloadDialog.js';
+import { MiradorViewer } from './MiradorViewer.js';
 
 class GetLink extends React.Component {
     render() {
@@ -71,7 +75,6 @@ export default class Facsimiles extends React.Component {
     render() //This is what gets re-redered
     {    
         const { data, ready } = this.state; //Allows access to the xml infomation from above to render() 
-        let name = window.location.pathname.substring(13);
 
         if(ready === true) //Displays page once everything is converted
         {
@@ -88,7 +91,6 @@ export default class Facsimiles extends React.Component {
                     <br />
                     <Row>
                         <Col>
-                            <Viewer width="100%" height="100vh" iiifUrl={`https://iiif.wlu.edu/iiif/huon/${window.location.pathname.substring(14)}001r.tif/info.json`} />
                         </Col>
                     </Row>
                 </Container>

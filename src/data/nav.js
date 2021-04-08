@@ -63,7 +63,7 @@ export const nav = [
         dropdown: [
             {
                 page: "Berlin (B)",
-                url: "/editions/bt"
+                url: "/editions-toc/bt"
 
             },
         ]
