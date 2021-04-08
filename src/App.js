@@ -19,6 +19,7 @@ import Search from './pages/Search/Search';
 import Toc from './pages/editions-toc/Toc';
 import Facsimilies from './pages/Facsimilies/Facsimilies.js';
 import MiradorViewer from './pages/Facsimilies/MiradorViewer.js';
+import Citation from './pages/About/Citation';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="/about/collaborators" component={Collaborators} />
             <Route path="/about/technical" component={Technical} />
             <Route path="/about/Bibliography" component={Bibliography} />
+            <Route path="/about/Citation" component={Citation} />
             <Route path="/Facsimilies/:teiName" component={Facsimilies} />
 
             //Add above this so that any unimplemented pages show 404 page
