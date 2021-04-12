@@ -18,19 +18,12 @@ const Bibliography = () => {
                                 <Nav.Link href="#1-manuscripts-and-early-print-editions">1. Manuscripts and Early Print Editions</Nav.Link>
                                 <Nav.Link href="#2-reference-works">2. Reference Works</Nav.Link>
                                 <Nav.Link href="#3-secondary-material">3. Secondary Material</Nav.Link>
-            <br />
-            <Row>
-                <Col class = "row fill" md={{span:2, offset: 0}} sticky="true" position="absolute" top="100px" bottom="0" bg="light" >
-                        <Navbar bg="light" sticky="top" position="absolute">
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                           <Nav className="flex-column">
-                                <b>Table of Contents</b>
-                                <Nav.Link href="#section1">1. Manuscripts and Early Print Editions</Nav.Link>
-                                <Nav.Link href="#section2">2. Reference Works</Nav.Link>
-                                <Nav.Link href="#section3">3. Secondary Material</Nav.Link>
-                            </Nav>
+                                <br />
                         </Navbar>
-                </Col>
+                </Col>  
+            </Row>
+
+               
                 <Col>
                 <h1 align="left">Huon d'Auvergne Bibliography</h1>
                     <h2 align= "left">
@@ -1101,10 +1094,9 @@ const Bibliography = () => {
                     </ul>
                 
                 
-                </Col>
-      
-        </Row>
-        </Container>)
+            </Col>
+        </Container>
+    )
 }
 
 export default Bibliography
