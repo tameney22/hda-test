@@ -14,6 +14,17 @@
   }
 }
 
+.lastupdatedtext {
+  text-align: right;
+}
+
+.mainBar {
+  background-color: 'blue'; 
+  height: '60px'; 
+  vertical-align: 'middle'; 
+  line-height: 'normal';
+}
+
 #highlight {
   background-color: yellow;
   animation-name: blink;
