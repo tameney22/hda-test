@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import axios from 'axios';
 import { useState, useEffect, createRef } from 'react';
 import { useParams } from 'react-router';
+import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -12,7 +13,7 @@ import { Viewer } from 'react-iiif-viewer'
 import './DigitalEdition.css'
 import {TokenAnnotator, TextAnnotator} from 'react-text-annotate'
 import Card from 'react-bootstrap/Card'
-import { State, Toggle } from 'react-powerplug'
+import { State } from 'react-powerplug'
 import annotator from 'annotator'
 
 function useQuery() {
@@ -109,9 +110,46 @@ const DigitalEdition = () => {
 
     return (
         <Container>
+            <Row className="mainBar">
+                <Col xs="auto">
+                    <Form>
+                        <Form.Check 
+                            type="switch"
+                            id="abbrev-switch"
+                            label="Expand Abbreviations"
+                            inline
+                        />
+                        <Form.Check
+                            type="switch"
+                            id="notes-switch"
+                            label="Notes"
+                            inline
+                        />
+                        <Form.Check 
+                            type="checkbox"
+                            id="tei-switch"
+                            label="Show TEI"
+                            inline
+                        />
+                        <Form.Check 
+                            type="checkbox"
+                            id="manuscript-switch"
+                            label="Show Manuscript"
+                            inline
+                        />
+                        <Form.Label className="align-items-right" inline>
+                            Last updated April 4, 2021
+                        </Form.Label>
+                    </Form>
+                </Col>
+                <Col xs="auto">
+                        <a href="https://github.com/SteveWLU/hda">Source Code</a>
+                </Col>
+                <br />
+            </Row>
             <Row>
                 <Col>
-                    {lineNum ? <Button variant='link' style={{ backgroundColor: "#5f0000", color: "white", margin: '15px' }} onClick={scrollToLine}>Scroll to line {lineNum}</Button> : <></>}
+                {lineNum ? <Button variant='link' style={{ backgroundColor: "#5f0000", color: "white", margin: '15px' }} onClick={scrollToLine}>Scroll to line {lineNum}</Button> : <></>}
                 </Col>
             </Row>
             <Row>
@@ -125,7 +163,7 @@ const DigitalEdition = () => {
 
                     {tei.ready ?
                         <TEIRender teiData={tei.data} path={`/teis/${teiName}.xml`}>
-                            {/* <TEIRoute el="tei-titlestmt" component={Title} /> */}
+                            {/*<TEIRoute el="tei-titlestmt" component={Title} />*/}
                             {/* <TEIRoute el='tei-body' >
                                 <Body stone={stone} />
                             </TEIRoute> */}
@@ -135,13 +173,9 @@ const DigitalEdition = () => {
                         : <Spinner animation="border" />}
                 </Col>
             </Row>
-        </Container >
+        </Container>
     );
 
 }
 
 export default DigitalEdition;
-
-
-
-
