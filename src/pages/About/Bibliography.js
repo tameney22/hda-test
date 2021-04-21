@@ -32,11 +32,11 @@ const Bibliography = () => {
 
                 <p class="bib">Conventions used are those of the <i>MLA Handbook for Writers of Research Papers</i>, 7th ed. (New York, NY: 2009), with the addition of “p.” or “pp.” for page numbers, where applicable, to assist in clarity.</p>
 
-                <ul class="bib" name="#1">
+                <ul class="bib" name="1-manuscripts-and-early-print-editions">
 
-                <i>Huon d’Auvergne</i>. 1341. MS 78 D 8 (olim MS Hamilton 337). Kupferstichkabinett, Berlin.
+                            <li class="bibentry"><i>Huon d’Auvergne</i>. 1341. MS 78 D 8 (olim MS Hamilton 337). Kupferstichkabinett, Berlin.</li><br />
 
-                <li><i>Huon d’Auvergne</i>. n.d. MS 32. Biblioteca del seminario, Padua.</li>
+                            <li class="bibentry"><i>Huon d’Auvergne</i>. n.d. MS 32. Biblioteca del seminario, Padua.</li><br />
 
                             <li class="bibentry"><i>Huon d’Auvergne</i>. 1341. MS 78 D 8 (olim MS Hamilton 337). Kupferstichkabinett, Berlin.</li><br />
 
@@ -74,15 +74,15 @@ const Bibliography = () => {
 
                             <li class="bibentry">Rajna, Pio. Transcription of Torino N.III.19. n.d. Carte Rajna XIX.15. Biblioteca Marucelliana (Sala consultazione manoscritti e rari), Florence.</li><br />
 
-                        </ul>
-                        <p class="bib"> </p>
-                        <h2 class="bib" id="section2">2. Reference Works</h2>
+                </ul>
+                <br/>
+                <h2 class="bib" id="2-reference-works">2. Reference Works</h2>
 
-                        <h3 class="bib">Siteography</h3>
+                <h3 class="bib">Siteography</h3>
 
-                        <p class="bib">These volumes are available online, including scanned versions of originally printed volumes). In BOLD are standard abbreviations used in the field for reference, though entries are listed by <a href="https://style.mla.org/">Modern Language Association 7th - 8th edition</a> style with altered spacing for web reading).</p>
+                <p class="bib">These volumes are available online, including scanned versions of originally printed volumes). In BOLD are standard abbreviations used in the field for reference, though entries are listed by <a href="https://style.mla.org/">Modern Language Association 7th - 8th edition</a> style with altered spacing for web reading).</p>
 
-                    <ul class="bib" name="2-reference-works">
+                <ul class="bib" name="2-reference-works">
 
                             <li class="bibentry"><a href="https://www.abdn.ac.uk/bestiary/ms24"><i>Aberdeen Bestiary</i></a>. Special Collections, Library, Special Collections and Museums, University of Aberdeen. Consulted 28 Jan 2021.</li><br />
 
@@ -140,15 +140,15 @@ const Bibliography = () => {
 
                             <li class="bibentry"><a href="http://vev.ovi.cnr.it/vocabolario">VEV</a>. <i>Vocabolario storico-etimologico del veneziano</i>, directed by Lorenzo Tomasin and Luca D'Onghia. Link verified 26 Feb. 2021.</li><br />
 
-                    </ul>
+                </ul>
 
-                            <p class="bib">NB: Standard text edition abbreviations are found on the website, DEAFBibél http://www.deaf-page.de/bibl_neu.php for the German version, and http://www.deaf-page.de/fr/bibl_neu.php for the French version, where one can either seek a specific abbreviation or browse by initial letter of the alphabet by clicking on it from the list above the boxes.</p>
+                <p class="bib">NB: Standard text edition abbreviations are found on the website, DEAFBibél http://www.deaf-page.de/bibl_neu.php for the German version, and http://www.deaf-page.de/fr/bibl_neu.php for the French version, where one can either seek a specific abbreviation or browse by initial letter of the alphabet by clicking on it from the list above the boxes.</p>
 
-                            <h3 class="bib">Compendium websites</h3>
+                <h3 class="bib">Compendium websites</h3>
 
-                            <p class="bib">These sites have multiple links to various resources</p>
+                <p class="bib">These sites have multiple links to various resources</p>
 
-                    <ul class="bib" name="#3-secondary-material">
+                <ul class="bib">
 
                             <li class="bibentry"><a href="https://www.lexilogos.com/francais_ancien.htm">Lexilogos Old French</a></li><br />
 
@@ -160,13 +160,13 @@ const Bibliography = () => {
 
                             <li class="bibentry"><a href="http://micmap.org/dicfro/search/tableaux-de-conjugaison">TCAF: Middle French Verbs</a></li><br />
 
-                        </ul>
+                </ul>
 
-                        <h3 class="bib">Language Reference</h3>
+                <h3 class="bib">Language Reference</h3>
 
-                        <p class="bib">The following are printed language-related reference works.</p>
+                <p class="bib">The following are printed language-related reference works.</p>
 
-                        <ul class="bib">
+                <ul class="bib">
 
                             <li class="bibentry">Baldinger, Kurt; Städtler, Thomas, dirs. <i>Dictionnaire étymologique de l’ancien français</i>. Tübingen: Niemeyer, 1974-2010; Berlin/New York: De Gruyter, 2010-. (DEAF)</li><br />
 
@@ -240,13 +240,13 @@ const Bibliography = () => {
 
                             <li class="bibentry">Wartburg, Walther von. <i>Französisches etymologisches Wörterbuch</i>. 25 vols. + Supp. Bonn: F. Klopp, 1921-.  (FEW)</li><br />
 
-                        </ul>
-                            <p class="bib"> </p>
-                            <h3 class="bib">Editorial Reference</h3>
+                </ul>
+                <p class="bib"> </p>
+                <h3 class="bib">Editorial Reference</h3>
 
-                            <p class="bib">Editing reference volumes and articles, both computational and printed text-related, with catalogues of libraries and collections</p>
+                <p class="bib">Editing reference volumes and articles, both computational and printed text-related, with catalogues of libraries and collections</p>
 
-                        <ul class="bib">
+                <ul class="bib">
 
                             <li class="bibentry">Albertini Ottolenghi, M. G. “La Biblioteca dei Visconti e degli Sforza.” <i>Studi petrarcheschi</i>, n. s. vol. 8, 1991, pp. 1-281.</li><br />
 
@@ -346,11 +346,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Zaccarello, Michelangelo. <i>L’Edizione critica del testo letterario. Primo corso di filologia italiana</i>. Florence: Le Monnier, 2017.</li><br />
 
-                        </ul>
+                </ul>
 
-                            <h3 class="bib">Digital Scholarship</h3>
+                <h3 class="bib">Digital Scholarship</h3>
 
-                        <ul class="bib">
+                <ul class="bib">
 
                             <li class="bibentry">Bornstein, George and Theresa Tinkle, eds. <i>The Iconic Page in Manuscript, Print, and Digital Culture.</i> Ann Arbor, MI: University of Michigan Press, 1998.</li><br />
 
@@ -362,15 +362,15 @@ const Bibliography = () => {
 
                             <li class="bibentry">Siemens, Ray, et al. “Toward Modeling the Social Edition: An Approach to Understanding the Electronic Scholarly Edition in the Context of New and Emerging Social Media.” <i>Literary and Linguistic Computing</i>, vol. 27, no. 4, 2012, pp. 445-61.</li><br />
 
-                        </ul>
+                </ul>
 
-                            <h2 class="bib" id="section3">3. Secondary Material</h2>
+                <h2 class="bib" id="3-secondary-material">3. Secondary Material</h2>
 
-                            <p class="bib">Editions, monographs and scholarly essays</p>
+                <p class="bib">Editions, monographs and scholarly essays</p>
 
-                            <h3 class="bib">A</h3>
+                <h3 class="bib">A</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Adams, Jenny. <i>Power Play: The Literature and Politics of Chess in the Late Middle Ages</i>. Philadelphia: U of Penn P, 2006.</li><br />
 
@@ -396,11 +396,11 @@ const Bibliography = () => {
 
                             <li class="bibentry"><i>Aye d’Avignon: Chanson de geste anonyme</i>, edited by Sam J. Borg. Geneva: Droz, 1967. Textes littéraires français 134.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">B</h3>
+                <h3 class="bib">B</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Barbato, Marcello. “Il Franco-italiano: Storia e teoria: Definizione tipologia fenomenologia (Seminario 2014), In Memoria di Cesare Segre.” <i>Medioevo romanzo</i>, vol. 39, no.1, pp. 20-51.</li><br />
 
@@ -476,11 +476,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Busby, Keith, and Christopher Kleinhenz. “Medieval French and Italian Literature: Towards a Manuscript History.” <i>The Medieval Manuscript Book: Cultural Approaches</i>, edited by Michael Johnston and Michael Van Dussen. Cambridge: University Press, 2015, pp. 215–42.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">C</h3>
+                <h3 class="bib">C</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Capusso, Maria Grazia. “La Produzione franco-italiana dei secoli XIII e XIV: Convergenze letterarie e linguistiche.” <i>Plurilinguismo letterario: Atti del convegno (9-10 novembre 2006)</i>, edited by Oniga Renato and Sergio Vatteroni. Soveria Mannelli: Rubbettino, 2007, pp. 159-204.</li><br />
 
@@ -518,11 +518,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Crescini, V. “Orlando nella Chanson de Roland e nei poemi del Bojardo e dell’Ariosto.” <i>Il Propugnatore</i>, vol. 13, 1880, pp. 44-69.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">D</h3>
+                <h3 class="bib">D</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">D'Adda, Gerolamo. <i>Indagini storiche, artistiche e bibliographiche sulla Liberia Visconteo-Sforzesca del Castello di Pavia</i>. Milan: Brigola, 1875-79.</li><br />
 
@@ -542,11 +542,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">DeVries, Kelly and Robert Douglas Smith. <i>Medieval Military Technology</i>. 1992. Toronto: University of Toronto Press, 2012.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">E</h3>
+                <h3 class="bib">E</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry"><i>Entrée d’Espagne: Chanson de geste franco–italienne publiée d'après le manuscrit unique de Venise</i>, edited by Antoine Thomas. Paris: Firmin–Didot, 1913. (EE)</li><br />
 
@@ -554,11 +554,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Everson, Jane. "Prolongements romanesques de la matière épique." <i>Epic Studies: Acts of the Seventeenth International Congress of the Société Rencesvals for the Study of Romance Epic</i>, edited by Anne Berthelot et al. Special issue of Olifant, vol. 25, 2006, pp. 41–68. &lt;https://scholarworks.iu.edu/journals/index.php/olifant/article/view/13884/20056&gt; Link verified 26 Feb. 2021.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">F</h3>
+                <h3 class="bib">F</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Fassò, Andrea. “La Materia di Francia nei poemi e nei romanzi italiani.” <i>Sulle orme di Orlando: Leggende e luoghi carolingi in Italia: I paladini de Francia nelle tradizioni italiane: Una proposta storico antropologica</i>, edited by Anna Imelde Galletti and Roberto Roda. Padua: Interbooks, 1987, pp. 65-81.</li><br />
 
@@ -566,11 +566,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Flores D’Arcais, Francesca. “Les Illustrations des manuscripts français des Gonzague à la bibliothèque de Saint-Marc.” <i>Essor et fortune de la Chanson de geste dans l’Europe et l’Orient latin: Actes du IXeCongrès international de la Société Rencesvals pour l’étude des épopées romanes, Padoue-Venise, 20 août-4 septembre 1982</i>, edited by Alberto Limentani et al. 2 vols. Modena: Mucchi, 1984, vol. 2, pp. 585-616.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">G</h3>
+                <h3 class="bib">G</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Gardner, Eileen. <i>Medieval Visions of Heaven and Hell. A Sourcebook</i>. 1993. London: Routledge, 2018.</li><br />
 
@@ -592,11 +592,11 @@ const Bibliography = () => {
 
                             <li class="bibentry"><i>Gui de Nanteuil: Chanson de geste</i>, edited by James R. McCormick. Geneva: Droz, 1970.</li><br />
 
-                        <ul class="bib">
+                    <ul class="bib">
 
-                            <h3 class="bib">H</h3>
+                <h3 class="bib">H</h3>
 
-                        </ul>
+                    </ul>
 
                             <li class="bibentry">Hammerich, L. L. “Studies to Visiones Georgii. III. The Descent of Guerrino il Meschino into the Purgatory of St. Patrick.” <i>Classica et Medievalia</i>, vol. 1, 1938, pp. 95-118; vol. 2, 1939, pp. 190-220.</li><br />
 
@@ -664,27 +664,27 @@ const Bibliography = () => {
 
                             <li class="bibentry"><i>Huon de Bordeaux</i>, edited by P. Ruelle. Bruxelles-Paris: Presses universitaires de Bruxelles,1960.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">I</h3>
+                <h3 class="bib">I</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Infurna, Marco. “La Letteratura franco-veneta.” <i>Lo Spazio letterario del Medioevo. 2. Il Medioevo volgare. III. La Ricezione del testo</i>, edited by Piero Boitani et al. Rome: Salerno, 2003, pp. 405-30.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">J</h3>
+                <h3 class="bib">J</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry"><i>Jacobus de Voragine: The Golden Legend, Readings on the Saints</i>, trans. William Granger Ryan. 2 vols. Princeton: U. Press, 1993.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">K</h3>
+                <h3 class="bib">K</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Kay, Sarah. <i>The Chanson de Geste in the Age of Romance: Political Fictions</i>. Oxford: Clarendon, 1995.</li><br />
 
@@ -696,11 +696,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Krauss, Henning. “Franko-Italienisch: ein Sprach- und Literaturgeschichtliches Kuriosum.” <i>Vox Romanica</i>, vol. 62, 2003, pp. 1-27.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">L</h3>
+                <h3 class="bib">L</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Labie-Leurquin, Anne Françoise. “Huon d’Auvergne.” <i>Dictionnaire des lettres françaises, vol. 1: Le Moyen Age</i>, edited by Cardinal Georges Grente, 1964. New editors, Geneviève Hasenohr and Michel Zink. 4 vols. Paris: Fayard, 1994, vol. 1, pp. 702-703.</li><br />
 
@@ -722,11 +722,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Ludovisi, Idido. <i>L’Ugo d'Alvernia secondo il codice franco-italiano della biblioteca vescovile di Padova</i>. Aquila: Mele, 1895.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">M</h3>
+                <h3 class="bib">M</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Mainone, Friedrich. <i>Formenlehre und Syntax in der Berliner franco-venezianischen Chanson de geste von Huon d'Auvergne</i>. Leipzig: Verlag Robert Noske, Borna Bez, 1936. Leipziger romantische Studien I. Sprachwissenschaftliche Reihe 13.</li><br />
 
@@ -820,21 +820,21 @@ const Bibliography = () => {
 
                             <li class="bibentry">Morlino, Luca. “La letteratura francese e provenzale nell’Italia medievale.” <i>Atlante della letteratura italiana</i>. Turin: Einaudi, 2010, pp. 27-40.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">N</h3>
+                <h3 class="bib">N</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Nicola da Verona. <i>Opere: Pharsale; Continuazione dell’Entrée d’Espagne; Passion</i>, edited by Franca Di Ninni. Venice: Marsilio, 1992.</li><br />
 
                             <li class="bibentry">Nichols, Stephen. "Introduction: Philology in a Manuscript Culture." <i>Speculum</i>, vol. 65, no. 1, 1990, pp. 1-10.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">O</h3>
+                <h3 class="bib">O</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Obergfell, Sandra Cheshire. “The Problem of Didacticism in the romance Epic: Aiol.” <i>Olifant</i>, vol. 6, 1978, pp. 21-33.</li><br />
 
@@ -844,11 +844,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Owen, D.D.R. <i>The Vision of Hell: Infernal Journeys in Medieval French Literature</i>. New York: Barnes and Noble, 1970.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">P</h3>
+                <h3 class="bib">P</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Palumbo, Giovanni, and Anna Constantinidis. “La Chanson d’Aspremont: à propos d’une nouvelle édition du corpus français.” <i>In Limine Romaniae : chanson de geste et épopée européenne: Actes du XVIIIe Congrès international de la Société Rencesvals pour l’étude des épopées romanes (20-24 juillet 2009)</i>, edited by Carlos Alvar and Constance Cecile Carta. Bern: Peter Lang, 2012, pp. 533-51.</li><br />
 
@@ -872,11 +872,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">“Purgatory of Saint Patrick.” <i>Visions of Heaven &amp; Hell Before Dante</i>, edited by Eileen Gardiner. NY: Italica Press, pp.135-48.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">R</h3>
+                <h3 class="bib">R</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Rajna, Pio. “Codici francesi posseduti dagli Estensi nel secolo XV.” <i>Romania</i>, vol. 2, 1873, pp. 49-58.</li><br />
 
@@ -928,11 +928,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Ryan, William Granger, trans. <i>Jacobus de Voragine. The Golden Legend: Readings on the Saints</i>. 2 vols. Princeton, NJ: Princeton UP, 1993.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">S</h3>
+                <h3 class="bib">S</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">“Saint Brendan’s Voyage.” <i>Visions of Heaven &amp; Hell Before Dante</i>, edited by Eileen Gardiner. NY: Italica Press, pp. 81-133.</li><br />
 
@@ -974,11 +974,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Sunderland, Luke. <i>Rebel Barons: Resisting Royal Power in Medieval Culture</i>. Oxford: Oxford UP, 2017.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">T</h3>
+                <h3 class="bib">T</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Thomas, Antoine. “Le No 44 des manuscrits français des Gonzague.” <i>Romania</i>, vol. 10, 1881, pp. 406-408.</li><br />
 
@@ -990,11 +990,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Tomasoni, Piera. “Veneto.” <i>Storia della lingua italiana</i>. Turin: Einaudi, 1994, Vol. 3: Le Altre lingue, edited by Luca Serianni and Pietro Trifone, pp. 212-40.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">V</h3>
+                <h3 class="bib">V</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Valentinelli, Giuseppe. <i>Della biblioteca del Seminario di Padova</i>. Venice: Teresa Gattei, 1849. https://books.google.co.uk/books?vid=BL:A0019380413</li><br />
 
@@ -1040,11 +1040,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Vitullo, Juliann M. “Orality, Literacy, and the Prose Epic: The Case of Andrea da Barberino’s <i>Ugo d’Alvernia</i>.” <i>The Italianist</i>, vol. 13, 1993, pp. 29-46.</li><br />
 
-                        </ul>
+                    </ul>
 
-                            <h3 class="bib">W</h3>
+                <h3 class="bib">W</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Warren, Michelle R. “Philology in Ruins.” <i>Floriligium</i>, vol. 32, 2015, pp. 59-76.</li><br />
 
@@ -1068,11 +1068,11 @@ const Bibliography = () => {
 
                             <li class="bibentry">Wunderli, Peter, and Günter Holtus. “La ‘renaissance’ des études franco-italiennes. Rétrospective et prospective.” <i>Testi, cotesti e contesti del franco-italiano: Atti del 10 simposio franco-italiano (Bad Homburg, 13-16 aprile, 1987)</i>, edited by Günter Holtus et al. Tübingen: Niemeyer, 1989, pp. 3-23.</li><br />
 
-                        </ul>
+                    </ul>
 
-                        <h3 class="bib">Z</h3>
+                <h3 class="bib">Z</h3>
 
-                        <ul class="bib">
+                    <ul class="bib">
 
                             <li class="bibentry">Zambon, Francesco. “La ‘materia di Francia’ nella letteratura franco-veneta.” <i>Sulle orme di Orlando: Leggende e luoghi carolingi in Italia: I paladinidi Francia nelle tradizioni italiane, una proposta storico-antropologica</i>, edited by A. I. Galletti and R. Roda. Padua: Interbooks, 1987, pp. 53-64.</li><br />
 
@@ -1086,7 +1086,7 @@ const Bibliography = () => {
 
                             <li class="bibentry">Zuwiyya, David, ed. <i>A Companion to Alexander Literature in the Middle Ages</i>. Boston: Brill, 2011.</li><br />
 
-                        </ul>
+                    </ul>
                         
                 </Col>
             </Row>
