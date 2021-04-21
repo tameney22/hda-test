@@ -13,6 +13,7 @@
     "chokidar": "^1.7.0",
     "fast-xml-parser": "^3.19.0",
     "fs": "^0.0.1-security",
+    "jquery": "^3.6.0",
     "lunr": "^2.3.9",
     "lunr-languages": "^1.4.0",
     "mirador": "^3.0.0-rc.7",

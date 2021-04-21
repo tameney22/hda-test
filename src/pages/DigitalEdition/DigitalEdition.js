@@ -11,171 +11,283 @@ import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
 import { Viewer } from 'react-iiif-viewer'
 import './DigitalEdition.css'
-import {TokenAnnotator, TextAnnotator} from 'react-text-annotate'
-import Card from 'react-bootstrap/Card'
-import { State } from 'react-powerplug'
 import annotator from 'annotator'
+import CETEI, { addStyle } from 'CETEIcean'
+import $ from 'jquery'
+import React from 'react';
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
+class DigitalEdition extends React.Component{
 
+    state = {   //Sets default state to "Hey I don't have the xml data loaded in yet"
+        ready: false
+    } //IMPORTANT: Every time a state switches, the website gets re-redered
 
-const DigitalEdition = () => {
-    const getTif = (teiName, milestone) => {
-        return teiName + "0".repeat(4 - milestone.length) + milestone.toLowerCase()
-    }
+    componentDidMount() {
+        var app = new annotator.App();
+        app.include(annotator.ui.main);
+        app.include(annotator.storage.http);
+        app.start();
 
-    const { teiName, stone } = useParams()
-    let hide = stone === "1R" ? false : true; // condition to not skip rendering first few lines in t.xml
+        // CODE TO HIDE A PAGE
+        function showPage(page) {
+            // Hide all text that does not belong to the page indicated
+            var n
+            var pbs = 0
+            var hide = false
 
-    const [tei, setTei] = useState({ data: null, ready: false })
-    // const [manuName, setManuName] = useState("")
+            // First, remove all hiding CSS classes, if present.
+            Array.from(document.querySelectorAll('.hid_page')).map(function (el) {
+                el.classList.remove('hid_page')
+            })
 
-    useEffect(() => {
-        axios.get(`/teis/${teiName}.xml`, {
-            "Content-Type": "application/xml; charset=utf-8"
-        }).then((response) => {
-            setTei({ data: response.data, ready: true })
-            // console.log(tei)
-        })
-    }, [teiName])
+            // Walk trough all descendants of tei-text
+            var walk = document.createTreeWalker(document.querySelector('tei-text'), NodeFilter.SHOW_ALL, null, false)
+            while (n) {
+                if (n.nodeType === Node.ELEMENT_NODE) {
+                    //  If this is a page beginning, update page count.
+                    //  If page count is lower or higher than the page requested, set 'hide' flag.
+                    //  If page count corresponds to the page requested, remove 'hide' flag.
+                    if (n.localName === 'tei-milestone') {
+                        pbs++
+                        if (pbs !== page) {
+                            hide = true
+                        } else {
+                            hide = false
+                        }
+                    }
 
-    // const Title = (props) => {
-    //     let title = props.teiDomElement.children[1]
-    //     let type = title.getAttribute('type')
-    //     let text = title.textContent
-    //     // let dso = props.teiDomElement.getAttribute('data-origname')
-    //     console.log("Type:", type, text)
-    //     setManuName(text)
-    //     return (<h2>{text}</h2>)
-    // }
+                    // If the hide flag is set and this is an empty element, hide it just in case the
+                    // CETEIcean CSS (or other) does something with it.
+                    if (hide && n.childNodes.length === 0) {
+                        n.classList.add('hid_page')
+                    }
+                    //RAFF 10/19 just this if statement
+                    if (hide && n.tagName === 'tei-note') {
+                        n.classList.add('hid_note')
+                    }
 
-    const refs = new Map()
-    let query = useQuery()
-    let lineNum = query.get('lineNum')
+                } else if (n.nodeType === Node.TEXT_NODE) {
+                    // We mostly operate at text node level by storing and restoring text data.
 
-    const scrollToLine = () => refs.get(lineNum).current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
+                    // Start by always restoring text data is previously removed.
+                    if (n.storedContent) {
+                        n.textContent = n.storedContent
+                    }
 
-    const Line = (props) => {
-        // Scrolling when lineNum query param exists
-        const ref = createRef()
-        let lineNumber = props.teiDomElement.getAttribute('n')
-        refs.set(lineNumber, ref)
-
-        let children = props.teiDomElement.children
-        let milestone = Array.from(children).find(child => child.nodeName === "TEI-MILESTONE")
-        if (milestone) {
-            // console.log("REACHED:", milestone.getAttribute('n'))
-            if (milestone.getAttribute('n') === stone) {
-                hide = false
-            } else {
-                hide = true
+                    // If the 'hide' flag is set, store text content and remove it.
+                    if (hide) {
+                        n.storedContent = n.textContent
+                        n.textContent = ''
+                    }
+                }
+                n = walk.nextNode()
             }
         }
 
-        return (
-            <>
-                {!hide ?
-                    <p id={lineNum && lineNum === lineNumber ? 'highlight' : null} ref={ref}>
-                        {props.teiDomElement.textContent}
-                        {props.teiDomElement.getAttribute('n') % 5 === 0 ?
-                            <span className="number" style={{ float: 'right' }}>{props.teiDomElement.getAttribute('n')}</span>
-                            : <></>}</p>
-                    : <></>}
-            </>
-        )
+
+        // CODE TO RUN CETEICEAN
+        var CETEIcean = new CETEI()
+
+        CETEIcean.getHTML5(`/teis/b.xml`, function (data) {
+
+            document.getElementById("TEI").innerHTML = ""
+            document.getElementById("TEI").appendChild(data)
+            /*CETEIcean.addStyle(document, data)*/
+
+            // Get status from TEI header <change> tag and place in the update div (line 96)
+            var update = data.querySelector("tei-change")
+            document.getElementById("status").innerHTML = ""
+            document.getElementById("status").appendChild(update)
+            /*CETEIcean.addStyle(document, data)*/
+
+            //get current page
+            const currentMilestone = document.getElementById("TEI").getAttribute("data-milestone");
+
+            //show current page
+            showPage(currentMilestone)
+
+            // to show notes
+            var CETEIceanNotes = new CETEI()
+
+            CETEIceanNotes.getHTML5(`/teis/notes-b.xml`, function (data) {
+
+
+
+                // to get note IDs RAFF 10/19
+                var visible_ids = Array.from(document.querySelectorAll('#TEI  tei-note:not(.hid_page')).map(function (n) { return n.getAttribute('xml:id') })
+                console.log(visible_ids)
+
+                /// Raff 10/19
+                visible_ids.forEach(function (id) {
+                    if (id) {
+                        var note = data.querySelector('tei-note[target="#' + id + '"]');
+                        try {
+                            document.getElementById('edition-notes').appendChild(note);
+                        } catch (TypeError) {
+                            // expected output: ReferenceError: nonExistentFunction is not defined
+                            // Note - error messages will vary depending on browser
+                        }
+                    }
+                });
+
+            });
+
+        });
+
+        //Variables for toggle buttons
+        var options = {
+            "rajna_reconstruction": false,
+            "expanded_abbreviations": true,
+            "show_french": true,
+            "notes": true
+        };
+
+        //Function to toggle abbreviations
+        $("input[name='abbreviations-toggle'").change(function () {
+            $("tei-choice").each(function () {
+                $(this).children("tei-ex").toggle();
+                $(this).children("tei-abbr").toggle();
+            })
+            options.expanded_abbreviations = $(this).is(":checked");
+        });
+
+        //Function to toggle rajna reconstruction
+        $("input[name='rajna-reconstruction'").change(function () {
+            options.rajna_reconstruction = $(this).is(":checked");
+            if (options.rajna_reconstruction) {
+                $("tei-seg").css("color", "red");
+            } else {
+                $("tei-seg").css("color", "black");
+            }
+        });
+
+        //Function to show french
+        $("input[name='show-french'").change(function () {
+            options.show_french = $(this).is(":checked");
+            if (options.show_french) {
+                $("tei-span").css("color", "blue");
+            } else {
+                $("tei-span").css("color", "black");
+            }
+        });
+
+        // Function to turn notes div on/off 
+        $("input[name='notes'").change(function () {
+            $("#edition-notes").toggle();
+        });
+
+        // The following is for the search result scrolling to the line
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const lineNum = urlParams.get('lineNum');
+
+        // Check every 100ms if element exists before trying to highlight and scroll to it
+        var checkExist = setInterval(function () {
+            if ($(`tei-l`).length) {
+                if ($(`tei-l[n="${lineNum}"]`).length) {
+                    if (lineNum) {
+                        const lineText = $(`tei-l[n="${lineNum}"]`).html();
+
+                        $('#TEI').animate({
+                            scrollTop: $(`tei-l[n="${lineNum}"]`).offset().top - $(`tei-l[n="${lineNum}"]`).parent().offset().top
+                        }, 'slow');
+
+                        $(`tei-l[n="${lineNum}"]`).html(`<span id="highlight">${lineText}</span>`);
+                    }
+                }
+                clearInterval(checkExist);
+            }
+        }, 100);
+
+        // Always display line numbers, after waiting for the tei-l's to load
+        var teiLExist = setInterval(function () {
+            if ($(`tei-l`).length) {
+                $('tei-l').each(function () {
+                    var lineNum = $(this).attr('n');
+                    if ($(this).text() !== "" && lineNum % 5 === 0) {
+                        this.innerHTML = `${this.innerHTML} <span class="number">${lineNum}</span>`;
+                    }
+                });
+                clearInterval(teiLExist);
+            }
+        }, 100);
+
+        // Logic to toggle showing divs
+        $(".toggleDiv").change(function () {
+            var value = $(this).attr('value');
+            if (this.checked) {
+                $(`#${value}`).show();
+            } else {
+                $(`#${value}`).hide();
+            }
+        });
     }
 
+    render() {
 
-
-    const Laisse = (props) => {
+        const { ready } = this.state;
 
         return (
-            <>
-                {!hide ?
-                    <h3>{props.teiDomElement.textContent}</h3>
-                    : <></>}
-            </>
-        )
+            <Container>
+                <Row className="mainBar">
+                    <Col xs="auto">
+                        <Form>
+                            <Form.Check 
+                                type="switch"
+                                id="abbrev-switch"
+                                label="Expand Abbreviations"
+                                inline
+                            />
+                            <Form.Check
+                                type="switch"
+                                id="notes-switch"
+                                label="Notes"
+                                inline
+                            />
+                            <Form.Check 
+                                type="checkbox"
+                                id="tei-switch"
+                                label="Show TEI"
+                                inline
+                            />
+                            <Form.Check 
+                                type="checkbox"
+                                id="manuscript-switch"
+                                label="Show Manuscript"
+                                inline
+                            />
+                            <Form.Label className="align-items-right" inline>
+                                <div id="status"></div>
+                            </Form.Label>
+                        </Form>
+                    </Col>
+                    <Col xs="auto">
+                            <a href="https://github.com/SteveWLU/hda">Source Code</a>
+                    </Col>
+                    <br />
+                </Row>
+                <Row>
+                    <Col>
+                    {/*lineNum ? <Button variant='link' style={{ backgroundColor: "#5f0000", color: "white", margin: '15px' }} onClick={scrollToLine}>Scroll to line {lineNum}</Button> : <></>*/}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Viewer width="100%" height="100vh" iiifUrl={`https://iiif.wlu.edu/iiif/huon/b001r.tif/info.json`} />
+                    </Col>
+
+                    <Col className="custom-scroll">
+                    <div id="TEI" data-milestone="1"></div>
+                    </Col>
+                    <Col>
+                    <div className='custom-scroll' id="edition-notes" data-milestone="1">
+                        <h2>Edition Notes</h2>
+                    </div>
+                    </Col>
+                </Row>
+            </Container>
+        );
     }
-
-    var app = new annotator.App();
-    app.include(annotator.ui.main);
-    app.include(annotator.storage.http);
-    app.start();
-
-    return (
-        <Container>
-            <Row className="mainBar">
-                <Col xs="auto">
-                    <Form>
-                        <Form.Check 
-                            type="switch"
-                            id="abbrev-switch"
-                            label="Expand Abbreviations"
-                            inline
-                        />
-                        <Form.Check
-                            type="switch"
-                            id="notes-switch"
-                            label="Notes"
-                            inline
-                        />
-                        <Form.Check 
-                            type="checkbox"
-                            id="tei-switch"
-                            label="Show TEI"
-                            inline
-                        />
-                        <Form.Check 
-                            type="checkbox"
-                            id="manuscript-switch"
-                            label="Show Manuscript"
-                            inline
-                        />
-                        <Form.Label className="align-items-right" inline>
-                            Last updated April 4, 2021
-                        </Form.Label>
-                    </Form>
-                </Col>
-                <Col xs="auto">
-                        <a href="https://github.com/SteveWLU/hda">Source Code</a>
-                </Col>
-                <br />
-            </Row>
-            <Row>
-                <Col>
-                {lineNum ? <Button variant='link' style={{ backgroundColor: "#5f0000", color: "white", margin: '15px' }} onClick={scrollToLine}>Scroll to line {lineNum}</Button> : <></>}
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <Viewer width="100%" height="100vh" iiifUrl={`https://iiif.wlu.edu/iiif/huon/${getTif(teiName, stone)}.tif/info.json`} />
-                </Col>
-
-                <Col id="TEI" className="custom-scroll">
-                    <h1>{teiName.toUpperCase()}.XML</h1>
-
-
-                    {tei.ready ?
-                        <TEIRender teiData={tei.data} path={`/teis/${teiName}.xml`}>
-                            {/*<TEIRoute el="tei-titlestmt" component={Title} />*/}
-                            {/* <TEIRoute el='tei-body' >
-                                <Body stone={stone} />
-                            </TEIRoute> */}
-                            <TEIRoute el='tei-l' component={Line} />
-                            <TEIRoute el='tei-head' component={Laisse} />
-                        </TEIRender>
-                        : <Spinner animation="border" />}
-                </Col>
-            </Row>
-        </Container>
-    );
-
 }
 
 export default DigitalEdition;
