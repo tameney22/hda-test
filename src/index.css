@@ -12,6 +12,12 @@ code {
     monospace;
 }
 
+#main
+{
+  width: 80vh;
+  height: 80vh;
+}
+
 a {
   color: #5f0000;
   line-height: inherit;
@@ -45,7 +51,7 @@ p.intro:before {
 }
 
 .container {
-  max-width: 90%;
+  max-width: 100%;
 }
 
 img#initial {

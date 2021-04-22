@@ -10,11 +10,12 @@ import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
 import { Viewer } from 'react-iiif-viewer'
-import './DigitalEdition.css'
 import annotator from 'annotator'
 import CETEI, { addStyle } from 'CETEIcean'
 import $ from 'jquery'
 import React from 'react';
+import TopBar from './TopBar.js'
+import './DigitalEdition.css'
 
 class DigitalEdition extends React.Component{
 
@@ -23,10 +24,10 @@ class DigitalEdition extends React.Component{
     } //IMPORTANT: Every time a state switches, the website gets re-redered
 
     componentDidMount() {
-        var app = new annotator.App();
-        app.include(annotator.ui.main);
-        app.include(annotator.storage.http);
-        app.start();
+        //var app = new annotator.App();
+        //app.include(annotator.ui.main);
+        //app.include(annotator.storage.http);
+        //app.start();
 
         // CODE TO HIDE A PAGE
         function showPage(page) {
@@ -42,7 +43,8 @@ class DigitalEdition extends React.Component{
 
             // Walk trough all descendants of tei-text
             var walk = document.createTreeWalker(document.querySelector('tei-text'), NodeFilter.SHOW_ALL, null, false)
-            while (n) {
+            n = walk.nextNode()
+            while (false) {
                 if (n.nodeType === Node.ELEMENT_NODE) {
                     //  If this is a page beginning, update page count.
                     //  If page count is lower or higher than the page requested, set 'hide' flag.
@@ -205,7 +207,7 @@ class DigitalEdition extends React.Component{
                 $('tei-l').each(function () {
                     var lineNum = $(this).attr('n');
                     if ($(this).text() !== "" && lineNum % 5 === 0) {
-                        this.innerHTML = `${this.innerHTML} <span class="number">${lineNum}</span>`;
+                        this.innerHTML = `${this.innerHTML} <span className="number">${lineNum}</span>`;
                     }
                 });
                 clearInterval(teiLExist);
@@ -229,60 +231,22 @@ class DigitalEdition extends React.Component{
 
         return (
             <Container>
-                <Row className="mainBar">
-                    <Col xs="auto">
-                        <Form>
-                            <Form.Check 
-                                type="switch"
-                                id="abbrev-switch"
-                                label="Expand Abbreviations"
-                                inline
-                            />
-                            <Form.Check
-                                type="switch"
-                                id="notes-switch"
-                                label="Notes"
-                                inline
-                            />
-                            <Form.Check 
-                                type="checkbox"
-                                id="tei-switch"
-                                label="Show TEI"
-                                inline
-                            />
-                            <Form.Check 
-                                type="checkbox"
-                                id="manuscript-switch"
-                                label="Show Manuscript"
-                                inline
-                            />
-                            <Form.Label className="align-items-right" inline>
-                                <div id="status"></div>
-                            </Form.Label>
-                        </Form>
-                    </Col>
-                    <Col xs="auto">
-                            <a href="https://github.com/SteveWLU/hda">Source Code</a>
-                    </Col>
-                    <br />
-                </Row>
+                <TopBar />
+                {/*
                 <Row>
                     <Col>
-                    {/*lineNum ? <Button variant='link' style={{ backgroundColor: "#5f0000", color: "white", margin: '15px' }} onClick={scrollToLine}>Scroll to line {lineNum}</Button> : <></>*/}
+                    {lineNum ? <Button variant='link' style={{ backgroundColor: "#5f0000", color: "white", margin: '15px' }} onClick={scrollToLine}>Scroll to line {lineNum}</Button> : <></>}
                     </Col>
                 </Row>
-                <Row>
-                    <Col>
-                        <Viewer width="100%" height="100vh" iiifUrl={`https://iiif.wlu.edu/iiif/huon/b001r.tif/info.json`} />
+                */}
+                <Row className="row-eq-height">
+                    <Col id="VIEWER">
+                        <Viewer width="100%" height="80vh" background_color="#FFFFFF" iiifUrl={`https://iiif.wlu.edu/iiif/huon/b001r.tif/info.json`} />
                     </Col>
-
-                    <Col className="custom-scroll">
-                    <div id="TEI" data-milestone="1"></div>
+                    <Col id="TEI" className="custom-scroll" data-milestone="1">
                     </Col>
-                    <Col>
-                    <div className='custom-scroll' id="edition-notes" data-milestone="1">
+                    <Col id="edition-notes" className='custom-scroll' data-milestone="1">
                         <h2>Edition Notes</h2>
-                    </div>
                     </Col>
                 </Row>
             </Container>
