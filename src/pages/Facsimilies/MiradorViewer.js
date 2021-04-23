@@ -1,6 +1,12 @@
 import Mirador from 'mirador/dist/es/src/index';
 import miradorDownloadPlugin from '../../pluginsForMirador/MiradorDownloadPlugin.js';
 import miradorDownloadDialogPlugin from '../../pluginsForMirador/MiradorDownloadDialog.js';
+//import { miradorImageToolsPlugin } from '../../src';
+//import mirador from 'mirador/dist/es/src/index';
+//import annotationPlugins from '../../src';
+//import LocalStorageAdapter from '../../src/LocalStorageAdapter';
+//import AnnototAdapter from '../../src/AnnototAdapter';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -9,6 +15,11 @@ class MiradorViewer extends React.Component {
 
   componentDidMount () {
 
+
+    //
+    //
+    // 
+    //
     config = {
       id: 'main',
       miradorDownloadPlugin: {
@@ -19,6 +30,13 @@ class MiradorViewer extends React.Component {
         loadedManifest: this.props.link,
         thumbnailNavigationPosition: 'far-bottom'
       }],
+      catalog: [
+        { manifestId: "https://huondauvergne.org/manifests/b-manifest.json", provider: ""},
+        { manifestId: "https://huondauvergne.org/manifests/t-manifest.json", provider: ""},
+        { manifestId: "https://huondauvergne.org/manifests/p-manifest.json", provider: ""},
+        { manifestId: "https://huondauvergne.org/manifests/r-manifest.json", provider: ""},
+        { manifestId: "https://huondauvergne.org/manifests/br-manifest.json", provider: ""},
+      ],
       window: { //global window defaults
         allowClose: true, // Configure if windows can be closed or not
         allowFullscreen: true, // Configure to show a "fullscreen" button in the WindowTopBar
