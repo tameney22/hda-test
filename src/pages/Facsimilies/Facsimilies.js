@@ -17,9 +17,16 @@ import annotator from 'annotator';
 import { NavLink, Link } from 'react-router-dom';
 import { XMLParser } from 'react-xml-parser';
 import Mirador from 'mirador/dist/es/src/index';
-import MiradorDownloadPlugin from '../../plugins/MiradorDownloadPlugin.js';
-import MiradorDownloadDialog from '../../plugins/MiradorDownloadDialog.js';
+import MiradorDownloadPlugin from '../../pluginsForMirador/MiradorDownloadPlugin.js';
+import MiradorDownloadDialog from '../../pluginsForMirador/MiradorDownloadDialog.js';
 import MiradorViewer from './MiradorViewer.js';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect
+  } from "react-router-dom";
+import ReactDOM from 'react-dom';
 
 class GetLink extends React.Component {
     render() {
@@ -65,6 +72,32 @@ export default class Facsimiles extends React.Component {
                 var data = {};  
                 var parseString = require('xml2js').parseString; 
                 parseString(temp, function (err, result) {data = result;}) //change xml data from a string to a javascript object
+
+                var element;
+                
+                switch (window.location.pathname.substring(13))
+                {
+                    case "b":
+                        element = <MiradorViewer link='https://huondauvergne.org/manifests/b-manifest.json'/>;
+                        break;
+                    case "bt":
+                        element = <MiradorViewer link='https://huondauvergne.org/manifests/b-manifest.json'/>; //Does not exist
+                        break;
+                    case "t":
+                        element = <MiradorViewer link='https://huondauvergne.org/manifests/t-manifest.json'/>;
+                        break;
+                    case "p":
+                        element = <MiradorViewer link='https://huondauvergne.org/manifests/p-manifest.json'/>;
+                        break;
+                    case "br":
+                        element = <MiradorViewer link='https://huondauvergne.org/manifests/br-manifest.json'/>;
+                        break;
+                    default:
+                        element = <MiradorViewer link='https://huondauvergne.org/manifests/b-manifest.json'/>; //Deafults to b
+                        
+                }
+                
+                ReactDOM.render(element, document.getElementById('main'));
                 
                 return {data: data, ready: true} //Sets state to "Yay! XML data is loaded and converted into a readable object"
                 //IMPORTANT: Every time a state switches, the website gets re-redered
@@ -91,7 +124,7 @@ export default class Facsimiles extends React.Component {
                     <br />
                     <Row>
                         <Col>
-                            <MiradorViewer />
+                            <div id="main"></div>
                         </Col>
                     </Row>
                 </Container>
@@ -100,7 +133,10 @@ export default class Facsimiles extends React.Component {
         else
         {
             return(
-                <Spinner animation="border" />
+                <Container>
+                    <Spinner animation="border" />
+                    <div id="main"></div>
+                </Container>
             )
         }
     }
