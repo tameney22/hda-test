@@ -43,15 +43,14 @@ class DigitalEdition extends React.Component{
 
             // Walk trough all descendants of tei-text
             var walk = document.createTreeWalker(document.querySelector('tei-text'), NodeFilter.SHOW_ALL, null, false)
-            n = walk.nextNode()
-            while (false) {
+            while (n = walk.nextNode()) {
                 if (n.nodeType === Node.ELEMENT_NODE) {
                     //  If this is a page beginning, update page count.
                     //  If page count is lower or higher than the page requested, set 'hide' flag.
                     //  If page count corresponds to the page requested, remove 'hide' flag.
                     if (n.localName === 'tei-milestone') {
                         pbs++
-                        if (pbs !== page) {
+                        if (pbs != page) {
                             hide = true
                         } else {
                             hide = false
@@ -82,7 +81,6 @@ class DigitalEdition extends React.Component{
                         n.textContent = ''
                     }
                 }
-                n = walk.nextNode()
             }
         }
 
