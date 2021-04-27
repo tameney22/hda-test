@@ -75,10 +75,9 @@ class DigitalEdition extends React.Component{
     } //IMPORTANT: Every time a state switches, the website gets re-redered
 
     componentDidMount() {
-        //var app = new annotator.App();
-        //app.include(annotator.ui.main);
-        //app.include(annotator.storage.http);
-        //app.start();
+        var app = new annotator.App();
+        app.include(annotator.ui.main);
+        app.start();
 
         // CODE TO HIDE A PAGE
         function showEdition(page) {
