@@ -17,6 +17,50 @@ import $ from 'jquery'
 import React from 'react';
 import TopBar from './TopBar.js'
 
+function getCurrentMilestone() {
+    var endingInfo = window.location.pathname.split("/")[3];
+    var len = endingInfo.length;
+    var num = Number(endingInfo.substring(0,len-1));
+    var letterAtEnd = endingInfo.substring(len-1);
+    
+    if(letterAtEnd === 'V')
+    {
+        return num*2;
+    }
+    else
+    {
+        return (num*2)-1;
+    }
+}
+
+function getViewerName() {
+
+    var viewerName = "";
+
+    var editionName = window.location.pathname.split("/")[2];
+    viewerName+=editionName; //This adds the first letter i.e. b
+
+    var endingInfo = window.location.pathname.split("/")[3];
+    switch(endingInfo.length) //This statement adds the correct number of 0's in the name i.e. b00
+    {
+        case 2:
+            viewerName+="00";
+            break;
+        case 3:
+            viewerName+="0";
+            break;
+        case 4:
+            viewerName+="";
+            break;
+        default:
+            viewerName+=""
+    }
+
+    viewerName+=endingInfo.toLowerCase(); //this adds the rest of the page name i.e. b001r
+
+    return viewerName;
+}
+
 class DigitalEdition extends React.Component{
 
     state = {   //Sets default state to "Hey I don't have the xml data loaded in yet"
@@ -67,58 +111,8 @@ class DigitalEdition extends React.Component{
                         n.classList.add('hid_note')
                     }
 
-                } else if (n.nodeType === Node.TEXT_NODE) {
-                    // We mostly operate at text node level by storing and restoring text data.
-
-                    // Start by always restoring text data is previously removed.
-                    if (n.storedContent) {
-                        n.textContent = n.storedContent
-                    }
-
-                    // If the 'hide' flag is set, store text content and remove it.
-                    if (hide) {
-                        n.storedContent = n.textContent
-                        n.textContent = ''
-                    }
-                }
-            }
-        }
-
-        function showNotes(page) {
-            // Hide all text that does not belong to the page indicated
-            var hide = false
-            var n;
-            var pbs = 0;
-
-            // First, remove all hiding CSS classes, if present.
-            Array.from(document.querySelectorAll('.hid_page')).map(function (el) {
-                el.classList.remove('hid_page')
-            })
-
-            // Walk trough all descendants of tei-text
-            var walk = document.createTreeWalker(document.querySelector('edition-notes'), NodeFilter.SHOW_ALL, null, false)
-            while (n = walk.nextNode()) {
-                if (n.nodeType === Node.ELEMENT_NODE) {
-                    //  If this is a page beginning, update page count.
-                    //  If page count is lower or higher than the page requested, set 'hide' flag.
-                    //  If page count corresponds to the page requested, remove 'hide' flag.
-                    if (n.localName === 'tei-milestone') {
-                        pbs++
-                        if (pbs != page) {
-                            hide = true
-                        } else {
-                            hide = false
-                        }
-                    }
-
-                    // If the hide flag is set and this is an empty element, hide it just in case the
-                    // CETEIcean CSS (or other) does something with it.
-                    if (hide && n.childNodes.length === 0) {
-                        n.classList.add('hid_page')
-                    }
-                    //RAFF 10/19 just this if statement
-                    if (hide && n.localName === 'tei-note') {
-                        n.classList.add('hid_note')
+                    if(n.localName === 'tei-note') {
+                        n.classList.add('hideParen')
                     }
 
                 } else if (n.nodeType === Node.TEXT_NODE) {
@@ -153,11 +147,13 @@ class DigitalEdition extends React.Component{
             document.getElementById("status").appendChild(update)
             /*CETEIcean.addStyle(document, data)*/
 
-            //get current page
-            const currentMilestone = document.getElementById("TEI").getAttribute("data-milestone");
-
             //show current page
-            showEdition(currentMilestone)
+            showEdition(getCurrentMilestone())
+
+            var visible_ids = Array.from(document.querySelectorAll('tei-note:not(.hid_note)')).map(function (n) {
+                return n.getAttribute('xml:id')
+            })
+            console.log(visible_ids);
 
             // to show notes
             var CETEIceanNotes = new CETEI()
@@ -165,9 +161,6 @@ class DigitalEdition extends React.Component{
             CETEIceanNotes.getHTML5(`/teis/notes-b.xml`, function (data) 
             {
                 // to get note IDs RAFF 10/19
-                var visible_ids = Array.from(document.querySelectorAll('#TEI  tei-note:not(.hid_page')).map(function (n) {
-                    return n.getAttribute('xml:id')
-                })
 
                 /// Raff 10/19
                 visible_ids.forEach(function (id) {
@@ -290,7 +283,7 @@ class DigitalEdition extends React.Component{
                 */}
                 <Row className="row-eq-height justify-content-md-center">
                     <Col id="VIEWER">
-                        <Viewer width="100%" height="80vh" background_color="#FFFFFF" iiifUrl={`https://iiif.wlu.edu/iiif/huon/b001r.tif/info.json`} />
+                        <Viewer width="100%" height="80vh" background_color="#FFFFFF" iiifUrl={`https://iiif.wlu.edu/iiif/huon/${getViewerName()}.tif/info.json`} />
                     </Col>
                     <Col id="TEI" className="custom-scroll" data-milestone="1">
                     </Col>

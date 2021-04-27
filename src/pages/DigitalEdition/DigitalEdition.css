@@ -27,6 +27,13 @@
   display: none;
 }
 
+.hideParen {
+  all: none;
+  visibility: hidden;
+  display: none;
+  font-size: 0;
+}
+
 .hid_note {
   all: none;
   visibility: hidden;
