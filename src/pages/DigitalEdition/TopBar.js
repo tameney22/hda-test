@@ -112,15 +112,15 @@ class TopBar extends React.Component {
         this.setState({curPage: text});
     }
 
-    handlePageChange() {
-        
+    handlePageChange(e) {
         var userPage = "/";
     
         userPage += window.location.pathname.split("/")[1] + "/"; //gets the first domain i.e. editions
         userPage += window.location.pathname.split("/")[2] + "/"; //gets second domain i.e. current edition like b
         userPage += this.state.curPage;
 
-        alert(userPage);
+        window.location.href = userPage;
+        e.preventDefault(); //Keep this or changing pages with the test box does not work
     }
   
     render() {
