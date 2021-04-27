@@ -28,6 +28,7 @@
     "react-iiif-viewer": "^1.0.2",
     "react-powerplug": "^1.0.0",
     "react-query": "^3.13.4",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
     "react-teirouter": "^1.1.4",

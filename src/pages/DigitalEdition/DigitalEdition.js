@@ -38,7 +38,14 @@ function getViewerName() {
     var viewerName = "";
 
     var editionName = window.location.pathname.split("/")[2];
-    viewerName+=editionName; //This adds the first letter i.e. b
+    if(editionName === "bt")
+    {
+        viewerName+="b";
+    }
+    else
+    {
+        viewerName+=editionName; //This adds the first letter i.e. b
+    }
 
     var endingInfo = window.location.pathname.split("/")[3];
     switch(endingInfo.length) //This statement adds the correct number of 0's in the name i.e. b00
@@ -134,8 +141,9 @@ class DigitalEdition extends React.Component{
 
         // CODE TO RUN CETEICEAN
         var CETEIcean = new CETEI()
+        var editionName = window.location.pathname.split("/")[2];
 
-        CETEIcean.getHTML5(`/teis/b.xml`, function (data) 
+        CETEIcean.getHTML5(`/teis/`+editionName+`.xml`, function (data) 
         {
             document.getElementById("TEI").innerHTML = ""
             document.getElementById("TEI").appendChild(data)
@@ -158,7 +166,7 @@ class DigitalEdition extends React.Component{
             // to show notes
             var CETEIceanNotes = new CETEI()
 
-            CETEIceanNotes.getHTML5(`/teis/notes-b.xml`, function (data) 
+            CETEIceanNotes.getHTML5(`/teis/notes-`+editionName+`.xml`, function (data) 
             {
                 // to get note IDs RAFF 10/19
 
@@ -166,7 +174,34 @@ class DigitalEdition extends React.Component{
                 visible_ids.forEach(function (id) {
                     if (id) 
                     {
-                        var note = data.querySelector('tei-note[target="#' + id + '"]');
+                        var note;
+                        switch(editionName)
+                        {
+                            case "b":
+                                note = data.querySelector('tei-note[target="#' + id + '"]');
+                                break;
+                            
+                            case "p":
+                                note = data.querySelector('tei-note[id="' + id + '"]');
+                                break;
+
+                            case "t":
+                                note = data.querySelector('tei-note[id="' + id + '"]');
+                                break;
+
+                            case "br":
+                                note = data.querySelector('tei-note[id="' + id + '"]');
+                                break;
+
+                            case "bt":
+                                note = data.querySelector('tei-note[target="#' + id + '"]');
+                                break;   
+
+                            default:
+                                note = data.querySelector('tei-note[target="#' + id + '"]');
+                                break; 
+                        }
+                        
                         try 
                         {
                             document.getElementById('edition-notes').appendChild(note);
