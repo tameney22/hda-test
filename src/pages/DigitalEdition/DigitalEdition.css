@@ -14,6 +14,26 @@
   }
 }
 
+.number {
+    padding: 2px 7px;
+    border-radius: 5px;
+    float: right;
+    font-size: small;
+}
+
+.hid_page {
+  all: none;
+  visibility: hidden;
+  display: none;
+}
+
+.hid_note {
+  all: none;
+  visibility: hidden;
+  display: none;
+  font-size: 0;
+}
+
 #edition-notes {
   text-align: left;
   height: 80vh;
@@ -1258,7 +1278,7 @@ tei-num {
   /* Empty Rule Set */
 }
 tei-number {
-  /* Empty Rule Set */
+  text-align: right;
 }
 tei-numeric {
   /* not sure, depends how we're dealing with <f>'s */

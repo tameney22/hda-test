@@ -1,3 +1,4 @@
+import './DigitalEdition.css'
 import { TEIRender, TEIRoute } from 'react-teirouter'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios';
@@ -15,7 +16,6 @@ import CETEI, { addStyle } from 'CETEIcean'
 import $ from 'jquery'
 import React from 'react';
 import TopBar from './TopBar.js'
-import './DigitalEdition.css'
 
 class DigitalEdition extends React.Component{
 
@@ -63,7 +63,7 @@ class DigitalEdition extends React.Component{
                         n.classList.add('hid_page')
                     }
                     //RAFF 10/19 just this if statement
-                    if (hide && n.tagName === 'tei-note') {
+                    if (n.localName === 'tei-note') {
                         n.classList.add('hid_note')
                     }
 
@@ -205,7 +205,7 @@ class DigitalEdition extends React.Component{
                 $('tei-l').each(function () {
                     var lineNum = $(this).attr('n');
                     if ($(this).text() !== "" && lineNum % 5 === 0) {
-                        this.innerHTML = `${this.innerHTML} <span className="number">${lineNum}</span>`;
+                        this.innerHTML = `${this.innerHTML} <span class="number">${lineNum}</span>`;
                     }
                 });
                 clearInterval(teiLExist);
