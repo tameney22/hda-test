@@ -39,11 +39,19 @@
   height: 80vh;
   max-height: 80vh;
   word-wrap: break-word;
+  max-width: 33%;
 }
 
 #TEI {
   height: 80vh;
   max-height: 80vh;
+  max-width: 33%;
+}
+
+#VIEWER {
+  height: 80vh;
+  max-height: 80vh;
+  max-width: 33%;
 }
 
 .lastupdatedtext {
@@ -901,7 +909,7 @@ tei-kinesic {
 /* l */
 tei-l {
   display: block;
-  width: 35em;
+  max-width: 35em;
   margin-left: 3em;
   font-family: 'Open Sans', Arial, 'Liberation Sans', FreeSans, sans-serif;
   line-height: 1.5em;

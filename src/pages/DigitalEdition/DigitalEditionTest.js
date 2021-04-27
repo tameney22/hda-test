@@ -17,6 +17,24 @@ import $ from 'jquery'
 import React from 'react';
 import TopBar from './TopBar.js'
 
+var lastLineNum = 0;
+var currentMilestone = 0;
+
+function getCurrentMilestone() {
+    var temp = window.location.pathname.substring(12);
+    var len = temp.length;
+    var num = Number(temp.substring(0,len-1));
+    var letterAtEnd = temp.substring(len-1);
+    
+    if(letterAtEnd === 'V')
+    {
+        currentMilestone = num*2;
+    }
+    else
+    {
+        currentMilestone = (num*2)-1;
+    }
+}
 class DigitalEdition extends React.Component{
 
     state = {   //Sets default state to "Hey I don't have the xml data loaded in yet"
@@ -29,122 +47,38 @@ class DigitalEdition extends React.Component{
         //app.include(annotator.storage.http);
         //app.start();
 
-        // CODE TO HIDE A PAGE
-        function showEdition(page) {
-            // Hide all text that does not belong to the page indicated
-            var n
-            var pbs = 0
-            var hide = false
-
-            // First, remove all hiding CSS classes, if present.
-            Array.from(document.querySelectorAll('.hid_page')).map(function (el) {
-                el.classList.remove('hid_page')
-            })
-
-            // Walk trough all descendants of tei-text
-            var walk = document.createTreeWalker(document.querySelector('tei-text'), NodeFilter.SHOW_ALL, null, false)
-            while (n = walk.nextNode()) {
-                if (n.nodeType === Node.ELEMENT_NODE) {
-                    //  If this is a page beginning, update page count.
-                    //  If page count is lower or higher than the page requested, set 'hide' flag.
-                    //  If page count corresponds to the page requested, remove 'hide' flag.
-                    if (n.localName === 'tei-milestone') {
-                        pbs++
-                        if (pbs != page) {
-                            hide = true
-                        } else {
-                            hide = false
-                        }
-                    }
-
-                    // If the hide flag is set and this is an empty element, hide it just in case the
-                    // CETEIcean CSS (or other) does something with it.
-                    if (hide && n.childNodes.length === 0) {
-                        n.classList.add('hid_page')
-                    }
-                    //RAFF 10/19 just this if statement
-                    if (hide && n.localName === 'tei-note') {
-                        n.classList.add('hid_note')
-                    }
-
-                } else if (n.nodeType === Node.TEXT_NODE) {
-                    // We mostly operate at text node level by storing and restoring text data.
-
-                    // Start by always restoring text data is previously removed.
-                    if (n.storedContent) {
-                        n.textContent = n.storedContent
-                    }
-
-                    // If the 'hide' flag is set, store text content and remove it.
-                    if (hide) {
-                        n.storedContent = n.textContent
-                        n.textContent = ''
-                    }
-                }
-            }
-        }
-
-        function showNotes(page) {
-            // Hide all text that does not belong to the page indicated
-            var hide = false
-            var n;
-            var pbs = 0;
-
-            // First, remove all hiding CSS classes, if present.
-            Array.from(document.querySelectorAll('.hid_page')).map(function (el) {
-                el.classList.remove('hid_page')
-            })
-
-            // Walk trough all descendants of tei-text
-            var walk = document.createTreeWalker(document.querySelector('edition-notes'), NodeFilter.SHOW_ALL, null, false)
-            while (n = walk.nextNode()) {
-                if (n.nodeType === Node.ELEMENT_NODE) {
-                    //  If this is a page beginning, update page count.
-                    //  If page count is lower or higher than the page requested, set 'hide' flag.
-                    //  If page count corresponds to the page requested, remove 'hide' flag.
-                    if (n.localName === 'tei-milestone') {
-                        pbs++
-                        if (pbs != page) {
-                            hide = true
-                        } else {
-                            hide = false
-                        }
-                    }
-
-                    // If the hide flag is set and this is an empty element, hide it just in case the
-                    // CETEIcean CSS (or other) does something with it.
-                    if (hide && n.childNodes.length === 0) {
-                        n.classList.add('hid_page')
-                    }
-                    //RAFF 10/19 just this if statement
-                    if (hide && n.localName === 'tei-note') {
-                        n.classList.add('hid_note')
-                    }
-
-                } else if (n.nodeType === Node.TEXT_NODE) {
-                    // We mostly operate at text node level by storing and restoring text data.
-
-                    // Start by always restoring text data is previously removed.
-                    if (n.storedContent) {
-                        n.textContent = n.storedContent
-                    }
-
-                    // If the 'hide' flag is set, store text content and remove it.
-                    if (hide) {
-                        n.storedContent = n.textContent
-                        n.textContent = ''
-                    }
-                }
-            }
-        }
-
         // CODE TO RUN CETEICEAN
         var CETEIcean = new CETEI()
 
         CETEIcean.getHTML5(`/teis/b.xml`, function (data) 
         {
+            getCurrentMilestone();
+
             document.getElementById("TEI").innerHTML = ""
             document.getElementById("TEI").appendChild(data)
+
+            var milestoneList = document.getElementsByTagName("tei-milestone");
+            console.log(milestoneList);
+
+            var walk = document.createTreeWalker(milestoneList[currentMilestone], NodeFilter.SHOW_ALL, null, false)
+            var n;
+            var elems= [];
+            while(n = walk.nextNode())
+            {
+                if (n.nodeType === Node.ELEMENT_NODE) {
+                    //  If this is a page beginning, update page count.
+                    //  If page count is lower or higher than the page requested, set 'hide' flag.
+                    //  If page count corresponds to the page requested, remove 'hide' flag.
+                    if (n.localName === 'tei-milestone') {
+                        break;
+                    }
+                    else {
+                        elems.push(n);
+                    }
+                }
+            }
+            console.log(elems)
+            
             /*CETEIcean.addStyle(document, data)*/
 
             // Get status from TEI header <change> tag and place in the update div (line 96)
@@ -153,11 +87,9 @@ class DigitalEdition extends React.Component{
             document.getElementById("status").appendChild(update)
             /*CETEIcean.addStyle(document, data)*/
 
-            //get current page
-            const currentMilestone = document.getElementById("TEI").getAttribute("data-milestone");
 
             //show current page
-            showEdition(currentMilestone)
+            //showEdition(currentMilestone)
 
             // to show notes
             var CETEIceanNotes = new CETEI()
