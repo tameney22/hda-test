@@ -386,7 +386,7 @@
 .annotator-filter,
 .annotator-filter .annotator-filter-navigation button,
 .annotator-editor .annotator-controls {
-	text-align: center !important;
+	text-align: right !important;
 	padding: 3px;
 	border-top: 1px solid rgb(212,212,212);
 	background-color: rgb(212, 212, 212);

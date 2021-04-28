@@ -231,6 +231,16 @@ var Editor = exports.Editor = Widget.extend({
 
         if (this.options.defaultFields) {
             this.addField({
+                type: 'input',
+                label: _t('Subject') + '\u2026',
+                load: function (field, annotation) {
+                    $(field).find('input.subject').val(annotation.subject || '');
+                },
+                submit: function (field, annotation) {
+                    annotation.subject = $(field).find('input.subject').val();
+                }
+            });
+            this.addField({
                 type: 'textarea',
                 label: _t('Comments') + '\u2026',
                 load: function (field, annotation) {
@@ -238,6 +248,38 @@ var Editor = exports.Editor = Widget.extend({
                 },
                 submit: function (field, annotation) {
                     annotation.text = $(field).find('textarea').val();
+                }
+            });
+            this.addField({
+                type: 'radio-pub',
+                label: 'Public',
+                load: function (field, annotation) {
+                    $(field).find('input.public-radio').val(annotation.public || '');
+                },
+                submit: function (field, annotation) {
+                    var isChecked = $(field).find('input[name="annotationScope"]').is(':checked');
+                    if(isChecked) {
+                        annotation.public = "true";
+                    }
+                    else {
+                        annotation.public = "false";
+                    }
+                }
+            });
+            this.addField({
+                type: 'radio-priv',
+                label: 'Private',
+                load: function (field, annotation) {
+                    $(field).find('input.private-radio').val(annotation.private || '');
+                },
+                submit: function (field, annotation) {
+                    var isChecked = $(field).find('input[name="annotationScope"]').is(':checked');
+                    if(isChecked) {
+                        annotation.private = "true";
+                    }
+                    else {
+                        annotation.private = "false";
+                    }
                 }
             });
         }
@@ -403,6 +445,7 @@ var Editor = exports.Editor = Widget.extend({
     //   })
     //
     // Returns the created <li> Element.
+
     addField: function (options) {
         var field = $.extend({
             id: 'annotator-field-' + id(),
@@ -422,11 +465,14 @@ var Editor = exports.Editor = Widget.extend({
         } else if (field.type === 'checkbox') {
             input = $('<input type="checkbox" />');
         } else if (field.type === 'input') {
-            input = $('<input />');
+            input = $('<input class="subject" />');
         } else if (field.type === 'select') {
             input = $('<select />');
-        }
-
+        } else if (field.type === 'radio-pub') {
+            input = $('<input style="display: inline;" type="radio" name="annotationScope" class="public-radio" value="public"/>');
+        } else if (field.type === 'radio-priv') {
+            input = $('<input style="display: inline;" type="radio" name="annotationScope" class="private-radio" value="private"/>');
+        } 
         element.append(input);
 
         input.attr({
@@ -436,6 +482,14 @@ var Editor = exports.Editor = Widget.extend({
 
         if (field.type === 'checkbox') {
             element.addClass('annotator-checkbox');
+            element.append($('<label />', {
+                'for': field.id,
+                'html': field.label
+            }));
+        }
+
+        if (field.type === 'radio-pub' || field.type === 'radio-priv') {
+            element.addClass('annotator-radio');
             element.append($('<label />', {
                 'for': field.id,
                 'html': field.label
@@ -531,9 +585,9 @@ var Editor = exports.Editor = Widget.extend({
         // Find the first/last item element depending on orientation
         var cornerItem;
         if (this.element.hasClass(this.classes.invert.y)) {
-            cornerItem = this.element.find('.subject-line:last');
+            cornerItem = this.element.find('.annotator-item:last');
         } else {
-            cornerItem = this.element.find('.subject-line:last');
+            cornerItem = this.element.find('.annotator-item:first');
         }
 
         if (cornerItem) {
@@ -568,23 +622,8 @@ Editor.classes = {
 Editor.template = [
     '<div class="annotator-outer annotator-editor annotator-hide">',
     '  <form class="annotator-widget">',
-    '    <div class="subject-line">',
-    '       <input type="text" placeholder="Subject" name="annotationSubject" class="annotator-subject"></input>',
-    '    </div>',
-    '    <div class="subject-spacer"></div>',
     '    <ul class="annotator-listing"></ul>',
     '    <div class="annotator-controls">',
-    '     <input type="radio" name="annotationScope">Private</input>',
-    '     <input type="radio" name="annotationScope">Public</input>',
-    '     <div class="spacer"></div>',
-    '      <select name="annotationType" id="cars">',
-    '        <option value="def">Annotation Type</option>',
-    '        <option value="comment">Comment</option>',
-    '        <option value="query">Query</option>',
-    '        <option value="error">Error</option>',
-    '        <option value="edit">Edit</option>',
-    '      </select>',
-    '     <div class="spacer"></div>',
     '     <a href="#cancel" class="annotator-cancel">' + _t('Cancel') + '</a>',
     '      <a href="#save"',
     '         class="annotator-save annotator-focus">' + _t('Save') + '</a>',
