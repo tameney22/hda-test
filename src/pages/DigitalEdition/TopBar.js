@@ -16,6 +16,8 @@ import CETEI, { addStyle } from 'CETEIcean'
 import $ from 'jquery'
 import React from 'react';
 
+var curPath = window.location.pathname.split("/")[2];
+
 function getPrev()
 {
     var prevLocation = "/";
@@ -76,13 +78,17 @@ class TopBar extends React.Component {
             abbrev: false,
             notes: true,
             tei: true,
-            manu: true
+            manu: true,
+            rajna: false,
+            french: false
         };
   
         this.handleAbbrev = this.handleAbbrev.bind(this);
         this.handleNotes = this.handleNotes.bind(this);
         this.handleTEI = this.handleTEI.bind(this);
         this.handleManu = this.handleManu.bind(this);
+        this.handleRajna = this.handleRajna.bind(this);
+        this.handleFrench = this.handleFrench.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
     }
@@ -108,6 +114,16 @@ class TopBar extends React.Component {
         //↩↪
     }
 
+    handleRajna(event) {
+        var temp = this.state.rajna;
+        this.setState({rajna: !temp});
+    }
+
+    handleFrench(event) {
+        var temp = this.state.french;
+        this.setState({french: !temp});
+    }
+
     handleTextChange(text) {
         this.setState({curPage: text});
     }
@@ -120,10 +136,11 @@ class TopBar extends React.Component {
         userPage += this.state.curPage;
 
         window.location.href = userPage;
-        e.preventDefault(); //Keep this or changing pages with the test box does not work
+        e.preventDefault(); //Keep this or changing pages with the text box does not work
     }
   
     render() {
+        console.log(curPath);
         return (
             <form onSubmit={this.handlePageChange}>
                 <Row>
@@ -154,6 +171,30 @@ class TopBar extends React.Component {
                         <div class="slider round"></div>
                         </label> Notes
                     </Col>
+                    {
+                    curPath === 't'
+                    ?
+                    <Col xs="auto">
+                        <label class="switch">
+                        <input type="checkbox" name="rajna-reconstruction" value="rajna-reconstruction" onChange={this.handleRajna} checked={this.state.rajna} />
+                        <div class="slider round"></div>
+                        </label> Rajna Reconstruction
+                    </Col>
+                    :
+                    <></>
+                    }
+                    {
+                    curPath === 'p'
+                    ?
+                    <Col xs="auto">
+                        <label class="switch">
+                        <input type="checkbox" name="show-french" value="show-french" onChange={this.handleFrench} checked={this.state.french} />
+                        <div class="slider round"></div>
+                        </label> Show French
+                    </Col>
+                    :
+                    <></>
+                    }
                     <Col xs="auto">
                         <input class="form-check-input toggleDiv" type="checkbox" id="showTEI" value={"TEI"} onChange={this.handleTEI} checked={this.state.tei} />
                         <label class="form-check-label" for="showTEI">Show TEI</label>

@@ -209,7 +209,7 @@ HttpStorage.prototype.create = function (annotation) {
     //return this._apiRequest('create', annotation);
     annotation.email = email;
     annotation.name = name;
-    if(email != null)
+    if(sessionStorage.getItem("name") != null)
     {
         firebase.database().ref("Annotations").push(annotation);
     }

@@ -1,18 +1,10 @@
 import './DigitalEdition.css'
-import { TEIRender, TEIRoute } from 'react-teirouter'
-import { useLocation } from 'react-router-dom'
-import axios from 'axios';
-import { useState, useEffect, createRef } from 'react';
-import { useParams } from 'react-router';
-import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Spinner from 'react-bootstrap/Spinner'
-import Button from 'react-bootstrap/Button'
 import { Viewer } from 'react-iiif-viewer'
 import annotator from '../../annotator'
-import CETEI, { addStyle } from 'CETEIcean'
+import CETEI from 'CETEIcean'
 import $ from 'jquery'
 import React from 'react';
 import TopBar from './TopBar.js'
@@ -72,7 +64,7 @@ function getViewerName() {
 class DigitalEdition extends React.Component{
 
     state = {   //Sets default state to "Hey I don't have the xml data loaded in yet"
-        ready: false
+        ready: false,
     } //IMPORTANT: Every time a state switches, the website gets re-redered
 
     componentDidMount() {
@@ -91,30 +83,18 @@ class DigitalEdition extends React.Component{
                 .signInWithPopup(provider)
                 .then((result) => {
                 /** @type {firebase.auth.OAuthCredential} */
-                var credential = result.credential;
             
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                var token = credential.accessToken;
-                // The signed-in user info.
-                var user = result.user;
                 // ...
                 }).catch((error) => {
                 // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // The email of the user's account used.
-                var email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                var credential = error.credential;
                 // ...
                 });
             var curr = firebase.auth().currentUser;
             
-            if (curr != null) {
-                var email = curr.email;
+            if (curr != null) {;
                 var name = curr.displayName;
                 sessionStorage.setItem("name", name);
-            }
+            } 
         }
 
         // CODE TO HIDE A PAGE
@@ -138,7 +118,7 @@ class DigitalEdition extends React.Component{
                     //  If page count corresponds to the page requested, remove 'hide' flag.
                     if (n.localName === 'tei-milestone') {
                         pbs++
-                        if (pbs != page) {
+                        if (pbs !== page) {
                             hide = true
                         } else {
                             hide = false
@@ -198,7 +178,6 @@ class DigitalEdition extends React.Component{
             var visible_ids = Array.from(document.querySelectorAll('tei-note:not(.hid_note)')).map(function (n) {
                 return n.getAttribute('xml:id')
             })
-            console.log(visible_ids);
 
             // to show notes
             var CETEIceanNotes = new CETEI()
