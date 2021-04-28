@@ -455,7 +455,7 @@ var Editor = exports.Editor = Widget.extend({
             controls = this.element.find('.annotator-controls');
 
         if (this.element.hasClass(this.classes.invert.y)) {
-            controls.insertBefore(list);
+            controls.insertAfter(list);
         } else if (controls.is(':first-child')) {
             controls.insertAfter(list);
         }
@@ -531,9 +531,9 @@ var Editor = exports.Editor = Widget.extend({
         // Find the first/last item element depending on orientation
         var cornerItem;
         if (this.element.hasClass(this.classes.invert.y)) {
-            cornerItem = this.element.find('.annotator-item:last');
+            cornerItem = this.element.find('.subject-line:last');
         } else {
-            cornerItem = this.element.find('.annotator-item:first');
+            cornerItem = this.element.find('.subject-line:last');
         }
 
         if (cornerItem) {
@@ -568,11 +568,28 @@ Editor.classes = {
 Editor.template = [
     '<div class="annotator-outer annotator-editor annotator-hide">',
     '  <form class="annotator-widget">',
+    '    <div class="subject-line">',
+    '       <input type="text" placeholder="Subject" name="annotationSubject" class="annotator-subject"></input>',
+    '    </div>',
+    '    <div class="subject-spacer"></div>',
     '    <ul class="annotator-listing"></ul>',
     '    <div class="annotator-controls">',
+    '     <input type="radio" name="annotationScope">Private</input>',
+    '     <input type="radio" name="annotationScope">Public</input>',
+    '     <div class="spacer"></div>',
+    '      <select name="annotationType" id="cars">',
+    '        <option value="def">Annotation Type</option>',
+    '        <option value="comment">Comment</option>',
+    '        <option value="query">Query</option>',
+    '        <option value="error">Error</option>',
+    '        <option value="edit">Edit</option>',
+    '      </select>',
+    '     <div class="spacer"></div>',
     '     <a href="#cancel" class="annotator-cancel">' + _t('Cancel') + '</a>',
     '      <a href="#save"',
     '         class="annotator-save annotator-focus">' + _t('Save') + '</a>',
+    '         <p class="invis">-</p>',
+    '         <p class="largeAnnoText">Note: Please email any submissions over 200 words to example@gmail.com</p>',
     '    </div>',
     '  </form>',
     '</div>'

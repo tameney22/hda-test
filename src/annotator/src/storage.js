@@ -1,11 +1,24 @@
 /*package annotator.storage */
 
-"use strict";
 
 var util = require('./util');
+var firebase = require('firebase');
 var $ = util.$;
 var _t = util.gettext;
 var Promise = util.Promise;
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDF40q742rSX9rYwuaOLpdg70QLNfcDMaw",
+    authDomain: "huon-digital-archive.firebaseapp.com",
+    databaseURL: "https://huon-digital-archive-default-rtdb.firebaseio.com",
+    projectId: "huon-digital-archive",
+    storageBucket: "huon-digital-archive.appspot.com",
+    messagingSenderId: "405715148508",
+    appId: "1:405715148508:web:7f1330476a029c6d475e19",
+    measurementId: "G-Z4JDN1TR5K"
+};
+
+firebase.initializeApp(firebaseConfig);
 
 
 // id returns an identifier unique within this session
@@ -176,7 +189,8 @@ HttpStorage = exports.HttpStorage = function HttpStorage(options) {
  * :rtype: Promise
  */
 HttpStorage.prototype.create = function (annotation) {
-    return this._apiRequest('create', annotation);
+    //return this._apiRequest('create', annotation);
+    firebase.database().ref("Annotations").push(annotation);
 };
 
 /**

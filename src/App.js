@@ -21,7 +21,7 @@ import Facsimilies from './pages/Facsimilies/Facsimilies.js';
 import MiradorViewer from './pages/Facsimilies/MiradorViewer.js';
 import Citation from './pages/About/Citation';
 
-import './firebase/firebase.js';
+//import './firebase/firebase.js';
 
 function App() {
   return (

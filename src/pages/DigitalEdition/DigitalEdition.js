@@ -11,7 +11,7 @@ import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
 import { Viewer } from 'react-iiif-viewer'
-import annotator from 'annotator'
+import annotator from '../../annotator'
 import CETEI, { addStyle } from 'CETEIcean'
 import $ from 'jquery'
 import React from 'react';
@@ -77,7 +77,10 @@ class DigitalEdition extends React.Component{
     componentDidMount() {
         var app = new annotator.App();
         app.include(annotator.ui.main);
-        app.start();
+        app.include(annotator.storage.http);
+        app.start().then(function () {
+            app.annotations.load();
+        });
 
         // CODE TO HIDE A PAGE
         function showEdition(page) {
