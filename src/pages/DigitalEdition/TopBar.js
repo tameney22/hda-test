@@ -161,7 +161,7 @@ class TopBar extends React.Component {
                     </Col>
                     <Col xs="auto">
                         <label class="switch">
-                        <input type="checkbox" name="abbreviations-toggle" onChange={this.handleAbbrev}/>
+                        <input type="checkbox" name="abbreviations-toggle" onChange={this.handleAbbrev} checked={this.state.abbrev}/>
                         <div class="slider round"></div>
                         </label> Expand Abbreviations
                     </Col>
