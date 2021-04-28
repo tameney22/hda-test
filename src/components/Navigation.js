@@ -29,11 +29,11 @@ const Navigation = () => {
                     ? 
                         <NavDropdown title={name} id="collasible-nav-dropdown">
                             <Nav.Item>
-                                <Nav.Link href={"/signout"}>Sign Out</Nav.Link>
+                                <Nav.Link href={"/signoutbetween"}>Sign Out</Nav.Link>
                             </Nav.Item>     
                         </NavDropdown>
                     :
-                        <Nav.Link href={"/signin"}>Sign In</Nav.Link>
+                        <Nav.Link href={"/signinbetween"}>Sign In</Nav.Link>
                     }
                 </Nav>
             </Navbar.Collapse>

@@ -3,12 +3,6 @@ import Container from 'react-bootstrap/Container'
 import * as firebase from 'firebase';
 
 const Signout = () => {
-    firebase.auth().signOut().then(() => {
-        // Sign-out successful.
-      }).catch((error) => {
-        // An error happened.
-      });
-    sessionStorage.removeItem("name");
     return(
         <Container>
             <h1>Sign Out</h1>

@@ -21,6 +21,8 @@ import Facsimilies from './pages/Facsimilies/Facsimilies.js';
 import MiradorViewer from './pages/Facsimilies/MiradorViewer.js';
 import Citation from './pages/About/Citation';
 import React from 'react';
+import SignoutBetween from './pages/SignoutBetween';
+import SigninBetween from './pages/SigninBetween';
 import Signout from './pages/Signout';
 import Signin from './pages/Signin';
 
@@ -43,6 +45,8 @@ function App() {
             <Route path="/about/Bibliography" component={Bibliography} />
             <Route path="/about/Citation" component={Citation} />
             <Route path="/Facsimilies/:teiName" component={Facsimilies} />
+            <Route path="/signoutbetween" component={SignoutBetween} />
+            <Route path="/signinbetween" component={SigninBetween} />
             <Route path="/signout" component={Signout} />
             <Route path="/signin" component={Signin} />
 
