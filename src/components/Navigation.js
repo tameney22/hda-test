@@ -3,8 +3,10 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { nav } from '../data/nav'
+var name;
 
 const Navigation = () => {
+    name = sessionStorage.getItem("name");
     return (
         <Navbar collapseOnSelect expand="lg" bg="light">
             <Navbar.Brand href="/" >
@@ -23,6 +25,16 @@ const Navigation = () => {
                                 <Nav.Link href={elem.url}>{elem.title}</Nav.Link>
                             </Nav.Item>)
                     })}
+                    {name != null 
+                    ? 
+                        <NavDropdown title={name} id="collasible-nav-dropdown">
+                            <Nav.Item>
+                                <Nav.Link href={"/signout"}>Sign Out</Nav.Link>
+                            </Nav.Item>     
+                        </NavDropdown>
+                    :
+                        <Nav.Link href={"/signin"}>Sign In</Nav.Link>
+                    }
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

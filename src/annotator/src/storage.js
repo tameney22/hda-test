@@ -18,8 +18,25 @@ const firebaseConfig = {
     measurementId: "G-Z4JDN1TR5K"
 };
 
+var credential;
+var user;
+var email;
+var name;
+
 firebase.initializeApp(firebaseConfig);
 
+
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        var curr = firebase.auth().currentUser;
+        
+        if (curr != null) {
+          email = curr.email;
+          name = curr.displayName;
+          sessionStorage.setItem("name", name);
+        }
+    }
+  });
 
 // id returns an identifier unique within this session
 var id = (function () {
@@ -190,7 +207,16 @@ HttpStorage = exports.HttpStorage = function HttpStorage(options) {
  */
 HttpStorage.prototype.create = function (annotation) {
     //return this._apiRequest('create', annotation);
-    firebase.database().ref("Annotations").push(annotation);
+    annotation.email = email;
+    annotation.name = name;
+    if(email != null)
+    {
+        firebase.database().ref("Annotations").push(annotation);
+    }
+    else
+    {
+        alert("Please refresh the page and sign in to Google if you would like to make annotations");
+    }
 };
 
 /**

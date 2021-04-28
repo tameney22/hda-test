@@ -16,6 +16,7 @@ import CETEI, { addStyle } from 'CETEIcean'
 import $ from 'jquery'
 import React from 'react';
 import TopBar from './TopBar.js'
+import * as firebase from 'firebase'
 
 function getCurrentMilestone() {
     var endingInfo = window.location.pathname.split("/")[3];
@@ -81,6 +82,40 @@ class DigitalEdition extends React.Component{
         app.start().then(function () {
             app.annotations.load();
         });
+
+        if(sessionStorage.getItem("name") === null)
+        {
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().languageCode = 'it';
+            firebase.auth()
+                .signInWithPopup(provider)
+                .then((result) => {
+                /** @type {firebase.auth.OAuthCredential} */
+                var credential = result.credential;
+            
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                // ...
+                }).catch((error) => {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+                });
+            var curr = firebase.auth().currentUser;
+            
+            if (curr != null) {
+                var email = curr.email;
+                var name = curr.displayName;
+                sessionStorage.setItem("name", name);
+            }
+        }
 
         // CODE TO HIDE A PAGE
         function showEdition(page) {

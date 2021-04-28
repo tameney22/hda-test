@@ -20,6 +20,9 @@ import Toc from './pages/editions-toc/Toc';
 import Facsimilies from './pages/Facsimilies/Facsimilies.js';
 import MiradorViewer from './pages/Facsimilies/MiradorViewer.js';
 import Citation from './pages/About/Citation';
+import React from 'react';
+import Signout from './pages/Signout';
+import Signin from './pages/Signin';
 
 //import './firebase/firebase.js';
 
@@ -40,6 +43,8 @@ function App() {
             <Route path="/about/Bibliography" component={Bibliography} />
             <Route path="/about/Citation" component={Citation} />
             <Route path="/Facsimilies/:teiName" component={Facsimilies} />
+            <Route path="/signout" component={Signout} />
+            <Route path="/signin" component={Signin} />
 
             //Add above this so that any unimplemented pages show 404 page
             <Route path="*" component={error404} />
