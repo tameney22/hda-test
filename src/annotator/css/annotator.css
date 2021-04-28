@@ -907,8 +907,9 @@
 }
 
 .spacer {
-	width:25px;
-	display: inline-block;
+	width:25px !important;
+	height: 0px !important;
+	display: inline-block !important;
 }
 
 .subject-spacer {
@@ -927,6 +928,14 @@
 	line-height: 1.3;
 	border-top: none;
 	padding-left: 9px !important;
+}
+
+.annotator-radio {
+	display: inline-block;
+}
+
+.annotator-selectbox {
+	display: inline-block;
 }
 
 /*

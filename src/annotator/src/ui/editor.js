@@ -282,6 +282,17 @@ var Editor = exports.Editor = Widget.extend({
                     }
                 }
             });
+            this.addField({
+                type: 'select',
+                label: '',
+                load: function (field, annotation) {
+                    $(field).find('select option:selected').text();
+                },
+                submit: function (field, annotation) {
+                    var selected = $(field).find('select option:selected').text();
+                    annotation.type = selected;
+                }
+            });
         }
 
         var self = this;
@@ -467,12 +478,34 @@ var Editor = exports.Editor = Widget.extend({
         } else if (field.type === 'input') {
             input = $('<input class="subject" />');
         } else if (field.type === 'select') {
-            input = $('<select />');
+            input = $('<select name="annotationType" />');
         } else if (field.type === 'radio-pub') {
-            input = $('<input style="display: inline;" type="radio" name="annotationScope" class="public-radio" value="public"/>');
+            input = $('<input type="radio" name="annotationScope" class="public-radio" value="public"/>');
         } else if (field.type === 'radio-priv') {
-            input = $('<input style="display: inline;" type="radio" name="annotationScope" class="private-radio" value="private"/>');
+            input = $('<input type="radio" name="annotationScope" class="private-radio" value="private"/>');
         } 
+
+        if(field.type === 'select') {
+            element.addClass('annotator-selectbox');
+            element.css("margin-left","10px");
+            input.append($('<option>', {
+                value: 0,
+                text: 'Annotation Type'
+            }));
+            input.append($('<option>', {
+                value: 1,
+                text: 'comment'
+            }));
+            input.append($('<option>', {
+                value: 2,
+                text: 'question'
+            }));
+            input.append($('<option>', {
+                value: 3,
+                text: 'error'
+            }));
+        }
+
         element.append(input);
 
         input.attr({
@@ -490,6 +523,7 @@ var Editor = exports.Editor = Widget.extend({
 
         if (field.type === 'radio-pub' || field.type === 'radio-priv') {
             element.addClass('annotator-radio');
+            element.css("margin-left","10px");
             element.append($('<label />', {
                 'for': field.id,
                 'html': field.label

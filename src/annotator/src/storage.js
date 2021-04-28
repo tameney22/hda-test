@@ -209,7 +209,7 @@ HttpStorage.prototype.create = function (annotation) {
  * :rtype: Promise
  */
 HttpStorage.prototype.update = function (annotation) {
-    return this._apiRequest('update', annotation);
+    return firebase.database().ref("Annotations").update(annotation);
 };
 
 /**
