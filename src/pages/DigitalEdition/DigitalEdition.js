@@ -83,10 +83,11 @@ class DigitalEdition extends React.Component{
                 .signInWithPopup(provider)
                 .then((result) => {
                 /** @type {firebase.auth.OAuthCredential} */
-            
+                window.location.reload();
                 // ...
                 }).catch((error) => {
                 // Handle Errors here.
+                window.location.reload();
                 // ...
                 });
             var curr = firebase.auth().currentUser;

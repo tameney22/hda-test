@@ -21,7 +21,7 @@ const SigninBetween = () => {
       if (curr != null) {
           var email = curr.email;
           var name = curr.displayName;
-          sessionStorage.setItem("name", name);
+          sessionStorage.setItem("name", name); //Cookies
           window.location.href = "/signin";
       }
       // ...
