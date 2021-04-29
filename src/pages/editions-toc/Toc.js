@@ -7,6 +7,12 @@ import Spinner from 'react-bootstrap/Spinner';
 import { Viewer } from 'react-iiif-viewer';
 import { NavLink } from 'react-router-dom';
 
+var manifestName = window.location.pathname.split("/")[2];
+if (manifestName === "bt")
+{
+    manifestName = "b";
+}
+
 export default class Toc extends React.Component {
 
     state = {   //Sets default state to "Hey I don't have the xml data loaded in yet"
@@ -56,7 +62,7 @@ export default class Toc extends React.Component {
                     <br />
                     <Row>
                         <Col>
-                            <Viewer width="100%" height="100vh" iiifUrl={`https://iiif.wlu.edu/iiif/huon/${window.location.pathname.substring(14)}001r.tif/info.json`} />
+                            <Viewer width="100%" height="100vh" iiifUrl={`https://iiif.wlu.edu/iiif/huon/${manifestName}001r.tif/info.json`} />
                         </Col>
                         <Col>
                                 <h1 id="toc-title">Table of Contents</h1>

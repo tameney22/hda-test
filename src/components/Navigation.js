@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Image from 'react-bootstrap/Image'
 import { nav } from '../data/nav'
 var name;
 
