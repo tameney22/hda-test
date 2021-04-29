@@ -40,11 +40,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 // id returns an identifier unique within this session
 var id = (function () {
-    var counter;
-    counter = -1;
-    return function () {
-        return counter += 1;
-    };
+
+    return 1;
 }());
 
 
@@ -207,16 +204,18 @@ HttpStorage = exports.HttpStorage = function HttpStorage(options) {
  */
 HttpStorage.prototype.create = function (annotation) {
     //return this._apiRequest('create', annotation);
-    annotation.email = email;
+    annotation.id = id();
+    annotation.email = email.split("@")[0];
     annotation.name = name;
     if(sessionStorage.getItem("name") != null)
     {
-        firebase.database().ref("Annotations").push(annotation);
+        firebase.database().ref("Annotations").child(annotation.email).push(annotation);
     }
     else
     {
         alert("Please refresh the page and sign in to Google if you would like to make annotations");
     }
+    return annotation;
 };
 
 /**
@@ -235,7 +234,8 @@ HttpStorage.prototype.create = function (annotation) {
  * :rtype: Promise
  */
 HttpStorage.prototype.update = function (annotation) {
-    return firebase.database().ref("Annotations").update(annotation);
+    firebase.database().ref("rows").update(annotation)
+    return annotation;
 };
 
 /**
@@ -266,13 +266,22 @@ HttpStorage.prototype['delete'] = function (annotation) {
  *   A promise, resolves to an object containing query `results` and `meta`.
  * :rtype: Promise
  */
-HttpStorage.prototype.query = function (queryObj) {
-    return this._apiRequest('search', queryObj)
-    .then(function (obj) {
-        var rows = obj.rows;
-        delete obj.rows;
-        return {results: rows, meta: obj};
-    });
+ HttpStorage.prototype.query = function (queryObj) {
+    firebase.database().ref("Annotations").once("value").then((data) => 
+    {
+        var annotationList = data.val();
+        if(annotationList != null) {
+            var filteredList = [];
+            const keys = Object.keys(annotationList);
+            keys.forEach((k) => {
+                if(annotationList[k].email === sessionStorage.getItem("email"))
+                {
+                    filteredList.push(annotationList[k]);
+                }
+            })
+            return {results: filteredList.rows, meta: filteredList};
+        }
+    })
 };
 
 /**
@@ -288,6 +297,7 @@ HttpStorage.prototype.query = function (queryObj) {
  * :param string value: The header value.
  */
 HttpStorage.prototype.setHeader = function (key, value) {
+    console.log("THE VALUE IS: " + value);
     this.options.headers[key] = value;
 };
 
@@ -302,6 +312,7 @@ HttpStorage.prototype.setHeader = function (key, value) {
  * :rtype: jqXHR
  */
 HttpStorage.prototype._apiRequest = function (action, obj) {
+    console.log("apiRequest was called for some ungodly reason");
     var id = obj && obj.id;
     var url = this._urlFor(action, id);
     var options = this._apiRequestOptions(action, obj);
@@ -379,6 +390,7 @@ HttpStorage.prototype._apiRequestOptions = function (action, obj) {
  * :returns String: URL for the request.
  */
 HttpStorage.prototype._urlFor = function (action, id) {
+    console.log("urlFor sadly ran and does nothing btw");
     if (typeof id === 'undefined' || id === null) {
         id = '';
     }
@@ -402,6 +414,7 @@ HttpStorage.prototype._urlFor = function (action, id) {
  * :returns String: Method for the request.
  */
 HttpStorage.prototype._methodFor = function (action) {
+    console.log("methodFor sadly ran and really does nothing btw");
     var table = {
         create: 'POST',
         update: 'PUT',
@@ -419,6 +432,7 @@ HttpStorage.prototype._methodFor = function (action) {
  * :param jqXHR: The jqXMLHttpRequest object.
  */
 HttpStorage.prototype._onError = function (xhr) {
+    console.log("sadly there is an error");
     if (typeof this.onError !== 'function') {
         return;
     }
@@ -573,6 +587,7 @@ StorageAdapter.prototype.create = function (obj) {
     if (typeof obj === 'undefined' || obj === null) {
         obj = {};
     }
+    console.log("create was ran!");
     return this._cycle(
         obj,
         'create',
@@ -674,8 +689,10 @@ StorageAdapter.prototype.query = function (query) {
  */
 StorageAdapter.prototype.load = function (query) {
     var self = this;
+    console.log("load is being ran");
     return this.query(query)
         .then(function (data) {
+            console.log("loaded!");
             self.runHook('annotationsLoaded', [data.results]);
         });
 };

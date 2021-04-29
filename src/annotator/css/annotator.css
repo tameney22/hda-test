@@ -885,8 +885,8 @@
 }
 
 .annotator-hl-active {
-	background: #FFFF0A;
-	background: rgba(255, 255, 10, 0.8);
+	background: #FFFF0A !important;
+	background: rgba(255, 255, 10, 0.8 !important);
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFF0A, endColorstr=#CCFFFF0A)";  /* 0.8 == CC in MS filters */
 }
 

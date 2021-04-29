@@ -68,14 +68,7 @@ class DigitalEdition extends React.Component{
     } //IMPORTANT: Every time a state switches, the website gets re-redered
 
     componentDidMount() {
-        var app = new annotator.App();
-        app.include(annotator.ui.main);
-        app.include(annotator.storage.http);
-        app.start().then(function () {
-            app.annotations.load();
-        });
-
-        if(sessionStorage.getItem("name") === null)
+        if(sessionStorage.getItem("name") === null || sessionStorage.getItem("email") === null)
         {
             var provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().languageCode = 'it';
@@ -83,6 +76,14 @@ class DigitalEdition extends React.Component{
                 .signInWithPopup(provider)
                 .then((result) => {
                 /** @type {firebase.auth.OAuthCredential} */
+                var curr = firebase.auth().currentUser;
+            
+                if (curr != null) {;
+                    var name = curr.displayName;
+                    var email = curr.email;
+                    sessionStorage.setItem("name", name);
+                    sessionStorage.setItem("email", email);
+                } 
                 window.location.reload();
                 // ...
                 }).catch((error) => {
@@ -90,12 +91,6 @@ class DigitalEdition extends React.Component{
                 window.location.reload();
                 // ...
                 });
-            var curr = firebase.auth().currentUser;
-            
-            if (curr != null) {;
-                var name = curr.displayName;
-                sessionStorage.setItem("name", name);
-            } 
         }
 
         // CODE TO HIDE A PAGE
@@ -230,6 +225,15 @@ class DigitalEdition extends React.Component{
                         }
                     }
                 });
+            });
+
+
+            var app = new annotator.App();
+            app.include(annotator.ui.main);
+            app.include(annotator.storage.http);
+
+            app.start().then(function () {
+                app.annotations.load();
             });
         });
 

@@ -10,6 +10,7 @@ const SignoutBetween = () => {
         // An error happened.
       });
     sessionStorage.removeItem("name");
+    sessionStorage.removeItem("email");
     return(
         <Container>
             <h1>Sign Out</h1>
