@@ -19,7 +19,7 @@ const SigninBetween = () => {
       var curr = firebase.auth().currentUser;
   
       if (curr != null) {
-          var email = curr.email;
+          var email = curr.email.split("@")[0];
           var name = curr.displayName;
           sessionStorage.setItem("name", name); 
           sessionStorage.setItem("email", email); //Cookies

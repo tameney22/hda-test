@@ -11,6 +11,7 @@ const SignoutBetween = () => {
       });
     sessionStorage.removeItem("name");
     sessionStorage.removeItem("email");
+    sessionStorage.clear();
     return(
         <Container>
             <h1>Sign Out</h1>

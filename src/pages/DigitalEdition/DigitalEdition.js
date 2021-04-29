@@ -68,6 +68,9 @@ class DigitalEdition extends React.Component{
     } //IMPORTANT: Every time a state switches, the website gets re-redered
 
     componentDidMount() {
+
+        sessionStorage.setItem("currentManifest", window.location.pathname.split("/")[2]);
+
         if(sessionStorage.getItem("name") === null || sessionStorage.getItem("email") === null)
         {
             var provider = new firebase.auth.GoogleAuthProvider();
@@ -80,7 +83,7 @@ class DigitalEdition extends React.Component{
             
                 if (curr != null) {;
                     var name = curr.displayName;
-                    var email = curr.email;
+                    var email = curr.email.split("@")[0];
                     sessionStorage.setItem("name", name);
                     sessionStorage.setItem("email", email);
                 } 

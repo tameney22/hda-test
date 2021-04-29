@@ -31,19 +31,43 @@ firebase.auth().onAuthStateChanged(function(user) {
         var curr = firebase.auth().currentUser;
         
         if (curr != null) {
-          email = curr.email;
+          email = curr.email.split("@")[0];
           name = curr.displayName;
           sessionStorage.setItem("name", name);
+          sessionStorage.setItem("email", name);
         }
     }
   });
 
 // id returns an identifier unique within this session
+/*var id = (function () {
+    var curVal;
+
+    firebase.database().ref("doNotDelete").once("value").then((data) => {
+        curVal = data.val();
+        curVal = Number(data["counter"])+1;
+
+        firebase.database().ref("doNotDelete").update({counter:curVal});
+        return function () {
+            return curVal;
+        };
+    });
+}());*/
+var curVal;
+firebase.database().ref("doNotDelete").once("value").then((data) => {
+    curVal = Number(data.val().counter);
+});
+
 var id = (function () {
-
-    return 1;
+    return function () {
+        
+        firebase.database().ref("doNotDelete").once("value").then((data) => {
+            curVal = Number(data.val().counter);
+        });
+        firebase.database().ref("doNotDelete").update({counter: curVal+1});
+        return curVal+=1;
+    };
 }());
-
 
 /**
  * function:: debug()
@@ -205,8 +229,12 @@ HttpStorage = exports.HttpStorage = function HttpStorage(options) {
 HttpStorage.prototype.create = function (annotation) {
     //return this._apiRequest('create', annotation);
     annotation.id = id();
-    annotation.email = email.split("@")[0];
+    annotation.email = email;
     annotation.name = name;
+    annotation.currentManifest = sessionStorage.getItem("currentManifest");
+
+    console.log(annotation.id + "   " + annotation.email + "   " + annotation.name);
+
     if(sessionStorage.getItem("name") != null)
     {
         firebase.database().ref("Annotations").child(annotation.email).push(annotation);
@@ -234,7 +262,31 @@ HttpStorage.prototype.create = function (annotation) {
  * :rtype: Promise
  */
 HttpStorage.prototype.update = function (annotation) {
-    firebase.database().ref("rows").update(annotation)
+
+    firebase.database().ref("Annotations").child(annotation.email).once("value").then((data) => 
+    {
+        var annotationList = data.val();
+        var targetAnnoKey;
+
+        const keys = Object.keys(annotationList);
+
+        keys.forEach((k) => {
+            if(annotationList[k].id === annotation.id)
+            {
+                targetAnnoKey = k;
+            }
+        })
+
+        if(targetAnnoKey != null)
+        {
+            firebase.database().ref("Annotations").child(annotation.email).child(targetAnnoKey).update(annotation);
+        }
+        else
+        {
+            alert("Original annotation was not found");
+        }
+    })
+
     return annotation;
 };
 
@@ -253,7 +305,32 @@ HttpStorage.prototype.update = function (annotation) {
  * :rtype: Promise
  */
 HttpStorage.prototype['delete'] = function (annotation) {
-    return this._apiRequest('destroy', annotation);
+    
+    firebase.database().ref("Annotations").child(annotation.email).once("value").then((data) => 
+    {
+        var annotationList = data.val();
+        var targetAnnoKey;
+
+        const keys = Object.keys(annotationList);
+
+        keys.forEach((k) => {
+            if(annotationList[k].id === annotation.id)
+            {
+                targetAnnoKey = k;
+            }
+        })
+
+        if(targetAnnoKey != null)
+        {
+            firebase.database().ref("Annotations").child(annotation.email).child(targetAnnoKey).remove();
+        }
+        else
+        {
+            alert("Original annotation was not found");
+        }
+    })
+    
+    return annotation;
 };
 
 /**
@@ -264,22 +341,31 @@ HttpStorage.prototype['delete'] = function (annotation) {
  * :param Object queryObj: An object describing the query.
  * :returns:
  *   A promise, resolves to an object containing query `results` and `meta`.
+ * 
+ * var rows = obj.rows;
+        delete obj.rows;
+        return {results: rows, meta: obj};
+ * 
+ * 
  * :rtype: Promise
  */
  HttpStorage.prototype.query = function (queryObj) {
-    firebase.database().ref("Annotations").once("value").then((data) => 
+    return firebase.database().ref("Annotations").child(email).once("value").then((data) => 
     {
         var annotationList = data.val();
         if(annotationList != null) {
-            var filteredList = [];
+            var filteredList = {total: 0, rows: []};
             const keys = Object.keys(annotationList);
             keys.forEach((k) => {
-                if(annotationList[k].email === sessionStorage.getItem("email"))
+                if(annotationList[k].email === email && annotationList[k].currentManifest === sessionStorage.getItem("currentManifest"))
                 {
-                    filteredList.push(annotationList[k]);
+                    filteredList.total+=1;
+                    filteredList.rows.push(annotationList[k]);
                 }
             })
-            return {results: filteredList.rows, meta: filteredList};
+            var rows = filteredList.rows;
+            delete filteredList.rows;
+            return {results: rows, meta: filteredList};
         }
     })
 };
@@ -672,6 +758,7 @@ StorageAdapter.prototype['delete'] = function (obj) {
  * :returns Promise: Resolves to the store return value.
  */
 StorageAdapter.prototype.query = function (query) {
+    console.log("query from SA");
     return Promise.resolve(this.store.query(query));
 };
 
@@ -689,10 +776,9 @@ StorageAdapter.prototype.query = function (query) {
  */
 StorageAdapter.prototype.load = function (query) {
     var self = this;
-    console.log("load is being ran");
     return this.query(query)
         .then(function (data) {
-            console.log("loaded!");
+            console.log("results is " + data);
             self.runHook('annotationsLoaded', [data.results]);
         });
 };
