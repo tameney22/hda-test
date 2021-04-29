@@ -232,6 +232,7 @@ HttpStorage.prototype.create = function (annotation) {
     annotation.email = email;
     annotation.name = name;
     annotation.currentManifest = sessionStorage.getItem("currentManifest");
+    annotation.adminVerified = false;
 
     console.log(annotation.id + "   " + annotation.email + "   " + annotation.name);
 
