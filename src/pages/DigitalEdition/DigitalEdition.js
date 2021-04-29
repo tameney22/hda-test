@@ -69,9 +69,9 @@ class DigitalEdition extends React.Component{
 
     componentDidMount() {
 
-        sessionStorage.setItem("currentManifest", window.location.pathname.split("/")[2]);
+        localStorage.setItem("currentManifest", window.location.pathname.split("/")[2]);
 
-        if(sessionStorage.getItem("name") === null || sessionStorage.getItem("email") === null)
+        if(localStorage.getItem("name") === null || localStorage.getItem("email") === null)
         {
             var provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().languageCode = 'it';
@@ -84,8 +84,8 @@ class DigitalEdition extends React.Component{
                 if (curr != null) {;
                     var name = curr.displayName;
                     var email = curr.email.split("@")[0];
-                    sessionStorage.setItem("name", name);
-                    sessionStorage.setItem("email", email);
+                    localStorage.setItem("name", name);
+                    localStorage.setItem("email", email);
                 } 
                 window.location.reload();
                 // ...
@@ -201,11 +201,11 @@ class DigitalEdition extends React.Component{
                                 break;
 
                             case "t":
-                                note = data.querySelector('tei-note[id="' + id + '"]');
+                                note = data.querySelector('tei-note[target="#' + id + '"]');
                                 break;
 
                             case "br":
-                                note = data.querySelector('tei-note[id="' + id + '"]');
+                                note = data.querySelector('tei-note[target="#' + id + '"]');
                                 break;
 
                             case "bt":

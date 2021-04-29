@@ -21,8 +21,8 @@ const SigninBetween = () => {
       if (curr != null) {
           var email = curr.email.split("@")[0];
           var name = curr.displayName;
-          sessionStorage.setItem("name", name); 
-          sessionStorage.setItem("email", email); //Cookies
+          localStorage.setItem("name", name); 
+          localStorage.setItem("email", email); //Cookies
           window.location.href = "/signin";
       }
       // ...

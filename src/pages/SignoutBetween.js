@@ -9,9 +9,9 @@ const SignoutBetween = () => {
       }).catch((error) => {
         // An error happened.
       });
-    sessionStorage.removeItem("name");
-    sessionStorage.removeItem("email");
-    sessionStorage.clear();
+    localStorage.removeItem("name");
+    localStorage.removeItem("email");
+    localStorage.clear();
     return(
         <Container>
             <h1>Sign Out</h1>

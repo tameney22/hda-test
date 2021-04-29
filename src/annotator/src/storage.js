@@ -33,8 +33,8 @@ firebase.auth().onAuthStateChanged(function(user) {
         if (curr != null) {
           email = curr.email.split("@")[0];
           name = curr.displayName;
-          sessionStorage.setItem("name", name);
-          sessionStorage.setItem("email", name);
+          localStorage.setItem("name", name);
+          localStorage.setItem("email", name);
         }
     }
   });
@@ -231,12 +231,10 @@ HttpStorage.prototype.create = function (annotation) {
     annotation.id = id();
     annotation.email = email;
     annotation.name = name;
-    annotation.currentManifest = sessionStorage.getItem("currentManifest");
+    annotation.currentManifest = localStorage.getItem("currentManifest");
     annotation.adminVerified = false;
 
-    console.log(annotation.id + "   " + annotation.email + "   " + annotation.name);
-
-    if(sessionStorage.getItem("name") != null)
+    if(localStorage.getItem("name") != null)
     {
         firebase.database().ref("Annotations").child(annotation.email).push(annotation);
     }
@@ -353,12 +351,13 @@ HttpStorage.prototype['delete'] = function (annotation) {
  HttpStorage.prototype.query = function (queryObj) {
     return firebase.database().ref("Annotations").child(email).once("value").then((data) => 
     {
+        console.log("running query");
         var annotationList = data.val();
         if(annotationList != null) {
             var filteredList = {total: 0, rows: []};
             const keys = Object.keys(annotationList);
             keys.forEach((k) => {
-                if(annotationList[k].email === email && annotationList[k].currentManifest === sessionStorage.getItem("currentManifest"))
+                if(annotationList[k].email === email && annotationList[k].currentManifest === localStorage.getItem("currentManifest"))
                 {
                     filteredList.total+=1;
                     filteredList.rows.push(annotationList[k]);
@@ -366,6 +365,7 @@ HttpStorage.prototype['delete'] = function (annotation) {
             })
             var rows = filteredList.rows;
             delete filteredList.rows;
+            console.log("finished query");
             return {results: rows, meta: filteredList};
         }
     })
@@ -384,7 +384,6 @@ HttpStorage.prototype['delete'] = function (annotation) {
  * :param string value: The header value.
  */
 HttpStorage.prototype.setHeader = function (key, value) {
-    console.log("THE VALUE IS: " + value);
     this.options.headers[key] = value;
 };
 
@@ -399,7 +398,6 @@ HttpStorage.prototype.setHeader = function (key, value) {
  * :rtype: jqXHR
  */
 HttpStorage.prototype._apiRequest = function (action, obj) {
-    console.log("apiRequest was called for some ungodly reason");
     var id = obj && obj.id;
     var url = this._urlFor(action, id);
     var options = this._apiRequestOptions(action, obj);
@@ -477,7 +475,6 @@ HttpStorage.prototype._apiRequestOptions = function (action, obj) {
  * :returns String: URL for the request.
  */
 HttpStorage.prototype._urlFor = function (action, id) {
-    console.log("urlFor sadly ran and does nothing btw");
     if (typeof id === 'undefined' || id === null) {
         id = '';
     }
@@ -501,7 +498,6 @@ HttpStorage.prototype._urlFor = function (action, id) {
  * :returns String: Method for the request.
  */
 HttpStorage.prototype._methodFor = function (action) {
-    console.log("methodFor sadly ran and really does nothing btw");
     var table = {
         create: 'POST',
         update: 'PUT',
@@ -519,7 +515,6 @@ HttpStorage.prototype._methodFor = function (action) {
  * :param jqXHR: The jqXMLHttpRequest object.
  */
 HttpStorage.prototype._onError = function (xhr) {
-    console.log("sadly there is an error");
     if (typeof this.onError !== 'function') {
         return;
     }
@@ -674,7 +669,6 @@ StorageAdapter.prototype.create = function (obj) {
     if (typeof obj === 'undefined' || obj === null) {
         obj = {};
     }
-    console.log("create was ran!");
     return this._cycle(
         obj,
         'create',
@@ -758,8 +752,8 @@ StorageAdapter.prototype['delete'] = function (obj) {
  *
  * :returns Promise: Resolves to the store return value.
  */
+
 StorageAdapter.prototype.query = function (query) {
-    console.log("query from SA");
     return Promise.resolve(this.store.query(query));
 };
 
@@ -779,7 +773,6 @@ StorageAdapter.prototype.load = function (query) {
     var self = this;
     return this.query(query)
         .then(function (data) {
-            console.log("results is " + data);
             self.runHook('annotationsLoaded', [data.results]);
         });
 };

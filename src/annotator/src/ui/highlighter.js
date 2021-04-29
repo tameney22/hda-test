@@ -96,9 +96,7 @@ Highlighter.prototype.drawAll = function (annotations) {
             if (typeof annList === 'undefined' || annList === null) {
                 annList = [];
             }
-            console.log("Before all splice:"+annList);
             var now = annList.splice(0, self.options.chunkSize);
-            console.log("After all splice:"+now);
             for (var i = 0, len = now.length; i < len; i++) {
                 highlights = highlights.concat(self.draw(now[i]));
             }
@@ -128,17 +126,12 @@ Highlighter.prototype.drawAll = function (annotations) {
 Highlighter.prototype.draw = function (annotation) {
     var normedRanges = [];
 
-    console.log(annotation);
-
     for (var i = 0; i < annotation.ranges.length; i++) {
-        console.log("in for loop");
         var r = reanchorRange(annotation.ranges[i], this.element);
         if (r !== null) {
             normedRanges.push(r);
         }
     }
-
-    console.log("1111111");
 
     var hasLocal = (typeof annotation._local !== 'undefined' &&
                     annotation._local !== null);
@@ -146,8 +139,6 @@ Highlighter.prototype.draw = function (annotation) {
     if (!hasLocal) {
         annotation._local = {};
     }
-
-    console.log("222222222222");
 
     var hasHighlights = (typeof annotation._local.highlights !== 'undefined' &&
                          annotation._local.highlights === null);
@@ -157,8 +148,6 @@ Highlighter.prototype.draw = function (annotation) {
         annotation._local.highlights = [];
     }
 
-    console.log("333333333333");
-
     for (var j = 0, jlen = normedRanges.length; j < jlen; j++) {
         var normed = normedRanges[j];
         $.merge(
@@ -167,20 +156,14 @@ Highlighter.prototype.draw = function (annotation) {
         );
     }
 
-    console.log("4444444444444");
-
     // Save the annotation data on each highlighter element.
     $(annotation._local.highlights).data('annotation', annotation);
-
-    console.log("5555555555555");
 
     // Add a data attribute for annotation id if the annotation has one
     if (typeof annotation.id !== 'undefined' && annotation.id !== null) {
         $(annotation._local.highlights)
             .attr('data-annotation-id', annotation.id);
     }
-
-    console.log("66666666666");
 
     return annotation._local.highlights;
 };

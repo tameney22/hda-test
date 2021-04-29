@@ -475,7 +475,7 @@ Viewer.options = {
 
     // Time, in milliseconds, before the viewer is hidden when a user mouses off
     // the viewer.
-    inactivityDelay: 500,
+    inactivityDelay: 50,
 
     // Time, in milliseconds, before the viewer is updated when a user mouses
     // over another annotation.

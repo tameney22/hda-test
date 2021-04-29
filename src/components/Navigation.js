@@ -6,7 +6,7 @@ import { nav } from '../data/nav'
 var name;
 
 const Navigation = () => {
-    name = sessionStorage.getItem("name");
+    name = localStorage.getItem("name");
     return (
         <Navbar collapseOnSelect expand="lg" bg="light">
             <Navbar.Brand href="/" >
