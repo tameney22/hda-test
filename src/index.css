@@ -19,8 +19,6 @@ code {
 .huon-logo-nav {
   max-width: 240px;
   max-height: 120px;
-  filter: invert(100%);
-  -webkit-filter: invert(100%);
   display: inline-block;
   float: left;
 }

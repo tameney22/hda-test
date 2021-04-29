@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image'
 import { nav } from '../data/nav'
+import logo from './huon-logo.png'
 var name;
 
 const Navigation = () => {
@@ -11,7 +12,7 @@ const Navigation = () => {
     return (
         <Navbar collapseOnSelect expand="lg" bg="light">
             <Navbar.Brand href="/" >
-                <img className="huon-logo-nav align-top" src="./huon-logo.png" alt="logo"></img>
+                <img className="huon-logo-nav align-top" src={logo} alt="logo" />
                 <h2 id="site-title">Huon d'Auvergne Digital Archive</h2>
                 <p id="nav-subtitle">A digital edition and translation of Huon d'Auvergne, a pre-modern, Franco-Italian Epic</p>
             </Navbar.Brand>
