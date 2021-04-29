@@ -12,6 +12,24 @@ code {
     monospace;
 }
 
+.display-inline {
+  display: inline-block;
+}
+
+.huon-logo-nav {
+  max-width: 240px;
+  max-height: 120px;
+  filter: invert(100%);
+  -webkit-filter: invert(100%);
+  display: inline-block;
+  float: left;
+}
+
+.huon-logo-container {
+  max-width: 240px;
+  max-height: 120px;
+}
+
 #main
 {
   width: 80vh;
@@ -63,7 +81,9 @@ img#initial {
 #site-title {
   text-transform: uppercase;
   margin: 0;
+  padding-top: 30px;
   text-align: left;
+  padding-right: 30px;
 }
 
 #nav-subtitle {
@@ -71,7 +91,9 @@ img#initial {
   font-weight: 400;
   color: #5f0000;
   text-transform: uppercase;
-  margin: none;
+  text-align: left;
+  margin: 0;
+  padding-right: 30px;
 }
 
 #responsive-navbar-nav {

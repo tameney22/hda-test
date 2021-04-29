@@ -11,6 +11,7 @@ const Navigation = () => {
     return (
         <Navbar collapseOnSelect expand="lg" bg="light">
             <Navbar.Brand href="/" >
+                <img className="huon-logo-nav align-top" src="./huon-logo.png" alt="logo"></img>
                 <h2 id="site-title">Huon d'Auvergne Digital Archive</h2>
                 <p id="nav-subtitle">A digital edition and translation of Huon d'Auvergne, a pre-modern, Franco-Italian Epic</p>
             </Navbar.Brand>
