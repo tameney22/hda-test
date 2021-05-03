@@ -1,3 +1,6 @@
+//This page is weird to explain. I wanted the navbar to update as soon as you logged in so this is the itermediary page between clicking sign in and actually seeing that you are signed in
+//The entire sign in process is handled here
+
 import React from "react";
 import Container from 'react-bootstrap/Container'
 import * as firebase from 'firebase';
@@ -6,7 +9,7 @@ const SigninBetween = () => {
   var provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().languageCode = 'it';
   firebase.auth()
-    .signInWithPopup(provider)
+    .signInWithPopup(provider) //This brings up the google pop-up
     .then((result) => {
       /** @type {firebase.auth.OAuthCredential} */
       var credential = result.credential;
@@ -22,7 +25,7 @@ const SigninBetween = () => {
           var email = curr.email.split("@")[0];
           var name = curr.displayName;
           localStorage.setItem("name", name); 
-          localStorage.setItem("email", email); //Cookies
+          localStorage.setItem("email", email); //saves the Cookies
           window.location.href = "/signin";
       }
       // ...

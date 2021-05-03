@@ -1,3 +1,5 @@
+//This is the bibliography page, the green tags at the bottom cotain the table of contents and the rest are all of the sources
+
 import React from "react";
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'

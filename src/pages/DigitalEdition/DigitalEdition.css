@@ -1,3 +1,6 @@
+/* This is the CSS for the digital edition, this is very long mainly because it also has all of the CETEIcean CSS copied into it as well due to this weird 
+issue I had where the CETEIcean.addStyle() wasn't working*/
+
 #TEI {
   height: 85vh;
 }

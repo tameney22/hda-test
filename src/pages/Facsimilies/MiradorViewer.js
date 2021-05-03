@@ -1,3 +1,5 @@
+//This is the configuration file for mirador
+
 import Mirador from 'mirador/dist/es/src/index';
 import miradorDownloadPlugin from '../../pluginsForMirador/MiradorDownloadPlugin.js';
 import miradorDownloadDialogPlugin from '../../pluginsForMirador/MiradorDownloadDialog.js';

@@ -1,3 +1,5 @@
+//This file contains the links and names for each link in the nav bar, if you want to add another page, 
+//add it into this variable and then go to App.js and more comments will be there
 export const nav = [
     {
         title: "About",

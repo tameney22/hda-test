@@ -1,3 +1,5 @@
+//This is the sign in page confirming you got signed in
+
 import React from "react";
 import Container from 'react-bootstrap/Container'
 import * as firebase from 'firebase';

@@ -1,3 +1,5 @@
+//This handes the mirador plugin for every edition
+
 import { TEIRender, TEIRoute } from 'react-teirouter';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -32,7 +34,7 @@ class GetLink extends React.Component {
     render() {
       var nameOfText = window.location.pathname.substring(13);
 
-      switch(nameOfText)
+      switch(nameOfText) //This switch statement handles the text at the top of each facsimile page
       {
         case "b":
             return <a href="https://www.smb.museum/museen-und-einrichtungen/kupferstichkabinett/ueber-uns/service.html">Berlin Kupferstichkabinett</a>;
@@ -75,7 +77,7 @@ export default class Facsimiles extends React.Component {
 
                 var element;
                 
-                switch (window.location.pathname.substring(13))
+                switch (window.location.pathname.substring(13)) //This makes sure that the default edition for each mirador page is the correct one
                 {
                     case "b":
                         element = <MiradorViewer link='https://huondauvergne.org/manifests/b-manifest.json'/>;
@@ -97,7 +99,7 @@ export default class Facsimiles extends React.Component {
                         
                 }
                 
-                ReactDOM.render(element, document.getElementById('main'));
+                ReactDOM.render(element, document.getElementById('main')); //This code is vital to have mirador in a div and not taking up the whole page
                 
                 return {data: data, ready: true} //Sets state to "Yay! XML data is loaded and converted into a readable object"
                 //IMPORTANT: Every time a state switches, the website gets re-redered

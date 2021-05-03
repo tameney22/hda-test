@@ -1,3 +1,5 @@
+//This is the home page for the website
+
 import React from "react";
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'

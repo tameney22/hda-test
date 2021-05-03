@@ -1,3 +1,6 @@
+//This is the code to generate the Nav bar for each page
+//Inside App.js the <Navigation> tag adds the nav bar
+
 import React from 'react';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from 'react-bootstrap/Nav';
@@ -28,7 +31,7 @@ const Navigation = () => {
                                 <Nav.Link href={elem.url}>{elem.title}</Nav.Link>
                             </Nav.Item>)
                     })}
-                    {name != null 
+                    {name != null //This is the code that toggles wether it says sign in or shows your name
                     ? 
                         <NavDropdown title={name} id="collasible-nav-dropdown">
                             <Nav.Item>

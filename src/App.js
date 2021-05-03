@@ -1,5 +1,7 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 // import logo from './logo.svg';
+
+//This file is incredibly important and handles the entire website
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -25,6 +27,7 @@ import SignoutBetween from './pages/SignoutBetween';
 import SigninBetween from './pages/SigninBetween';
 import Signout from './pages/Signout';
 import Signin from './pages/Signin';
+//Add an import for every page you want to add
 
 //import './firebase/firebase.js';
 
@@ -32,7 +35,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navigation />
+        <Navigation /> {/*This displays the nav bar on every page*/}
         <div>
           <Switch>
             <Route path="/" component={HomePage} exact />
@@ -49,12 +52,15 @@ function App() {
             <Route path="/signinbetween" component={SigninBetween} />
             <Route path="/signout" component={Signout} />
             <Route path="/signin" component={Signin} />
+            {/*Add another route for each new page*/}
+            {/*The path should match with the links in nav.js inside the data folder*/}
+            {/*The component is the same name used in the import statement at the top*/}
 
-            //Add above this so that any unimplemented pages show 404 page
+            {/*Add above this so that any unimplemented pages show 404 page*/}
             <Route path="*" component={error404} />
           </Switch>
         </div>
-        <Footer />
+        <Footer /> {/*This displays the footer on every page*/}
       </div>
     </Router>);
 }

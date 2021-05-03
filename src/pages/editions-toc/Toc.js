@@ -1,3 +1,5 @@
+//This file controls the Table of Contents for every edition
+
 import axios from 'axios';
 import React from 'react';
 import Container from 'react-bootstrap/Container';
@@ -10,7 +12,7 @@ import { NavLink } from 'react-router-dom';
 var manifestName = window.location.pathname.split("/")[2];
 if (manifestName === "bt")
 {
-    manifestName = "b";
+    manifestName = "b"; //This makes sure if bt is shown, it just shows the b manifest
 }
 
 export default class Toc extends React.Component {
@@ -51,11 +53,11 @@ export default class Toc extends React.Component {
                 <Container>
                     <Row>
                         <Col>
-                            <h1>{data.TEI.teiHeader[0].fileDesc[0].titleStmt[0].title[1]._}</h1>
+                            <h1>{data.TEI.teiHeader[0].fileDesc[0].titleStmt[0].title[1]._}</h1> {/*This gets the edition name*/}
 
                             <h2>Introduction to Edition</h2>
 
-                            <p>{data.TEI.teiHeader[0].fileDesc[0].sourceDesc[0].msDesc[0].history[0].acquisition[0].p[0]}</p>
+                            <p>{data.TEI.teiHeader[0].fileDesc[0].sourceDesc[0].msDesc[0].history[0].acquisition[0].p[0]}</p> {/*This gets the aquisition tag*/}
                             
                         </Col>
                     </Row>

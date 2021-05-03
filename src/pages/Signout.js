@@ -1,3 +1,5 @@
+//This is the sign out page confirming you got signed out
+
 import React from "react";
 import Container from 'react-bootstrap/Container'
 import * as firebase from 'firebase';

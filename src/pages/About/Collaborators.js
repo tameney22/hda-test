@@ -1,4 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+
+
+//This is the collaborators page, this just has basic links
 import React from "react";
 import Container from 'react-bootstrap/Container'
 import Image from 'react-bootstrap/Image'

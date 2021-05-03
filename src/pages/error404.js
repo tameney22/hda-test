@@ -1,3 +1,5 @@
+//This is just a basic error 404 page and this shows whenever a page does not exist
+
 import React from "react";
 import Container from 'react-bootstrap/Container'
 

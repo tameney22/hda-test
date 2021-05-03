@@ -1,3 +1,6 @@
+//This is the footer that shows up on every page of the website
+//Inside App.js shows the footer using the <Footer> tag
+
 import React from 'react';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -37,7 +40,7 @@ function Footer() {
             <p className="legal">&copy; <a href="https://www.wlu.edu/romance-languages-department/faculty-and-staff/profile?ID=x9689"
                 title="Stephen P. McCormick">Stephen P. McCormick</a> and <a href="https://digitalhumanities.wlu.edu/" title="lynda">
                     Washington & Lee Digital Humanities</a> | Site built using <a href="https://reactjs.org" title="ReactJS">
-                    ReactJS</a> and the <a href="https://www.tei-c.org/" title="Text Encoding Initiative">Text Encoding Initiative.</a></p>
+                    ReactJS</a> and the <a href="https://www.tei-c.org/" title="Text Encoding Initiative">Text Encoding Initiative.</a></p> 
         </Container>
     );
 }

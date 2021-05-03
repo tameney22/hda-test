@@ -1,3 +1,5 @@
+//This is the bread and butter of the website and ill make sure I comment it well
+
 import './DigitalEdition.css'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -10,7 +12,10 @@ import React from 'react';
 import TopBar from './TopBar.js'
 import * as firebase from 'firebase'
 
-function getCurrentMilestone() {
+//This finds what page you are currently on by looking at the url 
+//Each url will be structure as so:  /textName/(PageNumber)(R or V) i.e. /b/4R
+//The code below finds those two values to determine which milestone needs to be read
+function getCurrentMilestone() { 
     var endingInfo = window.location.pathname.split("/")[3];
     var len = endingInfo.length;
     var num = Number(endingInfo.substring(0,len-1));
@@ -26,11 +31,13 @@ function getCurrentMilestone() {
     }
 }
 
+//This function uses the link in the url bar to structure the correct string for the IIIF Viewer
+//Based on the current page it will generate text like so: "b001R" or "p035V"
 function getViewerName() {
 
     var viewerName = "";
 
-    var editionName = window.location.pathname.split("/")[2];
+    var editionName = window.location.pathname.split("/")[2]; //This gets the current name of the edition
     if(editionName === "bt")
     {
         viewerName+="b";
@@ -69,13 +76,14 @@ class DigitalEdition extends React.Component{
 
     componentDidMount() {
 
-        localStorage.setItem("currentManifest", window.location.pathname.split("/")[2]);
+        localStorage.setItem("currentManifest", window.location.pathname.split("/")[2]); //This saves the current edition to cookies so annotations can be made per edition
 
-        if(localStorage.getItem("name") === null || localStorage.getItem("email") === null)
+        if(localStorage.getItem("name") === null || localStorage.getItem("email") === null) //This if statement forces the user to log in if they have not already just so they don't make annotations as
+                                                                                            //they wouldn't be stored if you don't log in
         {
-            var provider = new firebase.auth.GoogleAuthProvider();
+            var provider = new firebase.auth.GoogleAuthProvider(); 
             firebase.auth().languageCode = 'it';
-            firebase.auth()
+            firebase.auth() //Launches the google window to sign in (It is a pop-up currently but maybe making it its own page might be better)
                 .signInWithPopup(provider)
                 .then((result) => {
                 /** @type {firebase.auth.OAuthCredential} */
@@ -87,16 +95,17 @@ class DigitalEdition extends React.Component{
                     localStorage.setItem("name", name);
                     localStorage.setItem("email", email);
                 } 
-                window.location.reload();
+                window.location.reload(); //Refreshes the page so that the nav bar updates with your current ID
                 // ...
                 }).catch((error) => {
                 // Handle Errors here.
-                window.location.reload();
+                window.location.reload(); //Refreshes the page to make sure they log in through google if they X out of the window
                 // ...
                 });
         }
 
         // CODE TO HIDE A PAGE
+        //All code her was pulled from the current live website with very slight modifications
         function showEdition(page) {
             // Hide all text that does not belong to the page indicated
             var n
@@ -134,7 +143,7 @@ class DigitalEdition extends React.Component{
                         n.classList.add('hid_note')
                     }
 
-                    if(n.localName === 'tei-note') {
+                    if(n.localName === 'tei-note') { //This if statement hides the random parenthesis that would show whenever you make a note tag
                         n.classList.add('hideParen')
                     }
 
@@ -159,7 +168,7 @@ class DigitalEdition extends React.Component{
         var CETEIcean = new CETEI()
         var editionName = window.location.pathname.split("/")[2];
 
-        CETEIcean.getHTML5(`/teis/`+editionName+`.xml`, function (data) 
+        CETEIcean.getHTML5(`/teis/`+editionName+`.xml`, function (data) //makes this page work with any edition based on current link name
         {
             document.getElementById("TEI").innerHTML = ""
             document.getElementById("TEI").appendChild(data)
@@ -172,7 +181,7 @@ class DigitalEdition extends React.Component{
             /*CETEIcean.addStyle(document, data)*/
 
             //show current page
-            showEdition(getCurrentMilestone())
+            showEdition(getCurrentMilestone()) //This function calls the other function at the top of this file for current milestone
 
             var visible_ids = Array.from(document.querySelectorAll('tei-note:not(.hid_note)')).map(function (n) {
                 return n.getAttribute('xml:id')
@@ -190,7 +199,8 @@ class DigitalEdition extends React.Component{
                     if (id) 
                     {
                         var note;
-                        switch(editionName)
+                        switch(editionName) //NOTE: IF NOTES STOP WORKING FOR ANY EDITION, IT IS PROBABLY HERE
+                                            //Make sure the selector chooses the first part of each note tag, right now the only one that isn't consistant is the p.xml
                         {
                             case "b":
                                 note = data.querySelector('tei-note[target="#' + id + '"]');
@@ -231,7 +241,7 @@ class DigitalEdition extends React.Component{
             });
 
 
-            var app = new annotator.App();
+            var app = new annotator.App(); //This code starts the annotator app
             app.include(annotator.ui.main);
             app.include(annotator.storage.http);
 
@@ -241,6 +251,7 @@ class DigitalEdition extends React.Component{
         });
 
         //Variables for toggle buttons
+        //The rest of this code is unchanged
         var options = {
             "rajna_reconstruction": false,
             "expanded_abbreviations": true,
@@ -333,7 +344,7 @@ class DigitalEdition extends React.Component{
         return (
             <Container>
                 <TopBar />
-                {/*
+                {/*  //This is old code from the older version of digital edition that wasn't working well, I believe this is for the search function but Yoseph wrote this
                 <Row>
                     <Col>
                     {lineNum ? <Button variant='link' style={{ backgroundColor: "#5f0000", color: "white", margin: '15px' }} onClick={scrollToLine}>Scroll to line {lineNum}</Button> : <></>}

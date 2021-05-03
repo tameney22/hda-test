@@ -1,5 +1,5 @@
 /*package annotator.storage */
-
+//This document handles the connection with the database
 
 var util = require('./util');
 var firebase = require('firebase');
@@ -16,14 +16,14 @@ const firebaseConfig = {
     messagingSenderId: "405715148508",
     appId: "1:405715148508:web:7f1330476a029c6d475e19",
     measurementId: "G-Z4JDN1TR5K"
-};
+};  //This is the configuration for the firebase database
 
 var credential;
 var user;
 var email;
 var name;
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig); //Initializes firebase
 
 
 firebase.auth().onAuthStateChanged(function(user) {
@@ -33,7 +33,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         if (curr != null) {
           email = curr.email.split("@")[0];
           name = curr.displayName;
-          localStorage.setItem("name", name);
+          localStorage.setItem("name", name); //These set 2 cookies for the login system, they store their name and email address (Note: the email address does not cotain @gmail.com, I removed it)
           localStorage.setItem("email", name);
         }
     }
@@ -61,7 +61,7 @@ firebase.database().ref("doNotDelete").once("value").then((data) => {
 var id = (function () {
     return function () {
         
-        firebase.database().ref("doNotDelete").once("value").then((data) => {
+        firebase.database().ref("doNotDelete").once("value").then((data) => { //This function makes sure each annotation has a unique ID
             curVal = Number(data.val().counter);
         });
         firebase.database().ref("doNotDelete").update({counter: curVal+1});
@@ -226,7 +226,7 @@ HttpStorage = exports.HttpStorage = function HttpStorage(options) {
  * :returns: The request object.
  * :rtype: Promise
  */
-HttpStorage.prototype.create = function (annotation) {
+HttpStorage.prototype.create = function (annotation) { //This creastes the annotation with the correct fields
     //return this._apiRequest('create', annotation);
     annotation.id = id();
     annotation.email = email;
@@ -234,7 +234,7 @@ HttpStorage.prototype.create = function (annotation) {
     annotation.currentManifest = localStorage.getItem("currentManifest");
     annotation.adminVerified = false;
 
-    if(localStorage.getItem("name") != null)
+    if(localStorage.getItem("name") != null) //This makes sure the user is logged in
     {
         firebase.database().ref("Annotations").child(annotation.email).push(annotation);
     }
@@ -260,7 +260,7 @@ HttpStorage.prototype.create = function (annotation) {
  * :returns: The request object.
  * :rtype: Promise
  */
-HttpStorage.prototype.update = function (annotation) {
+HttpStorage.prototype.update = function (annotation) { //This will update a current annotation in the database
 
     firebase.database().ref("Annotations").child(annotation.email).once("value").then((data) => 
     {
@@ -305,7 +305,7 @@ HttpStorage.prototype.update = function (annotation) {
  */
 HttpStorage.prototype['delete'] = function (annotation) {
     
-    firebase.database().ref("Annotations").child(annotation.email).once("value").then((data) => 
+    firebase.database().ref("Annotations").child(annotation.email).once("value").then((data) => //This will delete an entry in the database based on its unique ID
     {
         var annotationList = data.val();
         var targetAnnoKey;
@@ -349,15 +349,15 @@ HttpStorage.prototype['delete'] = function (annotation) {
  * :rtype: Promise
  */
  HttpStorage.prototype.query = function (queryObj) {
-    return firebase.database().ref("Annotations").child(email).once("value").then((data) => 
-    {
+    return firebase.database().ref("Annotations").child(email).once("value").then((data) => //This function is very important, handles pulling all current annotations from
+    {                                                                                       //the database to then present them per user
         console.log("running query");
         var annotationList = data.val();
         if(annotationList != null) {
             var filteredList = {total: 0, rows: []};
             const keys = Object.keys(annotationList);
             keys.forEach((k) => {
-                if(annotationList[k].email === email && annotationList[k].currentManifest === localStorage.getItem("currentManifest"))
+                if(annotationList[k].email === email && annotationList[k].currentManifest === localStorage.getItem("currentManifest")) //This sorts annotations by manifest
                 {
                     filteredList.total+=1;
                     filteredList.rows.push(annotationList[k]);

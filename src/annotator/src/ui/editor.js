@@ -1,5 +1,7 @@
 "use strict";
 
+//This document handles the user interface for the annotation system - Jordan
+
 var Widget = require('./widget').Widget,
     util = require('../util');
 
@@ -229,8 +231,9 @@ var Editor = exports.Editor = Widget.extend({
         this.fields = [];
         this.annotation = {};
 
-        if (this.options.defaultFields) {
-            this.addField({
+        //If you want to add more fields for the annotations, add them here
+        if (this.options.defaultFields) { 
+            this.addField({  //This is the subject line for the annotation
                 type: 'input',
                 label: _t('Subject') + '\u2026',
                 load: function (field, annotation) {
@@ -241,7 +244,7 @@ var Editor = exports.Editor = Widget.extend({
                 }
             });
             this.addField({
-                type: 'textarea',
+                type: 'textarea', //This is the comments area
                 label: _t('Comments') + '\u2026',
                 load: function (field, annotation) {
                     $(field).find('textarea').val(annotation.text || '');
@@ -251,7 +254,7 @@ var Editor = exports.Editor = Widget.extend({
                 }
             });
             this.addField({
-                type: 'radio-pub',
+                type: 'radio-pub', //This is the public radio button
                 label: 'Public',
                 load: function (field, annotation) {
                     $(field).find('input.public-radio').val(annotation.public || '');
@@ -267,7 +270,7 @@ var Editor = exports.Editor = Widget.extend({
                 }
             });
             this.addField({
-                type: 'radio-priv',
+                type: 'radio-priv', //Private radio button
                 label: 'Private',
                 load: function (field, annotation) {
                     $(field).find('input.private-radio').val(annotation.private || '');
@@ -283,7 +286,7 @@ var Editor = exports.Editor = Widget.extend({
                 }
             });
             this.addField({
-                type: 'select',
+                type: 'select', //This is the drop down menu
                 label: '',
                 load: function (field, annotation) {
                     $(field).find('select option:selected').text();
@@ -457,6 +460,7 @@ var Editor = exports.Editor = Widget.extend({
     //
     // Returns the created <li> Element.
 
+    //You will need to add code here as well if you are adding fields to the annotations
     addField: function (options) {
         var field = $.extend({
             id: 'annotator-field-' + id(),
@@ -653,6 +657,8 @@ Editor.classes = {
 };
 
 // HTML template for this.element.
+//This is only for very basic appearance but DO NOT add fields here because they wont work
+//Add them in the code above 
 Editor.template = [
     '<div class="annotator-outer annotator-editor annotator-hide">',
     '  <form class="annotator-widget">',
