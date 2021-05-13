@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container'
 import * as firebase from 'firebase';
 
 const Signout = () => {
-    sessionStorage.clear();
+    localStorage.clear();
     return(
         <Container>
             <h1>Sign Out</h1>
