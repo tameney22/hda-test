@@ -147,6 +147,10 @@ class DigitalEdition extends React.Component{
                         n.classList.add('hideParen')
                     }
 
+                    if(hide && n.localName === 'tei-ex') { //This if statement hides the random parenthesis that would show whenever you make a note tag
+                        n.classList.add('hideParen')
+                    }
+
                 } else if (n.nodeType === Node.TEXT_NODE) {
                     // We mostly operate at text node level by storing and restoring text data.
 

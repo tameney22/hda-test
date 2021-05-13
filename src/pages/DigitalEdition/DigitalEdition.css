@@ -836,11 +836,11 @@ tei-hi[rend="black-initial"] {
   color: black;
   font-size: -webkit-xxx-large;
 }
-tei-hi[rend="angle"]:before {
-  content: "<";
+tei-ex[rend="angle"]:before {
+  content: "\003C";
 }
-tei-hi[rend="angle"]:after {
-  content: ">";
+tei-ex[rend="angle"]:after {
+  content: "\003E";
 }
 tei-hi {
   /* GLS: do we want to bold this or change the background color? */
